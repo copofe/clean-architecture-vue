@@ -1,32 +1,38 @@
-import type { IStorage, IStore, UseCase } from '::/entities/app'
-import { UserEntiry } from '::/entities/user'
+import type { ImplUseCase } from './_shared'
+import type { Store } from '::/entities/app'
+import { AppRepo } from '::/repositories/app'
 import { UserRepo } from '::/repositories/user'
 
 class UserUsecase {
-  repo = new UserRepo()
-  entity = new UserEntiry()
-  constructor() {}
+  repo: UserRepo
+  appRepo: AppRepo
+  constructor(store: Store) {
+    this.repo = new UserRepo(store)
+    this.appRepo = new AppRepo(store)
+  }
 }
 
-export class UserLoginUsecase extends UserUsecase implements UseCase {
-  constructor(private storage: IStorage, private store: IStore) {
-    super()
+export class UserLoginUsecase extends UserUsecase implements ImplUseCase {
+  constructor(store: Store) {
+    super(store)
   }
 
   async execute(...args: Parameters<UserRepo['login']>) {
     // TODO: 参数校验
     const res = await this.repo.login(...args)
-    this.entity.login(res.data, this.storage, this.store)
+    this.repo.setUser(res.data.data)
+    this.appRepo.setToken(res.data.data.token)
   }
 }
 
-export class UserLogoutUsecase extends UserUsecase implements UseCase {
-  constructor(private store: IStore, private storage: IStorage) {
-    super()
+export class UserLogoutUsecase extends UserUsecase implements ImplUseCase {
+  constructor(store: Store) {
+    super(store)
   }
 
   async execute() {
-    await this.repo.logout().catch(console.error)
-    this.entity.logout(this.storage, this.store)
+    await this.repo.logout()
+    this.repo.setUser()
+    this.appRepo.setToken(null)
   }
 }

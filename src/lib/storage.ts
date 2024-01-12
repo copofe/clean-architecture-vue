@@ -1,8 +1,8 @@
 import { createStorage } from 'unstorage'
 import localStorageDriver from 'unstorage/drivers/localstorage'
-import type { IStorage } from '::/entities/app'
+import type { Storage } from '::/entities/app'
 
-const storage: IStorage = createStorage({
+const storage: Storage = createStorage({
   driver: localStorageDriver({}),
 })
 

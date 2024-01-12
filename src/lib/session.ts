@@ -1,8 +1,8 @@
 import { createStorage } from 'unstorage'
 import sessionStorageDriver from 'unstorage/drivers/session-storage'
-import type { ISession } from '::/entities/app'
+import type { Session } from '::/entities/app'
 
-const session: ISession = createStorage({
+const session: Session = createStorage({
   driver: sessionStorageDriver({}),
 })
 

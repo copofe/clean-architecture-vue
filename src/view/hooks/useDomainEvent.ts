@@ -1,7 +1,7 @@
-import type { IEvents } from '::/entities/app'
+import type { Events } from '::/entities/app'
 import { eventer } from '::/lib'
 
-export function useDomainEvent<K extends keyof IEvents>(event: K, callback: (data: IEvents[K]) => void) {
+export function useDomainEvent<K extends keyof Events>(event: K, callback: (data: Events[K]) => void) {
   onMounted(() => {
     eventer.on(event, (data) => {
       callback(data)

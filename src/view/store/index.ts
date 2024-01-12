@@ -1,24 +1,24 @@
 import { createPinia, defineStore } from 'pinia'
 import type { ToRefs } from 'vue'
-import type { IAppInfo, IAppSetting, IStoreAction, IStoreGetter, IStoreState } from '::/entities/app'
-import type { IUser } from '::/entities/user'
+import type { AppInfo, AppSetting, StoreAction, StoreGetter, StoreState } from '::/entities/app'
+import type { User } from '::/entities/user'
 
-type IStore = ToRefs<IStoreState> & ToRefs<IStoreGetter> & IStoreAction
+type Store = ToRefs<StoreState> & ToRefs<StoreGetter> & StoreAction
 
-export const useStore = defineStore('global', (): IStore => {
-  const appInfo = ref<IAppInfo | undefined>()
-  function setAppInfo(data?: IAppInfo) {
+export const useStore = defineStore('root', (): Store => {
+  const appInfo = ref<AppInfo | undefined>()
+  function setAppInfo(data?: AppInfo) {
     appInfo.value = data
   }
 
-  const setting = ref<IAppSetting | undefined>()
-  function setSetting(data?: IAppSetting) {
+  const setting = ref<AppSetting | undefined>()
+  function setSetting(data?: AppSetting) {
     setting.value = data
   }
 
-  const user = ref<IUser | undefined>()
+  const user = ref<User | undefined>()
 
-  function setUser(data?: IUser) {
+  function setUser(data?: User) {
     user.value = data
   }
 

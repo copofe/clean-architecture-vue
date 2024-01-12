@@ -1,18 +1,22 @@
-import { AppEntiry } from '::/entities/app'
-import type { IStore, UseCase } from '::/entities/app'
+import type { ImplUseCase } from './_shared'
+import type { Store } from '::/entities/app'
 import { AppRepo } from '::/repositories/app'
 
-export class AppInitUsecase implements UseCase {
-  private repo = new AppRepo()
-  private entity = new AppEntiry()
-  constructor(private store: IStore) {}
+export class AppInitUsecase implements ImplUseCase {
+  private repo: AppRepo
+  constructor(private store: Store) {
+    this.repo = new AppRepo(this.store)
+  }
 
   async execute() {
+    const token = await this.repo.getToken()
+    this.repo.setToken(token)
+
     const [appSetting, appInfo] = await Promise.all([
-      this.repo.getAppSetting().then(data => data.data),
-      this.repo.getAppInfo().then(data => data.data),
+      this.repo.getAppSetting(),
+      this.repo.getAppInfo(),
     ])
-    this.entity.setAppInfo(appInfo, this.store)
-    this.entity.setAppSetting(appSetting, this.store)
+    this.repo.setAppInfo(appInfo)
+    this.repo.setAppSetting(appSetting)
   }
 }

@@ -1,20 +1,28 @@
-import { Repository, extractData } from './_base'
-import type { IRequestConfig } from '::/entities/app'
-import type { IUser } from '::/entities/user'
+import { Repository } from './_shared'
+import type { Store } from '::/entities/app'
+import type { User } from '::/entities/user'
 
 export class UserRepo extends Repository {
-  constructor() {
+  constructor(private store: Store) {
     super()
   }
 
   async login(data: {
     username: string
     password: string
-  }, config?: IRequestConfig) {
-    return this.request.post<IUser>('/api/user/login', data, config).then(extractData)
+  }) {
+    return this.request.post<User>('/api/user/login', data)
   }
 
   async logout() {
-    return this.request.get('/api/user/logout').then(extractData)
+    return this.request.get('/api/user/logout')
+  }
+
+  async getUser() {
+    return this.request.get<User>('/api/user')
+  }
+
+  setUser(user?: User) {
+    this.store.setUser(user)
   }
 }

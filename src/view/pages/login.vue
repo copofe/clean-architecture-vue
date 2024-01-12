@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { useStore } from '../store'
-import { storage } from '::/lib'
 import { UserLoginUsecase } from '::/usecases/user'
 
 const store = useStore()
-const userUsecase = new UserLoginUsecase(storage, store)
+const userUsecase = new UserLoginUsecase(store)
 const formData = reactive<Parameters<UserLoginUsecase['execute']>[0]>({
   username: '',
   password: '',
