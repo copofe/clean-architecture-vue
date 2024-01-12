@@ -1,4 +1,4 @@
-import type { ImplUseCase } from './_shared'
+import type { ImplUsecase } from './_shared'
 import type { Store } from '::/entities/app'
 import { AppRepo } from '::/repositories/app'
 import { UserRepo } from '::/repositories/user'
@@ -12,20 +12,20 @@ class UserUsecase {
   }
 }
 
-export class UserLoginUsecase extends UserUsecase implements ImplUseCase {
+export class UserLoginUsecase extends UserUsecase implements ImplUsecase {
   constructor(store: Store) {
     super(store)
   }
 
   async execute(...args: Parameters<UserRepo['login']>) {
-    // TODO: 参数校验
+    // TODO: validate params
     const res = await this.repo.login(...args)
     this.repo.setUser(res.data.data)
     this.appRepo.setToken(res.data.data.token)
   }
 }
 
-export class UserLogoutUsecase extends UserUsecase implements ImplUseCase {
+export class UserLogoutUsecase extends UserUsecase implements ImplUsecase {
   constructor(store: Store) {
     super(store)
   }

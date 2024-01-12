@@ -1,8 +1,8 @@
-import type { ImplUseCase } from './_shared'
+import type { ImplUsecase } from './_shared'
 import type { Store } from '::/entities/app'
 import { AppRepo } from '::/repositories/app'
 
-export class AppInitUsecase implements ImplUseCase {
+export class AppInitUsecase implements ImplUsecase {
   private repo: AppRepo
   constructor(private store: Store) {
     this.repo = new AppRepo(this.store)

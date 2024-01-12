@@ -92,7 +92,7 @@ export interface StoreState {
 }
 
 export interface StoreGetter {
-  readonly token: User['token'] | undefined
+  readonly token: Token
 }
 
 export interface StoreAction {

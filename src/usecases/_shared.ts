@@ -1,3 +1,3 @@
-export abstract class ImplUseCase {
-  abstract execute: (params?: any) => Promise<any>
+export abstract class ImplUsecase {
+  abstract execute: (params?: any) => any | Promise<any>
 }

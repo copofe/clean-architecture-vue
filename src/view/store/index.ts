@@ -22,7 +22,7 @@ export const useStore = defineStore('root', (): Store => {
     user.value = data
   }
 
-  const token = computed(() => user.value?.token)
+  const token = computed(() => user.value?.token || null)
 
   return {
     appInfo,

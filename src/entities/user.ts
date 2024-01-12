@@ -1,6 +1,8 @@
+import type { Token } from './app'
+
 export interface User {
   id: number
-  token: string
+  token: Token
   username: string
 }
 
