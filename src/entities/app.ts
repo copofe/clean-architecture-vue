@@ -1,7 +1,8 @@
 import type { User } from './user'
 
-type RequestData = Record<string, any> | FormData
 export type Token = string | null
+
+type RequestData = Record<string, any> | FormData
 
 export interface RequestConfig {
   method?: string
@@ -35,7 +36,10 @@ export interface Request {
   post: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
   put: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
   patch: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
-  Authorization: string | undefined
+  headers: {
+    Authorization: string | null
+    [key: string]: string | string[] | number | boolean | null
+  }
 }
 
 interface StorageKeyValue {
@@ -75,6 +79,12 @@ export interface Eventer {
   }
 }
 
+export abstract class ImplRespository {
+  abstract request: Request
+  abstract storage: Storage
+  abstract session: Session
+}
+
 /*****************************************************************************/
 
 export interface AppInfo {
@@ -85,15 +95,15 @@ export interface AppSetting {
   enabled: boolean
 }
 
+/*****************************************************************************/
+
 export interface StoreState {
   readonly appInfo: AppInfo | undefined
   readonly setting: AppSetting | undefined
   readonly user: User | undefined
 }
 
-export interface StoreGetter {
-  readonly token: Token
-}
+export interface StoreGetter {}
 
 export interface StoreAction {
   setAppInfo: (data?: AppInfo) => void

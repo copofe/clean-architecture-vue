@@ -22,8 +22,6 @@ export const useStore = defineStore('root', (): Store => {
     user.value = data
   }
 
-  const token = computed(() => user.value?.token || null)
-
   return {
     appInfo,
     setAppInfo,
@@ -31,7 +29,6 @@ export const useStore = defineStore('root', (): Store => {
     setSetting,
     user,
     setUser,
-    token,
   }
 })
 

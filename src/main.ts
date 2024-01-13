@@ -1,8 +1,8 @@
-import { AppInitUsecase } from '::/usecases/app'
+import { AppUsecase } from '::/usecases/app'
 import { storer, useStore } from '::/view/store'
 import router from '::/view/router'
 import App from '::/view/App.vue'
-import '::/assets/index.css'
+import '::/view/styles/index.css'
 
 function setup() {
   const app = createApp(App)
@@ -17,8 +17,8 @@ function setup() {
  */
 async function initialize() {
   const store = useStore()
-  const appUsecase = new AppInitUsecase(store)
-  await appUsecase.execute()
+  const appUsecase = new AppUsecase(store)
+  await appUsecase.initialize()
 }
 
 async function bootstrap() {

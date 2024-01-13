@@ -8,7 +8,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('./src/view/components/ui/button/Button.vue')['default']
-    ErrorBoundary: typeof import('./src/view/components/features/ErrorBoundary.vue')['default']
     Input: typeof import('./src/view/components/ui/input/Input.vue')['default']
     Label: typeof import('./src/view/components/ui/label/Label.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

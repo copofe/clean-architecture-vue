@@ -1,5 +1,5 @@
-import { Repository } from './_shared'
-import type { Store } from '::/entities/app'
+import { Repository, extractData } from './_shared'
+import type { Store, Token } from '::/entities/app'
 import type { User } from '::/entities/user'
 
 export class UserRepo extends Repository {
@@ -7,22 +7,30 @@ export class UserRepo extends Repository {
     super()
   }
 
-  async login(data: {
+  async generateToken(data: {
     username: string
     password: string
   }) {
-    return this.request.post<User>('/api/user/login', data)
+    return this.request.post<Token>('/api/user/login', data).then(extractData)
   }
 
-  async logout() {
-    return this.request.get('/api/user/logout')
+  invalidateToken() {
+    return this.request.get<void>('/api/user/logout')
   }
 
-  async getUser() {
-    return this.request.get<User>('/api/user')
+  setToken(token: Token) {
+    return this.storage.setItem('token', token)
   }
 
-  setUser(user?: User) {
+  getToken() {
+    return this.storage.getItem('token')
+  }
+
+  async getCurrentUser() {
+    return this.request.get<User>('/api/user').then(extractData)
+  }
+
+  observeUser(user?: User) {
     this.store.setUser(user)
   }
 }

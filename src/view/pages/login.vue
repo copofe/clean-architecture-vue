@@ -1,13 +1,16 @@
 <script setup lang="ts">
+import { useLoading } from '../hooks/useLoading'
 import { useStore } from '../store'
-import { UserLoginUsecase } from '::/usecases/user'
+import { UserAuthUsecase } from '::/usecases/user'
 
 const store = useStore()
-const userUsecase = new UserLoginUsecase(store)
-const formData = reactive<Parameters<UserLoginUsecase['execute']>[0]>({
+const userAuthUsecase = new UserAuthUsecase(store)
+const formData = reactive<Parameters<UserAuthUsecase['login']>[0]>({
   username: '',
   password: '',
 })
+
+const { loading, execute: login } = useLoading(() => userAuthUsecase.login(formData))
 </script>
 
 <template>
@@ -20,16 +23,16 @@ const formData = reactive<Parameters<UserLoginUsecase['execute']>[0]>({
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col gap-4">
       <div>
-        <Label for="username" class="mb-1">username</Label>
+        <Label for="username" class="mb-1">Username</Label>
         <Input id="username" v-model="formData.username" />
       </div>
 
       <div>
-        <Label for="password" class="mb-1">password</Label>
+        <Label for="password" class="mb-1">Password</Label>
         <Input id="password" v-model="formData.password" />
       </div>
 
-      <Button @click.stop="userUsecase.execute(formData)">
+      <Button :loading="loading" @click.stop="login">
         Sign in
       </Button>
     </div>

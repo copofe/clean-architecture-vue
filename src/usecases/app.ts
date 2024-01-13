@@ -1,22 +1,24 @@
-import type { ImplUsecase } from './_shared'
-import type { Store } from '::/entities/app'
+import { type Store, composeToken } from '::/entities/app'
 import { AppRepo } from '::/repositories/app'
+import { UserRepo } from '::/repositories/user'
 
-export class AppInitUsecase implements ImplUsecase {
+export class AppUsecase {
   private repo: AppRepo
   constructor(private store: Store) {
     this.repo = new AppRepo(this.store)
   }
 
-  async execute() {
-    const token = await this.repo.getToken()
-    this.repo.setToken(token)
+  async initialize() {
+    const userRepo = new UserRepo(this.store)
+    const token = await userRepo.getToken()
+    if (token)
+      this.repo.request.headers.Authorization = composeToken(token)
 
     const [appSetting, appInfo] = await Promise.all([
       this.repo.getAppSetting(),
       this.repo.getAppInfo(),
     ])
-    this.repo.setAppInfo(appInfo)
-    this.repo.setAppSetting(appSetting)
+    this.repo.observeAppInfo(appInfo)
+    this.repo.observeAppSetting(appSetting)
   }
 }
