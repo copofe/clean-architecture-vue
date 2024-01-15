@@ -1,10 +1,11 @@
-import { eventer } from './_shared'
+import { Usecase } from './_shared'
 import type { Store } from '::/entities/app'
 import { UserRepo } from '::/repositories/user'
 
-class UserUsecase {
+class UserUsecase extends Usecase {
   protected repo: UserRepo
   constructor(store: Store) {
+    super()
     this.repo = new UserRepo(store)
   }
 }
@@ -18,15 +19,19 @@ export class UserAuthUsecase extends UserUsecase {
     // TODO: validate params
     const token = await this.repo.generateToken(...args)
     this.repo.setToken(token)
+    this.repo.updateAuthorization(token)
     const user = await this.repo.getCurrentUser()
-    eventer.emit('user.logged', user)
     this.repo.observeUser(user)
+
+    this.eventer.emit('user.login', user)
   }
 
   async logout() {
     await this.repo.invalidateToken()
-    eventer.emit('user.logOut')
     this.repo.observeUser()
     this.repo.setToken(null)
+    this.repo.updateAuthorization(null)
+
+    this.eventer.emit('user.logout')
   }
 }

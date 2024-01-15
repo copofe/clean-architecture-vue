@@ -1,6 +1,6 @@
 import { Repository, extractData } from './_shared'
-import type { Store, Token } from '::/entities/app'
-import type { User } from '::/entities/user'
+import type { Store } from '::/entities/app'
+import type { Token, User } from '::/entities/user'
 
 export class UserRepo extends Repository {
   constructor(private store: Store) {
@@ -16,14 +16,6 @@ export class UserRepo extends Repository {
 
   invalidateToken() {
     return this.request.get<void>('/api/user/logout')
-  }
-
-  setToken(token: Token) {
-    return this.storage.setItem('token', token)
-  }
-
-  getToken() {
-    return this.storage.getItem('token')
   }
 
   async getCurrentUser() {

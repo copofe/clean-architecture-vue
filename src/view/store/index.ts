@@ -32,4 +32,4 @@ export const useStore = defineStore('root', (): Store => {
   }
 })
 
-export const storer = createPinia()
+export const store = createPinia()

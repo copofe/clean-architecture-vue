@@ -1,8 +1,12 @@
-# Vue Clean Architecture Project Template
+# Frontend Clean Architecture Project Template
 
-## Domain-Driven Design (DDD) and Clean Architecture
+[Create a repo from this template on GitHub.](https://github.com/copofe/frontend-clean-architecture/generate)
+
+## Principles
 
 Domain-Driven Design (DDD) and Clean Architecture represent two fundamental principles in software design. DDD emphasizes creating a shared language with domain experts, translating domain models into code, and implementing domain logic using domain terms. Clean Architecture provides a layered structure that isolates core business logic from the external world, fostering testability and modularity. Their integration aims to establish a lucid software architecture and sustainable domain models.
+
+## Application Architecture
 
 ### Entity Layer
 
@@ -22,8 +26,27 @@ Domain-Driven Design (DDD) and Clean Architecture represent two fundamental prin
 - Contains concrete use cases, business rules, and processes, fulfilling specific business requirements.
 - Typically encompasses logic and handling related to business processes.
 
-### View Layer
+### View Layer (with vue)
 
 - Presents data in a user-friendly manner through graphical interfaces, web pages, or mobile app interfaces.
 - Receives user input and forwards actions to other layers for processing.
 - Manages user interactions, responds to actions, displays feedback, and handles user events.
+
+## Technology Stack
+
+- Typescript
+- Vue 3
+  - vite
+  - pinia
+  - vue Router
+  - unplugin-auto-import
+  - unplugin-vue-components
+  - shadcn-vue
+- TailwindCSS
+
+## Developer Experience
+
+- `unplugin-auto-import` - Directly use Vue Composition API and others without importing
+- `unplugin-vue-components` - Auto import components
+- `.vscode/workspace.code-snippets` - Quickly generate code snippets
+- `.vscode/extensions` & `.vscode/settings.json` - Provide comprehensive type hints, automatically lint and format code.

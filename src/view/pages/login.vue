@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useLoading } from '../hooks/useLoading'
+import { useAsyncFunc } from '../hooks/useAsyncFunc'
 import { useStore } from '../store'
 import { UserAuthUsecase } from '::/usecases/user'
 
@@ -10,7 +10,7 @@ const formData = reactive<Parameters<UserAuthUsecase['login']>[0]>({
   password: '',
 })
 
-const { loading, execute: login } = useLoading(() => userAuthUsecase.login(formData))
+const { statusIs, execute: login } = useAsyncFunc(() => userAuthUsecase.login(formData))
 </script>
 
 <template>
@@ -32,7 +32,7 @@ const { loading, execute: login } = useLoading(() => userAuthUsecase.login(formD
         <Input id="password" v-model="formData.password" />
       </div>
 
-      <Button :loading="loading" @click.stop="login">
+      <Button :loading="statusIs.pending" @click.stop="login">
         Sign in
       </Button>
     </div>

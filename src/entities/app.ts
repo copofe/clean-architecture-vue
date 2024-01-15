@@ -1,8 +1,20 @@
-import type { User } from './user'
+import type { Token, User } from './user'
 
-export type Token = string | null
+export class StandardError extends Error {
+  constructor(public name: string, public message: string) {
+    super(message)
+  }
+}
 
-type RequestData = Record<string, any> | FormData
+export interface AppInfo {
+  version: string
+}
+
+export interface AppSetting {
+  enabled: boolean
+}
+
+/*****************************************************************************/
 
 export interface RequestConfig {
   method?: string
@@ -13,7 +25,7 @@ export interface RequestConfig {
 }
 
 export enum ApiResponseCode {
-  Success = 0,
+  Succeeded = 0,
   Failed = 1,
 }
 
@@ -24,11 +36,19 @@ export interface RequestResponse<T> {
   headers: Record<string, any>
 }
 
+export class RequestError extends StandardError {
+  constructor(public message: string, public code?: ApiResponseCode) {
+    super('RequestError', message)
+  }
+}
+
 export type ApiResponse<T> = RequestResponse<{
   code: ApiResponseCode
   msg: string
   data: T
 }>
+
+type RequestData = Record<string, any> | FormData
 
 export interface Request {
   get: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
@@ -42,35 +62,21 @@ export interface Request {
   }
 }
 
-interface StorageKeyValue {
-  token: Token
-}
-
-export interface Storage {
-  getItem: <K extends keyof StorageKeyValue>(key: K) => Promise<StorageKeyValue[K] | null>
-  setItem: <K extends keyof StorageKeyValue>(key: K, value: StorageKeyValue[K]) => Promise<void>
-  removeItem: (key: keyof StorageKeyValue) => Promise<void>
+export interface Storage<KV extends Record<string, any>> {
+  getItem: <K extends keyof KV>(key: K) => Promise<KV[K] | null>
+  setItem: <K extends keyof KV>(key: K, value: KV[K]) => Promise<void>
+  removeItem: (key: keyof KV) => Promise<void>
   clear: () => Promise<void>
 }
 
-interface SessionKeyValue {
-  user: User
-}
-
-export interface Session {
-  getItem: <K extends keyof SessionKeyValue>(key: K) => Promise<SessionKeyValue[K] | null>
-  setItem: <K extends keyof SessionKeyValue>(key: K, value: SessionKeyValue[K]) => Promise<void>
-  removeItem: (key: keyof SessionKeyValue) => Promise<void>
+export interface Session<KV extends Record<string, any>> {
+  getItem: <K extends keyof KV>(key: K) => Promise<KV[K] | null>
+  setItem: <K extends keyof KV>(key: K, value: KV[K]) => Promise<void>
+  removeItem: (key: keyof KV) => Promise<void>
   clear: () => Promise<void>
 }
 
-export interface Events {
-  // user state
-  'user.logged': User
-  'user.logOut': void
-}
-
-export interface Eventer {
+export interface Eventer<Events> {
   on: <K extends keyof Events>(e: K, fn: (data: Events[K]) => void) => void
   off: (e: keyof Events) => void
   emit: {
@@ -79,23 +85,17 @@ export interface Eventer {
   }
 }
 
-export abstract class ImplRespository {
-  abstract request: Request
-  abstract storage: Storage
-  abstract session: Session
-}
-
 /*****************************************************************************/
 
-export interface AppInfo {
-  version: string
+export abstract class ImplRepository {
+  protected abstract request: Request
+  protected abstract storage: Storage<any>
+  protected abstract session: Session<any>
 }
 
-export interface AppSetting {
-  enabled: boolean
+export abstract class ImplUsecase {
+  abstract eventer: Eventer<any>
 }
-
-/*****************************************************************************/
 
 export interface StoreState {
   readonly appInfo: AppInfo | undefined
@@ -114,10 +114,6 @@ export interface StoreAction {
 export interface Store extends StoreState, StoreGetter, StoreAction {}
 
 /*****************************************************************************/
-
-export function getLocale(): string {
-  return 'default'
-}
 
 export function composeToken(token: Token): string {
   return token ? `Bearer ${token}` : ''

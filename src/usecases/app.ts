@@ -1,18 +1,17 @@
-import { type Store, composeToken } from '::/entities/app'
+import { Usecase } from './_shared'
+import type { Store } from '::/entities/app'
 import { AppRepo } from '::/repositories/app'
-import { UserRepo } from '::/repositories/user'
 
-export class AppUsecase {
+export class AppUsecase extends Usecase {
   private repo: AppRepo
   constructor(private store: Store) {
+    super()
     this.repo = new AppRepo(this.store)
   }
 
   async initialize() {
-    const userRepo = new UserRepo(this.store)
-    const token = await userRepo.getToken()
-    if (token)
-      this.repo.request.headers.Authorization = composeToken(token)
+    const token = await this.repo.getToken()
+    this.repo.updateAuthorization(token)
 
     const [appSetting, appInfo] = await Promise.all([
       this.repo.getAppSetting(),
