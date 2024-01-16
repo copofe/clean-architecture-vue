@@ -5,7 +5,7 @@ import sessionStorageDriver from 'unstorage/drivers/session-storage'
 import localStorageDriver from 'unstorage/drivers/localstorage'
 import { ImplRepository, RequestError, composeToken } from '::/entities/app'
 import type { ApiResponse, Request, Session, Storage } from '::/entities/app'
-import type { Token, User } from '::/entities/user'
+import type { Token } from '::/entities/user'
 
 const instance = axios.create({
   timeout: 10000,
@@ -35,9 +35,7 @@ const request: Request = {
 
 /*****************************************************************************/
 
-interface SessionKeyValue {
-  user: User
-}
+interface SessionKeyValue {}
 
 const session: Session<SessionKeyValue> = createStorage({
   driver: sessionStorageDriver({}),
@@ -47,6 +45,7 @@ const session: Session<SessionKeyValue> = createStorage({
 
 interface StorageKeyValue {
   token: Token
+  language: string
 }
 
 const storage: Storage<StorageKeyValue> = createStorage({
@@ -73,6 +72,15 @@ export class Repository extends ImplRepository {
 
   updateAuthorization(token: Token) {
     this.request.headers.Authorization = composeToken(token)
+  }
+
+  setLanguage(language: string) {
+    return this.storage.setItem('language', language)
+  }
+
+  async getLanguage() {
+    const lang = await this.storage.getItem('language')
+    return lang ?? navigator.language
   }
 }
 

@@ -1,9 +1,8 @@
 import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
-import { useStore } from '../store'
 import { UserRepo } from '::/repositories/user'
 
 export async function auth(to: RouteLocationNormalized): Promise<void | RouteLocationRaw> {
-  const userRepo = new UserRepo(useStore())
+  const userRepo = new UserRepo()
   const isLogged = await userRepo.getToken()
   if (!isLogged) {
     return {

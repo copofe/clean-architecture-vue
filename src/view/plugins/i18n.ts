@@ -1,13 +1,12 @@
 import type { Locale } from 'vue-i18n'
 import { createI18n } from 'vue-i18n'
 import messages from '@intlify/unplugin-vue-i18n/messages'
-import type { Plugin } from 'vue'
 
 // Import i18n resources
 // https://vitejs.dev/guide/features.html#glob-import
 const i18n = createI18n({
   legacy: false,
-  locale: 'en-US',
+  locale: '',
   messages,
 })
 

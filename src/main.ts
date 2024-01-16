@@ -27,9 +27,13 @@ function setup() {
 }
 
 async function initialize() {
+  const appUsecase = new AppUsecase()
+  const { appInfo, appSetting, language } = await appUsecase.initialize()
+
   const store = useStore()
-  const appUsecase = new AppUsecase(store)
-  await appUsecase.initialize()
+  store.appInfo = appInfo
+  store.setting = appSetting
+  store.language = language
 }
 
 async function bootstrap() {

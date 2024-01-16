@@ -1,4 +1,4 @@
-import type { Token, User } from './user'
+import type { Token } from './user'
 
 export class StandardError extends Error {
   constructor(public name: string, public message: string) {
@@ -96,22 +96,6 @@ export abstract class ImplRepository {
 export abstract class ImplUsecase {
   abstract eventer: Eventer<any>
 }
-
-export interface StoreState {
-  readonly appInfo: AppInfo | undefined
-  readonly setting: AppSetting | undefined
-  readonly user: User | undefined
-}
-
-export interface StoreGetter {}
-
-export interface StoreAction {
-  setAppInfo: (data?: AppInfo) => void
-  setSetting: (data?: AppSetting) => void
-  setUser: (data?: User) => void
-}
-
-export interface Store extends StoreState, StoreGetter, StoreAction {}
 
 /*****************************************************************************/
 

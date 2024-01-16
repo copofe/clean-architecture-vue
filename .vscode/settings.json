@@ -13,6 +13,7 @@
     "source.organizeImports": "never"
   },
 
+  "eslint.format.enable": true,
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off" },
     { "rule": "format/*", "severity": "off" },

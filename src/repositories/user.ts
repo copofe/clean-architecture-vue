@@ -1,9 +1,8 @@
 import { Repository, extractData } from './_shared'
-import type { Store } from '::/entities/app'
 import type { Token, User } from '::/entities/user'
 
 export class UserRepo extends Repository {
-  constructor(private store: Store) {
+  constructor() {
     super()
   }
 
@@ -20,9 +19,5 @@ export class UserRepo extends Repository {
 
   async getCurrentUser() {
     return this.request.get<User>('/api/user').then(extractData)
-  }
-
-  observeUser(user?: User) {
-    this.store.setUser(user)
   }
 }
