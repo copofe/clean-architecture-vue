@@ -1,4 +1,4 @@
-import { createPinia, defineStore } from 'pinia'
+import { defineStore } from 'pinia'
 import type { ToRefs } from 'vue'
 import type { AppInfo, AppSetting, StoreAction, StoreGetter, StoreState } from '::/entities/app'
 import type { User } from '::/entities/user'
@@ -31,5 +31,3 @@ export const useStore = defineStore('root', (): Store => {
     setUser,
   }
 })
-
-export const store = createPinia()

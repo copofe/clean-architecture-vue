@@ -1,7 +1,9 @@
 import { RequestError } from '::/entities/app'
 import { AppUsecase } from '::/usecases/app'
-import { store, useStore } from '::/view/store'
+import { useStore } from '::/view/store'
 import router from '::/view/router'
+import i18n from '::/view/plugins/i18n'
+import store from '::/view/plugins/pinia'
 import App from '::/view/App.vue'
 import '::/view/styles/index.css'
 
@@ -10,6 +12,7 @@ function setup() {
   app
     .use(store)
     .use(router)
+    .use(i18n)
 
   app.config.errorHandler = (err, _vm, _info) => {
     if (err instanceof RequestError)

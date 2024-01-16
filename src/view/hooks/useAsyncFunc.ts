@@ -2,20 +2,20 @@ interface TaskOptions {
   immediate?: boolean
 }
 
-type TaskStatus = 'waiting' | 'pending' | 'succeeded' | 'failed'
+type TaskStatus = 'waiting' | 'executing' | 'succeeded' | 'failed'
 
 export function useAsyncFunc<T extends () => Promise<any>>(fn: T, options: TaskOptions = {}) {
   const status = ref<TaskStatus>('waiting')
 
   const statusIs = computed(() => ({
     waiting: status.value === 'waiting',
-    pending: status.value === 'pending',
+    executing: status.value === 'executing',
     succeeded: status.value === 'succeeded',
     failed: status.value === 'failed',
   }))
 
   async function execute() {
-    status.value = 'pending'
+    status.value = 'executing'
     return fn()
       .then(() => {
         status.value = 'succeeded'

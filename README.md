@@ -49,4 +49,7 @@ Domain-Driven Design (DDD) and Clean Architecture represent two fundamental prin
 - `unplugin-auto-import` - Directly use Vue Composition API and others without importing
 - `unplugin-vue-components` - Auto import components
 - `.vscode/workspace.code-snippets` - Quickly generate code snippets
-- `.vscode/extensions` & `.vscode/settings.json` - Provide comprehensive type hints, automatically lint and format code.
+- `.vscode/extensions` & `.vscode/settings.json`
+  - Provide comprehensive type hints
+  - automatically lint and format code.
+  - i18n intellisense

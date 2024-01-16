@@ -25,11 +25,13 @@
     "tailwindcss-animate": "^1.0.7",
     "unstorage": "^1.10.1",
     "vue": "^3.3.8",
+    "vue-i18n": "^9.9.0",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.4.5",
     "@eslint/eslintrc": "^3.0.0",
+    "@intlify/unplugin-vue-i18n": "^2.0.0",
     "@tsconfig/node18": "^18.2.2",
     "@types/node": "^20.10.8",
     "@vitejs/plugin-vue": "^5.0.2",
