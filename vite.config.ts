@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import path from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -48,6 +50,19 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, ''),
       },
+    },
+  },
+  test: {
+    coverage: {
+      reporter: ['html'],
+      include: [
+        'src/entities/**/*',
+        'src/repositories/**/*',
+        'src/usecases/**/*',
+        'src/view/components/ui/**/*.vue',
+        'src/view/hooks/**/*.ts',
+        'src/view/store/**/*.ts',
+      ],
     },
   },
 })

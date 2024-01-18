@@ -100,5 +100,14 @@ export abstract class ImplUsecase {
 /*****************************************************************************/
 
 export function composeToken(token: Token): string {
-  return token ? `Bearer ${token}` : ''
+  if (!token)
+    return ''
+
+  if (typeof token !== 'string')
+    throw new TypeError('Token must be a string')
+
+  if (token.trim().length === 0)
+    return ''
+
+  return `Bearer ${token.trim()}`
 }

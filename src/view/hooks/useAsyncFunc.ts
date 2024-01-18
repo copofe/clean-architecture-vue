@@ -16,13 +16,14 @@ export function useAsyncFunc<T extends () => Promise<any>>(fn: T, options: TaskO
 
   async function execute() {
     status.value = 'executing'
-    return fn()
-      .then(() => {
-        status.value = 'succeeded'
-      })
-      .finally(() => {
-        status.value = 'failed'
-      })
+
+    try {
+      await fn()
+      status.value = 'succeeded'
+    }
+    catch {
+      status.value = 'failed'
+    }
   }
 
   if (options.immediate)
