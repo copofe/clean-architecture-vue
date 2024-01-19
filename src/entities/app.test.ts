@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { RequestError, StandardError, composeToken } from './app'
+import { type Permission, RequestError, StandardError, composeToken, havePermission } from './app'
 
 describe('composeToken', () => {
   it('should throw if token is not a string', () => {
@@ -71,5 +71,25 @@ describe('requestError', () => {
     const error = new RequestError('Message')
 
     expect(error).toBeInstanceOf(Error)
+  })
+})
+
+describe('havePermission', () => {
+  it('should return true if required permission is in permissions list', () => {
+    const permissions: Permission[] = ['read', 'write']
+    const requiredPermission = 'read'
+    expect(havePermission(permissions, requiredPermission)).toBe(true)
+  })
+
+  it('should return false if required permission is not in permissions list', () => {
+    const permissions: Permission[] = ['delete']
+    const requiredPermission = 'read'
+    expect(havePermission(permissions, requiredPermission)).toBe(false)
+  })
+
+  it('should handle empty permissions list', () => {
+    const permissions: Permission[] = []
+    const requiredPermission = 'read'
+    expect(havePermission(permissions, requiredPermission)).toBe(false)
   })
 })

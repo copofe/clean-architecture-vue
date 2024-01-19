@@ -12,19 +12,36 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'Home',
-        component: () => import('::/view/pages/home.vue'),
+        component: () => import('::/view/pages/Home.vue'),
+        meta: {
+          title: 'home',
+        },
       },
     ],
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('::/view/pages/login.vue'),
+    path: '/sign-in',
+    name: 'SignIn',
+    component: () => import('::/view/pages/SignIn.vue'),
+    meta: {
+      title: 'user.sign-in',
+    },
+  },
+  {
+    path: '/permission-denied',
+    name: 'PermissionDenied',
+    component: () => import('::/view/pages/PermissionDenied.vue'),
+    meta: {
+      title: 'permission-denied',
+    },
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('::/view/pages/404.vue'),
+    meta: {
+      title: 'not-found',
+    },
   },
 ]
 

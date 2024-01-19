@@ -1,4 +1,6 @@
+permission-denied: Permission denied
 not-found: Not found
+home: Home
 user:
   sign-in: Sign in
   sign-out: Sign out

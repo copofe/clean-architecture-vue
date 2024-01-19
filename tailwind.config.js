@@ -5,13 +5,14 @@ module.exports = {
   darkMode: ['class'],
 
   content: [
-    './pages/**/*.{ts,tsx,vue}',
-    './components/**/*.{ts,tsx,vue}',
-    './app/**/*.{ts,tsx,vue}',
-    './src/**/*.{ts,tsx,vue}',
+    './src/view/**/*.vue',
+    './src/view/components/**/*.{ts,tsx}',
+    './src/view/styles/*.css',
   ],
 
   theme: {
+    colors: {},
+    borderRadius: {},
     container: {
       center: true,
       padding: '2rem',

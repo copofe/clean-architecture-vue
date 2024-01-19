@@ -21,8 +21,9 @@ export function useAsyncFunc<T extends () => Promise<any>>(fn: T, options: TaskO
       await fn()
       status.value = 'succeeded'
     }
-    catch {
+    catch (err) {
       status.value = 'failed'
+      throw err
     }
   }
 

@@ -6,6 +6,8 @@ export class StandardError extends Error {
   }
 }
 
+export type Permission = string
+
 export interface AppInfo {
   version: string
 }
@@ -110,4 +112,8 @@ export function composeToken(token: Token): string {
     return ''
 
   return `Bearer ${token.trim()}`
+}
+
+export function havePermission(permissions: Permission[], requiredPermission: Permission): boolean {
+  return permissions.includes(requiredPermission)
 }

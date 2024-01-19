@@ -1,4 +1,6 @@
+permission-denied: 权限不足
 not-found: 未找到页面
+home: 首页
 user:
   sign-in: 登录
   sign-out: 退出

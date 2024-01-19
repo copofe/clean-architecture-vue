@@ -3,5 +3,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <Page>{{ t('not-found') }}</Page>
+  <Page>
+    <h1>{{ t('permission-denied') }}</h1>
+  </Page>
 </template>
