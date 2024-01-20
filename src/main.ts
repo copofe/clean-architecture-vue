@@ -1,8 +1,8 @@
 import { RequestError } from '::/entities/app'
-import { AppUsecase } from '::/usecases/app'
+import { appUsecase } from '::/usecases/app'
 import { useStore } from '::/view/store'
 import router from '::/view/router'
-import i18n from '::/view/plugins/i18n'
+import i18n, { loadLanguageAsync } from '::/view/plugins/i18n'
 import store from '::/view/plugins/pinia'
 import App from '::/view/App.vue'
 import '::/view/styles/index.css'
@@ -11,8 +11,8 @@ function setup() {
   const app = createApp(App)
   app
     .use(store)
-    .use(router)
     .use(i18n)
+    .use(router)
 
   app.config.errorHandler = (err, _vm, _info) => {
     if (err instanceof RequestError)
@@ -27,13 +27,11 @@ function setup() {
 }
 
 async function initialize() {
-  const appUsecase = new AppUsecase()
-  const { appInfo, appSetting, language } = await appUsecase.initialize()
-
   const store = useStore()
+  const [{ appInfo, appSetting }] = await Promise.all([appUsecase.initialize(), loadLanguageAsync(store.language)])
+
   store.appInfo = appInfo
   store.setting = appSetting
-  store.language = language
 }
 
 async function bootstrap() {

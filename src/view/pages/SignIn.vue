@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { useAsyncFunc } from '../hooks/useAsyncFunc'
 import { useStore } from '../store'
-import { UserAuthUsecase } from '::/usecases/user'
+import { userAuthUsecase } from '::/usecases/user'
 
 const { t } = useI18n()
 const store = useStore()
 
-const userAuthUsecase = new UserAuthUsecase()
-const formData = reactive<Parameters<UserAuthUsecase['login']>[0]>({
+const formData = reactive<Parameters<typeof userAuthUsecase['login']>[0]>({
   username: '',
   password: '',
 })

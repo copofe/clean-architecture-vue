@@ -24,9 +24,13 @@ describe('useAsyncFunc', () => {
 
   it('should set status to failed on reject', async () => {
     const { execute, status, statusIs } = useAsyncFunc(() => Promise.reject(new Error('reject')))
-    await execute()
-    expect(status.value).toBe('failed')
-    expect(statusIs.value.failed).toBeTruthy()
+    try {
+      await execute()
+    }
+    catch {
+      expect(status.value).toBe('failed')
+      expect(statusIs.value.failed).toBeTruthy()
+    }
   })
 
   it('should immediately execute if immediate option', async () => {

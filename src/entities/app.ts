@@ -115,5 +115,5 @@ export function composeToken(token: Token): string {
 }
 
 export function havePermission(permissions: Permission[], requiredPermission: Permission): boolean {
-  return permissions.includes(requiredPermission)
+  return !!requiredPermission && permissions.includes(requiredPermission)
 }

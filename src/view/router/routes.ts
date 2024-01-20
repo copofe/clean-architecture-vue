@@ -28,14 +28,6 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/permission-denied',
-    name: 'PermissionDenied',
-    component: () => import('::/view/pages/PermissionDenied.vue'),
-    meta: {
-      title: 'permission-denied',
-    },
-  },
-  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('::/view/pages/404.vue'),

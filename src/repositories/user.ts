@@ -1,7 +1,7 @@
 import { Repository, extractData } from './_shared'
 import type { Token, User } from '::/entities/user'
 
-export class UserRepo extends Repository {
+class UserRepo extends Repository {
   constructor() {
     super()
   }
@@ -21,3 +21,5 @@ export class UserRepo extends Repository {
     return this.request.get<User>('/api/user').then(extractData)
   }
 }
+
+export const userRepo = new UserRepo()

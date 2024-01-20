@@ -35,7 +35,7 @@ const request: Request = {
 
 /*****************************************************************************/
 
-interface SessionKeyValue {}
+export interface SessionKeyValue {}
 
 const session: Session<SessionKeyValue> = createStorage({
   driver: sessionStorageDriver({}),
@@ -43,9 +43,8 @@ const session: Session<SessionKeyValue> = createStorage({
 
 /*****************************************************************************/
 
-interface StorageKeyValue {
+export interface StorageKeyValue {
   token: Token
-  language: string
 }
 
 const storage: Storage<StorageKeyValue> = createStorage({
@@ -72,15 +71,6 @@ export class Repository extends ImplRepository {
 
   updateAuthorization(token: Token) {
     this.request.headers.Authorization = composeToken(token)
-  }
-
-  setLanguage(language: string) {
-    return this.storage.setItem('language', language)
-  }
-
-  async getLanguage() {
-    const lang = await this.storage.getItem('language')
-    return lang ?? navigator.language
   }
 }
 

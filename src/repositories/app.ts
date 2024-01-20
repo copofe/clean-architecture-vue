@@ -1,7 +1,7 @@
 import { Repository, extractData } from './_shared'
 import type { AppInfo, AppSetting, RequestConfig } from '::/entities/app'
 
-export class AppRepo extends Repository {
+class AppRepo extends Repository {
   constructor() {
     super()
   }
@@ -14,3 +14,5 @@ export class AppRepo extends Repository {
     return this.request.get<AppSetting>('').then(extractData)
   }
 }
+
+export const appRepo = new AppRepo()

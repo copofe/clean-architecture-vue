@@ -1,24 +1,23 @@
 import { Usecase } from './_shared'
-import { UserRepo } from '::/repositories/user'
+import { userRepo } from '::/repositories/user'
 
 class UserUsecase extends Usecase {
-  protected repo = new UserRepo()
   constructor() {
     super()
   }
 }
 
-export class UserAuthUsecase extends UserUsecase {
+class UserAuthUsecase extends UserUsecase {
   constructor() {
     super()
   }
 
-  async login(...args: Parameters<UserRepo['generateToken']>) {
+  async login(...args: Parameters<typeof userRepo['generateToken']>) {
     // TODO: validate params
-    const token = await this.repo.generateToken(...args)
-    this.repo.setToken(token)
-    this.repo.updateAuthorization(token)
-    const user = await this.repo.getCurrentUser()
+    const token = await userRepo.generateToken(...args)
+    userRepo.setToken(token)
+    userRepo.updateAuthorization(token)
+    const user = await userRepo.getCurrentUser()
 
     this.eventer.emit('user.login', user)
 
@@ -29,10 +28,12 @@ export class UserAuthUsecase extends UserUsecase {
   }
 
   async logout() {
-    await this.repo.invalidateToken()
-    this.repo.setToken(null)
-    this.repo.updateAuthorization(null)
+    await userRepo.invalidateToken()
+    userRepo.setToken(null)
+    userRepo.updateAuthorization(null)
 
     this.eventer.emit('user.logout')
   }
 }
+
+export const userAuthUsecase = new UserAuthUsecase()

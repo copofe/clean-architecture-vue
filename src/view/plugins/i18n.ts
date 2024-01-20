@@ -6,7 +6,7 @@ import messages from '@intlify/unplugin-vue-i18n/messages'
 // https://vitejs.dev/guide/features.html#glob-import
 const i18n = createI18n({
   legacy: false,
-  locale: '',
+  locale: navigator.language,
   messages,
 })
 

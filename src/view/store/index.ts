@@ -9,7 +9,7 @@ export const useStore = defineStore('root', () => {
 
   const user = ref<User>()
 
-  const language = ref<string>()
+  const language = ref<Navigator['language']>(navigator.language)
 
   return {
     appInfo,
