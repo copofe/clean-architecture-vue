@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useLocalStorage } from '@vueuse/core'
 import type { AppInfo, AppSetting } from '::/entities/app'
 import type { User } from '::/entities/user'
 
@@ -9,7 +10,7 @@ export const useStore = defineStore('root', () => {
 
   const user = ref<User>()
 
-  const language = ref<Navigator['language']>(navigator.language)
+  const language: Ref<string> = useLocalStorage('language', navigator.language)
 
   return {
     appInfo,
