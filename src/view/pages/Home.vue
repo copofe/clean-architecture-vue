@@ -7,7 +7,7 @@ const { t } = useI18n()
 const store = useStore()
 const router = useRouter()
 
-const isDark = useDark()
+const isDark = useDark({ storageKey: null })
 const toggleDark = useToggle(isDark)
 </script>
 
@@ -26,16 +26,18 @@ const toggleDark = useToggle(isDark)
       </Button>
     </div>
     <div class="flex gap-2">
-      <Button size="icon" variant="link">
+      <Button
+        size="icon"
+        variant="link"
+        @click="toggleDark()"
+      >
         <Sun
-          v-if="!isDark"
+          v-if="isDark"
           class="text-muted-foreground"
-          @click="toggleDark()"
         />
         <Moon
           v-else
           class="text-muted-foreground"
-          @click="toggleDark()"
         />
       </Button>
       <Button

@@ -5,7 +5,7 @@ export async function auth(to: RouteLocationNormalized): Promise<void | RouteLoc
   const isLogged = await userRepo.getToken()
   if (!isLogged) {
     return {
-      name: 'Login',
+      name: 'SignIn',
       query: { redirect: encodeURIComponent(to.fullPath) },
     }
   }

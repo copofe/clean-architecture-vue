@@ -55,13 +55,12 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     coverage: {
-      reporter: ['html'],
       include: [
         'src/entities/**/*',
         'src/repositories/**/*',
         'src/usecases/**/*',
         'src/view/components/ui/**/*.vue',
-        'src/view/hooks/**/*.ts',
+        'src/view/compositions/**/*.ts',
         'src/view/store/**/*.ts',
       ],
     },

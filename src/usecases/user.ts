@@ -1,23 +1,21 @@
 import { Usecase } from './_shared'
 import { userRepo } from '::/repositories/user'
 
-class UserUsecase extends Usecase {
-  constructor() {
-    super()
-  }
-}
-
-class UserAuthUsecase extends UserUsecase {
+class UserAuthUsecase extends Usecase {
   constructor() {
     super()
   }
 
-  async login(...args: Parameters<typeof userRepo['generateToken']>) {
+  async login(..._args: Parameters<typeof userRepo['generateToken']>) {
     // TODO: validate params
-    const token = await userRepo.generateToken(...args)
+
+    // TODO: your own logic
+    const token = '123abc'
+    // const token = await userRepo.generateToken(...args)
     userRepo.setToken(token)
     userRepo.updateAuthorization(token)
-    const user = await userRepo.getCurrentUser()
+    const user = { token, id: 1, username: 'admin', permission: [] }
+    // const user = await userRepo.getCurrentUser()
 
     this.eventer.emit('user.login', user)
 

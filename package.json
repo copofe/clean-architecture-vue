@@ -12,9 +12,9 @@
     "build": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint:fix": "eslint . --fix",
+    "lint-staged": "lint-staged",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -43,7 +43,6 @@
     "@types/node": "^20.11.4",
     "@vitejs/plugin-vue": "^5.0.2",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
-    "@vitest/coverage-v8": "^1.2.0",
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.55.0",
