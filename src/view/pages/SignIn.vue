@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useAsyncFunc } from '../compositions/useAsyncFunc'
-import { useStore } from '../store'
 import { userAuthUsecase } from '::/usecases/user'
 
 const { t } = useI18n()
-const store = useStore()
 const route = useRoute()
 const router = useRouter()
 
@@ -13,8 +11,7 @@ const formData = reactive<Parameters<typeof userAuthUsecase['login']>[0]>({
   password: '',
 })
 
-const { statusIs, execute: login } = useAsyncFunc(() => userAuthUsecase.login(formData).then(({ user }) => {
-  store.user = user
+const { statusIs, execute: login } = useAsyncFunc(() => userAuthUsecase.login(formData).then(() => {
   const { redirect } = route.query
   router.replace(redirect ? decodeURIComponent(redirect as string) : { name: 'Home' })
 }))

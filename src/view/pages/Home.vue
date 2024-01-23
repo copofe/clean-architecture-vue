@@ -2,6 +2,7 @@
 import { useDark, useToggle } from '@vueuse/core'
 import { Languages, Moon, Sun } from 'lucide-vue-next'
 import { useStore } from '../store'
+import { appUsecase } from '::/usecases/app'
 
 const { t } = useI18n()
 const store = useStore()
@@ -9,6 +10,10 @@ const router = useRouter()
 
 const isDark = useDark({ storageKey: null })
 const toggleDark = useToggle(isDark)
+
+function toggleLanguage() {
+  appUsecase.eventer.emit('view.language.change', store.language === 'en-US' ? 'zh-CN' : 'en-US')
+}
 </script>
 
 <template>
@@ -43,7 +48,7 @@ const toggleDark = useToggle(isDark)
       <Button
         size="icon"
         variant="link"
-        @click="store.language = store.language === 'en-US' ? 'zh-CN' : 'en-US'"
+        @click="toggleLanguage"
       >
         <Languages class="text-muted-foreground" />
       </Button>

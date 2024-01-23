@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
 import type { AppInfo, AppSetting } from '::/entities/app'
 import type { User } from '::/entities/user'
+import { appUsecase } from '::/usecases/app'
 
 export const useStore = defineStore('root', () => {
   const appInfo = ref<AppInfo>()
