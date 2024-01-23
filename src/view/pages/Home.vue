@@ -8,7 +8,7 @@ const { t } = useI18n()
 const store = useStore()
 const router = useRouter()
 
-const isDark = useDark({ storageKey: null })
+const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
 function toggleLanguage() {
