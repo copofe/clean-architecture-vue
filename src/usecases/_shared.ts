@@ -6,12 +6,6 @@ export interface Events {
   // user
   'user.login': User
   'user.logout': void
-
-  // route
-  'route.change': any
-
-  // view
-  'view.language.change': string
 }
 
 const eventer: Eventer<Events> = mitt()

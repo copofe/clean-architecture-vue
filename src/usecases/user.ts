@@ -6,16 +6,13 @@ class UserAuthUsecase extends Usecase {
     super()
   }
 
-  async login(..._args: Parameters<typeof userRepo['generateToken']>) {
+  async login(...args: Parameters<typeof userRepo['generateToken']>) {
     // TODO: validate params
 
-    // TODO: your own logic
-    const token = '123abc'
-    // const token = await userRepo.generateToken(...args)
+    const token = await userRepo.generateToken(...args)
     userRepo.setToken(token)
     userRepo.updateAuthorization(token)
-    const user = { token, id: 1, username: 'admin', permission: [] }
-    // const user = await userRepo.getCurrentUser()
+    const user = await userRepo.getCurrentUser()
 
     this.eventer.emit('user.login', user)
 

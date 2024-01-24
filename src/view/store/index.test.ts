@@ -52,13 +52,11 @@ describe('root store', () => {
     const store = useStore()
     store.user = {
       id: 1,
-      token: 'abc123',
       username: 'test',
       permission: [],
     }
     expect(store.user).toEqual({
       id: 1,
-      token: 'abc123',
       username: 'test',
       permission: [],
     })

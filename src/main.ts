@@ -17,7 +17,7 @@ function errorHandler(err: unknown) {
     console.error(err)
 }
 
-function setup() {
+async function setup() {
   const app = createApp(App)
   app
     .use(store)
@@ -25,6 +25,12 @@ function setup() {
     .use(router)
 
   app.config.errorHandler = errorHandler
+
+  // Change condition to enable or disable mock
+  if (true) {
+    const { startMock } = await import('./mocks/browser')
+    await startMock()
+  }
 
   return app
 }
@@ -40,7 +46,7 @@ async function initialize() {
 }
 
 async function bootstrap() {
-  const app = setup()
+  const app = await setup()
   await initialize()
   app.mount('#app')
 }

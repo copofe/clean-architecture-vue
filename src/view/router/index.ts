@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
+import i18n from '../plugins/i18n'
 import routes from './routes'
-import { appUsecase } from '::/usecases/app'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,7 +20,8 @@ router.beforeEach((to, from) => {
 })
 router.afterEach((to) => {
   NProgress.done()
-  appUsecase.eventer.emit('route.change', to)
+  if (to.meta.title)
+    document.title = i18n.global.t(to.meta.title)
 })
 
 router.onError((error) => {

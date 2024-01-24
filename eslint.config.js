@@ -5,6 +5,9 @@ const compat = new FlatCompat()
 
 export default antfu(
   {
+    ignores: [
+      'public/**',
+    ],
     vue: {
       overrides: {
         'vue/max-attributes-per-line': ['error', { singleline: 2, multiline: 1 }],
