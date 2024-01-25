@@ -1,47 +1,44 @@
-<p align='center'>
-  <img src='./public/logo.svg' width='200'/>
-</p>
+<img src='./public/logo.svg' width='180'/>
+
+A front-end template that considers itself excellent for building web applications with Vue.
+
+[Live preview](https://frontend-clean-architecture.vercel.app/)
 
 [Create a repo from this template on GitHub.](https://github.com/copofe/frontend-clean-architecture/generate)
 
+## Features
+
+- Preconfigured with code quality tools: ESLint, TypeScript, Vitest, etc.
+- Preconfigured with workflow tools: commitlint, husky, etc.
+- Preconfigured with VSCode code snippets and other VSCode settings.
+- Auto imports components.
+- Auto imports APIs (Vue, Vue Router, Vue I18n).
+- I18n ready.
+- Mocking ready.
+
 ## Principles
 
-Domain-Driven Design (DDD) and Clean Architecture represent two fundamental principles in software design. DDD emphasizes creating a shared language with domain experts, translating domain models into code, and implementing domain logic using domain terms. Clean Architecture provides a layered structure that isolates core business logic from the external world, fostering testability and modularity. Their integration aims to establish a lucid software architecture and sustainable domain models.
+[Separation Of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) is most important. By separating business objects, business workflows, and views, the development and maintenance of the program is simplified. Clean Architecture was proposed by Robert C. Martin in 2012. It is divided into four levels in total (Entities, Use Cases, Interface Adapters, Frameworks and Drivers). There is a dependency principle between layers:
 
-## Architecture
+The dependency relationships in the source code can only point to the inner layer of the same concentric circle, that is, low-level mechanisms point to high-level policies:
 
-### Entity Layer
+- High-level modules should not depend on low-level modules, both should depend on their abstractions.
+- Abstractions should not depend on details, details should depend on abstractions.
 
-- Represents core objects and data structures in the business domain.
-- Includes business-related attributes, methods, identity, associations, and domain events.
-- Primarily focuses on essential concepts in the business domain.
+Based on these principles, we decided to split into four layers:
 
-### Repository Layer
+- Entity: Business objects that encapsulate core business data and logic that are essential to the business domain.
+- Repository: Abstracts data access and storage responsibilities away from business objects, handles CRUD operations and queries against persistence storage.
+- Use Case: Contains application-specific business rules and workflows, coordinates work across entities and repositories to perform specific application goals.
+- View: Renders UI components and handles presentation responsibilities, communicates with use cases to display information and collect user input.
 
-- Encapsulates access and operations on data storage, providing CRUD operations.
-- Offers an abstract interface, concealing specific data storage implementation details.
-- May include access logic for data caching, remote data sources, and local databases.
+## Tech Stack
 
-### Usecase Layer
-
-- Implements specific business use cases, rules, and processes, coordinating interactions between entities and repositories.
-- Contains concrete use cases, business rules, and processes, fulfilling specific business requirements.
-- Typically encompasses logic and handling related to business processes.
-
-### View Layer
-
-- Presents data in a user-friendly manner through graphical interfaces, web pages, or mobile app interfaces.
-- Receives user input and forwards actions to other layers for processing.
-- Manages user interactions, responds to actions, displays feedback, and handles user events.
-
-#### View Framework and Features
-
-- [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite)
-
-- [State Management via Pinia](https://pinia.vuejs.org/)
-
-- [TailwindCSS](https://github.com/tailwindlabs/tailwindcss)
-
-- [Components auto importing](./src/view/components/ui/)
-
-- [I18n ready](./locales)
+- [Vue 3](https://github.com/vuejs/core), [Vue Router](https://router.vuejs.org/), [Vite](https://vitejs.dev/)
+- [Pinia](https://pinia.vuejs.org/)
+- [Axios](https://axios-http.com/)
+- [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss)
+- [Shadcn-Vue](https://www.shadcn-vue.com/)
+- [Vue I18n](https://vue-i18n.intlify.dev/), [@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n)
+- [Vitest](https://vitest.dev/)
+- [msw.js](https://mswjs.io/)
