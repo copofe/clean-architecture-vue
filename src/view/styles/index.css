@@ -92,3 +92,9 @@
   width: 100%;
   height: 2px;
 }
+
+html,
+body,
+#app {
+  height: 100%;
+}

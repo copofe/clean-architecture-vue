@@ -42,16 +42,6 @@ export default defineConfig({
     }),
     VueDevTools(),
   ],
-  server: {
-    port: 3030,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, ''),
-      },
-    },
-  },
   test: {
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],

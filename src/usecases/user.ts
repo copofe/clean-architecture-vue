@@ -6,7 +6,7 @@ class UserAuthUsecase extends Usecase {
     super()
   }
 
-  async login(...args: Parameters<typeof userRepo['generateToken']>) {
+  login = async (...args: Parameters<typeof userRepo['generateToken']>) => {
     // TODO: validate params
 
     const token = await userRepo.generateToken(...args)
@@ -22,7 +22,7 @@ class UserAuthUsecase extends Usecase {
     }
   }
 
-  async logout() {
+  logout = async () => {
     await userRepo.invalidateToken()
     userRepo.setToken(null)
     userRepo.updateAuthorization(null)

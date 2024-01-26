@@ -11,10 +11,15 @@ const formData = reactive<Parameters<typeof userAuthUsecase['login']>[0]>({
   password: '',
 })
 
-const { statusIs, execute: login } = useAsyncFunc(() => userAuthUsecase.login(formData).then(() => {
-  const { redirect } = route.query
-  router.replace(redirect ? decodeURIComponent(redirect as string) : { name: 'Home' })
-}))
+const { isLoading, run: login } = useAsyncFunc(
+  () => userAuthUsecase.login(formData),
+  {
+    onSuccess: () => {
+      const { redirect } = route.query
+      router.replace(redirect ? decodeURIComponent(redirect as string) : { name: 'Home' })
+    },
+  },
+)
 </script>
 
 <template>
@@ -30,7 +35,7 @@ const { statusIs, execute: login } = useAsyncFunc(() => userAuthUsecase.login(fo
         <Input id="password" v-model="formData.password" />
       </div>
 
-      <Button :loading="statusIs.executing" @click.stop="login">
+      <Button :loading="isLoading" @click.stop="login">
         {{ t('user.sign-in') }}
       </Button>
     </div>

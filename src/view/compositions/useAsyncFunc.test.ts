@@ -1,41 +1,43 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { useAsyncFunc } from './useAsyncFunc'
 
 describe('useAsyncFunc', () => {
-  it('should initialize with status waiting', () => {
-    const { status, statusIs } = useAsyncFunc(() => Promise.resolve())
-    expect(status.value).toBe('waiting')
-    expect(statusIs.value.waiting).toBeTruthy()
+  it('should set isLoading to true when running', async () => {
+    const { isLoading, run } = useAsyncFunc(() => Promise.resolve())
+    run()
+    expect(isLoading.value).toBe(true)
   })
 
-  it('should set status to executing when executed', async () => {
-    const { execute, status, statusIs } = useAsyncFunc(() => new Promise(resolve => setTimeout(resolve, 1000)))
-    execute()
-    expect(status.value).toBe('executing')
-    expect(statusIs.value.executing).toBeTruthy()
+  it('should set data and isLoading when resolved', async () => {
+    const { isLoading, data, run } = useAsyncFunc(() => Promise.resolve('foo'))
+    await run()
+    expect(isLoading.value).toBe(false)
+    expect(data.value).toBe('foo')
   })
 
-  it('should set status to succeeded on resolve', async () => {
-    const { execute, status, statusIs } = useAsyncFunc(() => Promise.resolve())
-    await execute()
-    expect(status.value).toBe('succeeded')
-    expect(statusIs.value.succeeded).toBeTruthy()
+  it('should retry on failure', async () => {
+    const mockFn = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('bar')
+    const { run } = useAsyncFunc(mockFn, { retry: true })
+    await run()
+    expect(mockFn).toHaveBeenCalledTimes(2)
   })
 
-  it('should set status to failed on reject', async () => {
-    const { execute, status, statusIs } = useAsyncFunc(() => Promise.reject(new Error('reject')))
+  it('should call onSuccess callback', async () => {
+    const onSuccess = vi.fn()
+    const { run } = useAsyncFunc(() => Promise.resolve('baz'), { onSuccess })
+    await run()
+    expect(onSuccess).toHaveBeenCalledWith('baz')
+  })
+
+  it('should call onError callback', async () => {
+    const onError = vi.fn()
+    const mockFn = vi.fn().mockRejectedValue(new Error('some error'))
+    const { run } = useAsyncFunc(mockFn, { onError })
     try {
-      await execute()
+      await run()
     }
-    catch {
-      expect(status.value).toBe('failed')
-      expect(statusIs.value.failed).toBeTruthy()
+    catch (error) {
+      expect(onError).toHaveBeenCalled()
     }
-  })
-
-  it('should immediately execute if immediate option', async () => {
-    const { status, statusIs } = useAsyncFunc(() => new Promise(resolve => setTimeout(resolve, 1000)), { immediate: true })
-    expect(status.value).toBe('executing')
-    expect(statusIs.value.executing).toBeTruthy()
   })
 })
