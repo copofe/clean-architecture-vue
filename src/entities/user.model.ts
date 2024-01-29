@@ -1,6 +1,4 @@
-import type { Permission } from './app'
-
-export type Token = string | null
+import type { Permission } from './app.model'
 
 export interface User {
   id: number

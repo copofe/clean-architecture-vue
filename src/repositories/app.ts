@@ -1,5 +1,5 @@
 import { Repository, extractData } from './_shared'
-import type { AppInfo, AppSetting, RequestConfig } from '::/entities/app'
+import type { AppInfo, AppSetting, RequestConfig } from '::/entities/app.model'
 
 class AppRepo extends Repository {
   constructor() {

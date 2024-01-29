@@ -1,6 +1,6 @@
 import mitt from 'mitt'
-import type { Eventer, ImplUsecase } from '::/entities/app'
-import type { User } from '::/entities/user'
+import type { Eventer, ImplUsecase } from '::/entities/app.model'
+import type { User } from '::/entities/user.model'
 
 export interface Events {
   // user

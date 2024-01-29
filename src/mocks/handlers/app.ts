@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'msw'
 import { http } from 'msw'
 import { stdResponse } from './_shared'
-import type { AppInfo, AppSetting } from '::/entities/app'
+import type { AppInfo, AppSetting } from '::/entities/app.model'
 
 const handles: RequestHandler[] = [
   http.get('/api/app', () => {

@@ -1,7 +1,7 @@
 import type { RequestHandler } from 'msw'
 import { delay, http } from 'msw'
 import { stdResponse } from './_shared'
-import type { User } from '::/entities/user'
+import type { User } from '::/entities/user.model'
 
 const handles: RequestHandler[] = [
   http.post('/api/user/login', async () => {

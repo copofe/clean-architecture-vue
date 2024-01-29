@@ -1,5 +1,6 @@
 import { Repository, extractData } from './_shared'
-import type { Token, User } from '::/entities/user'
+import type { Token } from '::/entities/app.model'
+import type { User } from '::/entities/user.model'
 
 class UserRepo extends Repository {
   constructor() {

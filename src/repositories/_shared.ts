@@ -3,9 +3,9 @@ import axios from 'axios'
 import { createStorage } from 'unstorage'
 import sessionStorageDriver from 'unstorage/drivers/session-storage'
 import localStorageDriver from 'unstorage/drivers/localstorage'
-import { ImplRepository, RequestError, composeToken } from '::/entities/app'
-import type { ApiResponse, Request, Session, Storage } from '::/entities/app'
-import type { Token } from '::/entities/user'
+import { ImplRepository, RequestError } from '::/entities/app.model'
+import type { ApiResponse, Request, Session, Storage, Token } from '::/entities/app.model'
+import { AppEntity } from '::/entities/app.entity'
 
 const instance = axios.create({
   timeout: 10000,
@@ -70,7 +70,7 @@ export class Repository extends ImplRepository {
   }
 
   updateAuthorization(token: Token) {
-    this.request.headers.Authorization = composeToken(token)
+    this.request.headers.Authorization = AppEntity.composeToken(token)
   }
 }
 

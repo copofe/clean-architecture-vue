@@ -1,4 +1,4 @@
-import { RequestError } from '::/entities/app'
+import { RequestError } from '::/entities/app.model'
 import { appUsecase } from '::/usecases/app'
 import { useStore } from '::/view/store'
 import router from '::/view/router'
@@ -9,6 +9,7 @@ import App from '::/view/App.vue'
 import '::/view/styles/index.css'
 
 function errorHandler(err: unknown) {
+  // Global error handler
   if (err instanceof RequestError)
   // TODO: show error by notification or toast
     console.error(err)

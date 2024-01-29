@@ -1,10 +1,10 @@
-import type { Token } from './user'
-
 export class StandardError extends Error {
   constructor(public name: string, public message: string) {
     super(message)
   }
 }
+
+export type Token = string | null
 
 export type Permission = string
 
@@ -97,23 +97,4 @@ export abstract class ImplRepository {
 
 export abstract class ImplUsecase {
   abstract eventer: Eventer<any>
-}
-
-/*****************************************************************************/
-
-export function composeToken(token: Token): string {
-  if (!token)
-    return ''
-
-  if (typeof token !== 'string')
-    throw new TypeError('Token must be a string')
-
-  if (token.trim().length === 0)
-    return ''
-
-  return `Bearer ${token.trim()}`
-}
-
-export function havePermission(permissions: Permission[], requiredPermission: Permission): boolean {
-  return !!requiredPermission && permissions.includes(requiredPermission)
 }
