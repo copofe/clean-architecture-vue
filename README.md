@@ -1,10 +1,12 @@
 <img src='./public/logo.svg' width='180'/>
 
-A front-end template that considers itself excellent for building web applications with Vue.
+A front-end template designed for building web applications with Vue.js.
 
-[Live preview](https://frontend-clean-architecture.vercel.app/)
+[Live Demo](https://frontend-clean-architecture.vercel.app/)
 
 [Create a repo from this template on GitHub.](https://github.com/copofe/frontend-clean-architecture/generate)
+
+[中文介绍](./README_CN.md)
 
 ## Features
 
@@ -14,7 +16,7 @@ A front-end template that considers itself excellent for building web applicatio
 - Auto imports components.
 - Auto imports APIs (Vue, Vue Router, Vue I18n).
 - I18n ready.
-- Mocking ready.
+- Mock ready.
 
 ## Principles
 
@@ -42,3 +44,11 @@ Based on these principles, we decided to split into four layers:
 - [Vue I18n](https://vue-i18n.intlify.dev/), [@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n)
 - [Vitest](https://vitest.dev/)
 - [msw.js](https://mswjs.io/)
+
+## Checklist
+
+When you use this template, try follow the checklist to update your info properly
+
+- [ ] Change the author name in `LICENSE`
+- [ ] Change the title in `index.html`
+- [ ] Change the `logo.svg` in `public`
