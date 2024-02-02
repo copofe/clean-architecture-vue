@@ -59,7 +59,6 @@ export interface Request {
   put: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
   patch: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
   headers: {
-    Authorization: string | null
     [key: string]: string | string[] | number | boolean | null
   }
 }

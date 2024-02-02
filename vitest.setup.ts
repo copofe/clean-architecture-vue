@@ -1,12 +1,11 @@
-import { afterAll, afterEach, beforeAll } from 'vitest'
-import { server } from './src/mocks/node.js'
+import { createServer } from 'node:http'
+import { afterAll, beforeAll } from 'vitest'
+import handler from './.output/server/index.mjs'
+
+const server = createServer(handler)
 
 beforeAll(() => {
   server.listen()
-})
-
-afterEach(() => {
-  server.resetHandlers()
 })
 
 afterAll(() => {

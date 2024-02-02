@@ -1,8 +1,6 @@
 import type { Token } from './app.model'
 
 export class AppEntity {
-  constructor() {}
-
   static composeToken(token: Token): string {
     if (!token)
       return ''

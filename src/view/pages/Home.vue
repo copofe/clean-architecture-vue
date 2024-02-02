@@ -27,19 +27,12 @@ function toggleLanguage() {
 <template>
   <Page class="flex flex-col items-center px-6 py-12 lg:px-8 gap-8">
     <img src="/logo.svg" class="w-1/4 sm:w-32 self-center">
+    <h1 class="text-lg">
+      {{ t('name') }}
+    </h1>
     <p class="italic text-muted-foreground">
-      A front-end template designed for building web applications with Vue.js.
+      {{ t('slogan') }}
     </p>
-    <div class="flex gap-2">
-      <RouterLink :to="{ name: 'SignIn' }">
-        <Button variant="secondary">
-          {{ t('user.sign-in') }}
-        </Button>
-      </RouterLink>
-      <Button variant="secondary" disabled>
-        {{ t('user.sign-up') }}
-      </Button>
-    </div>
     <div class="flex gap-2">
       <Button
         size="icon"

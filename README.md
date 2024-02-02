@@ -43,7 +43,52 @@ Based on these principles, we decided to split into four layers:
 - [Shadcn-Vue](https://www.shadcn-vue.com/)
 - [Vue I18n](https://vue-i18n.intlify.dev/), [@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n)
 - [Vitest](https://vitest.dev/)
-- [msw.js](https://mswjs.io/)
+- [nitro](https://nitro.unjs.io/)
+
+## Scripts
+
+- `dev` : Start development server
+- `dev:mock` : Start development server with mock server
+- `server` : Start mock server
+- `build` : Build production files
+- `type-check` : Check types
+- `lint:fix` : Lint check and fix
+- `lint-staged` : Lint staged files
+- `test` : Run tests
+- `coverage` : Run tests and generate coverage report
+- `prepare` : Configure husky hooks
+
+### Mocking
+
+We use nitro as mock service, supporting global and local mocking. The mock server port is hardcoded as 8080 in the project. If there is a conflict, you can modify the following:
+
+- `package.json`
+```json
+{
+  "scripts": {
+    "server": "nitro dev --port <your port>"
+  }
+}
+```
+
+- `.env`
+```env
+VITE_MOCK_SERVER=http://localhost:<your port>
+```
+
+#### Usage
+
+- Enable/disable mock: .env file `VITE_MOCK_ENABLE=true/false`
+- Enable/disable global mock: .env file `VITE_MOCK_GLOBAL=true/false`
+- Local mock: Add `mock: true` in request header
+
+#### Benefits
+
+- Non-invasive
+- Independent service
+- Complete server capabilities, supports middleware/plugins/storage, perfectly simulate server data changes
+- Use TypeScript, reuse business type definitions
+- Support hot updates
 
 ## Checklist
 
@@ -52,3 +97,5 @@ When you use this template, try follow the checklist to update your info properl
 - [ ] Change the author name in `LICENSE`
 - [ ] Change the title in `index.html`
 - [ ] Change the `logo.svg` in `public`
+- [ ] Change the `VITE_API_BASE_URL` in `.env` file to the dev environment API domain
+- [ ] Create `.env.production` file and modify `VITE_API_BASE_URL` to the production API domain

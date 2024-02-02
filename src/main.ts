@@ -1,5 +1,5 @@
+// import { appUsecase } from '::/usecases/app'
 import { RequestError } from '::/entities/app.model'
-import { appUsecase } from '::/usecases/app'
 import { useStore } from '::/view/store'
 import router from '::/view/router'
 import i18n, { loadLanguageAsync } from '::/view/plugins/i18n'
@@ -27,21 +27,16 @@ async function setup() {
 
   app.config.errorHandler = errorHandler
 
-  // Change condition to enable or disable mock
-  if (true) {
-    const { startMock } = await import('./mocks/browser')
-    await startMock()
-  }
-
   return app
 }
 
 async function initialize() {
   const store = useStore()
-  const [{ appInfo, appSetting }] = await Promise.all([appUsecase.initialize(), loadLanguageAsync(store.language)])
+  // const [{ appInfo, appSetting }] = await Promise.all([appUsecase.initialize(), loadLanguageAsync(store.language)])
+  await Promise.all([loadLanguageAsync(store.language)])
 
-  store.appInfo = appInfo
-  store.setting = appSetting
+  // store.appInfo = appInfo
+  // store.setting = appSetting
 
   registerEventHub()
 }

@@ -2,8 +2,8 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "composite": true,
-    "experimentalDecorators": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
       "::/*": [

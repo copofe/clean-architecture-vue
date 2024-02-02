@@ -1,6 +1,7 @@
 import type { Locale } from 'vue-i18n'
 import { createI18n } from 'vue-i18n'
 import messages from '@intlify/unplugin-vue-i18n/messages'
+import { appRepo } from '::/repositories/app'
 
 // Import i18n resources
 // https://vitejs.dev/guide/features.html#glob-import
@@ -36,6 +37,8 @@ export async function loadLanguageAsync(lang: string): Promise<Locale> {
   const messages = await localesMap[lang]()
   i18n.global.setLocaleMessage(lang, messages.default)
   loadedLanguages.push(lang)
+
+  appRepo.updateAcceptLanguage(lang)
 
   return setI18nLanguage(lang)
 }

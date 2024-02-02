@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { type Permission, RequestError, StandardError } from './app.model'
+import { RequestError, StandardError } from './app.model'
 import { AppEntity } from './app.entity'
 
 describe('composeToken', () => {

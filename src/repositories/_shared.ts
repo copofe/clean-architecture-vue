@@ -8,8 +8,10 @@ import type { ApiResponse, Request, Session, Storage, Token } from '::/entities/
 import { AppEntity } from '::/entities/app.entity'
 
 const instance = axios.create({
-  timeout: 10000,
-  baseURL: '',
+  baseURL: `${import.meta.env.DEV ? '' : import.meta.env.VITE_API_BASE_URL}/api`,
+  headers: {
+    mock: import.meta.env.VITE_MOCK_GLOBAL,
+  },
 })
 
 instance.interceptors.response.use(
@@ -71,6 +73,10 @@ export class Repository extends ImplRepository {
 
   updateAuthorization(token: Token) {
     this.request.headers.Authorization = AppEntity.composeToken(token)
+  }
+
+  updateAcceptLanguage(lang: string) {
+    this.request.headers['Accept-Language'] = lang
   }
 }
 

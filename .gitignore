@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 coverage
+.nitro
+.output
+.env.production
 
 # Editor directories and files
 .idea

@@ -7,6 +7,8 @@ export default antfu(
   {
     ignores: [
       'public/**',
+      '.nitro/**',
+      '.output/**',
     ],
     vue: {
       overrides: {

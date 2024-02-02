@@ -7,11 +7,11 @@ class AppRepo extends Repository {
   }
 
   async getAppInfo(config?: RequestConfig) {
-    return this.request.get<AppInfo>('/api/app', config).then(extractData)
+    return this.request.get<AppInfo>('/app/info', config).then(extractData)
   }
 
   async getAppSetting() {
-    return this.request.get<AppSetting>('/api/app/setting').then(extractData)
+    return this.request.get<AppSetting>('/app/setting').then(extractData)
   }
 }
 

@@ -39,7 +39,50 @@
 - [Shadcn-Vue](https://www.shadcn-vue.com/)
 - [Vue I18n](https://vue-i18n.intlify.dev/)、[@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n)
 - [Vitest](https://vitest.dev/)
-- [msw.js](https://mswjs.io/)
+- [nitro](https://nitro.unjs.io/)
+
+## 脚本
+
+- `dev` 启动开发服务
+- `dev:mock` 启动开发服务，同时启动 mock 服务
+- `server` 启动 mock 服务
+- `build` 构建项目
+- `type-check` 类型检查
+- `lint:fix` 代码检查修复
+- `lint-staged` 暂存区代码检查
+- `test` 执行测试
+- `coverage` 执行测试并生成覆盖率报告
+- `prepare` 配置 husky 钩子
+
+### Mock
+
+我们使用 nitro 作为 mock 服务，支持全局和局部 mock。项目中硬编码了 mock 服务端口为8080，如果存在冲突，可修改以下文件内容
+
+- `package.json`
+```json
+{
+  "scripts": {
+    "server": "nitro dev --port <your port>"
+  }
+}
+```
+- `.env`
+```env
+VITE_MOCK_SERVER=http://localhost:<your port>
+```
+#### 使用
+
+- 开启/关闭 mock 功能： .env文件 `VITE_MOCK_ENABLE=true/false`
+- 开启/关闭全局 mock: .env文件 `VITE_MOCK_GLOBAL=true/false`
+- 局部 mock: 请求头中添加 `mock: true`
+
+#### 优势
+
+- 无侵入性
+- 独立服务
+- 完整 server 端能力，支持中间件/插件/存储，能够完美模拟服务端数据变更
+- 可用 typescript，复用业务类型定义
+- 支持热更新
 
 ## 检查清单
 
@@ -48,3 +91,5 @@
 - [ ] 在 `LICENSE` 文件中更改作者名字。
 - [ ] 在 `index.html` 文件中更改网站标题。
 - [ ] 更换 `public` 目录下的 `logo.svg` 文件。
+- [ ] 修改 `.env` 文件中的 `VITE_API_BASE_URL` 为开发环境接口域名
+- [ ] 创建 `.env.production` 文件， 修改 `VITE_API_BASE_URL` 为生产环境接口域名

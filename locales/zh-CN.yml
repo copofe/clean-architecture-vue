@@ -1,9 +1,11 @@
-permission-denied: 权限不足
+name: 前端整洁架构
+slogan: 一个专为构建基于 Vue 的 Web 应用程序而设计的前端模板。
 not-found: 未找到页面
+permission-denied: 权限不足
 home: 首页
 user:
+  password: 密码
   sign-in: 登录
   sign-out: 退出
   sign-up: 注册
   username: 用户名
-  password: 密码
