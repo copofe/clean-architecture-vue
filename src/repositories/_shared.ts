@@ -9,9 +9,13 @@ import { AppEntity } from '::/entities/app.entity'
 
 const instance = axios.create({
   baseURL: `${import.meta.env.DEV ? '' : import.meta.env.VITE_API_BASE_URL}/api`,
-  headers: {
-    mock: import.meta.env.VITE_MOCK_GLOBAL,
-  },
+})
+
+instance.interceptors.request.use((config) => {
+  if (import.meta.env.DEV && import.meta.env.VITE_MOCK_ENABLE === 'true' && import.meta.env.VITE_MOCK_GLOBAL === 'true')
+    config.headers['x-mock'] = true
+
+  return config
 })
 
 instance.interceptors.response.use(

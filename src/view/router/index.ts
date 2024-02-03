@@ -2,6 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
 import i18n from '../plugins/i18n'
 import routes from './routes'
+import type { Permission } from '::/entities/app.model'
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    title?: string
+    permission?: Permission[]
+  }
+}
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

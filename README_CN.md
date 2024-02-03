@@ -74,7 +74,7 @@ VITE_MOCK_SERVER=http://localhost:<your port>
 
 - 开启/关闭 mock 功能： .env文件 `VITE_MOCK_ENABLE=true/false`
 - 开启/关闭全局 mock: .env文件 `VITE_MOCK_GLOBAL=true/false`
-- 局部 mock: 请求头中添加 `mock: true`
+- 局部 mock: 请求头中添加 `x-mock: true`
 
 #### 优势
 

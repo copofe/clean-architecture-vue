@@ -80,7 +80,7 @@ VITE_MOCK_SERVER=http://localhost:<your port>
 
 - Enable/disable mock: .env file `VITE_MOCK_ENABLE=true/false`
 - Enable/disable global mock: .env file `VITE_MOCK_GLOBAL=true/false`
-- Local mock: Add `mock: true` in request header
+- Local mock: Add `x-mock: true` in request header
 
 #### Benefits
 

@@ -1,5 +1,6 @@
 export default defineEventHandler(async (event) => {
-  if (event.headers.get('mock') === 'false') {
+  const mock = event.headers.get('x-mock')
+  if (mock === 'false' || mock === null) {
     const res = await fetchWithEvent(event, import.meta.env.VITE_API_BASE_URL)
     if (res.status === 200) {
       return await res.text()
