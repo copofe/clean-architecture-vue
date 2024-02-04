@@ -6,7 +6,7 @@ A front-end template designed for building web applications with Vue.js.
 
 [Create a repo from this template on GitHub.](https://github.com/copofe/frontend-clean-architecture/generate)
 
-[中文介绍](./README_CN.md)
+[中文介绍](./README-zh_CN.md)
 
 ## Features
 

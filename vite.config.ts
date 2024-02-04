@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       AutoImport({
-        dts: true,
+        dts: 'types/auto-imports.d.ts',
         imports: ['vue', 'vue-router', 'vue-i18n'],
         eslintrc: {
           enabled: true,
@@ -29,7 +29,7 @@ export default defineConfig(({ mode }) => {
       }),
       vue(),
       Components({
-        dts: true,
+        dts: 'types/components.d.ts',
         dirs: ['src/view/components'],
         types: [
           {
@@ -52,7 +52,6 @@ export default defineConfig(({ mode }) => {
     },
     test: {
       environment: 'jsdom',
-      setupFiles: ['./vitest.setup.ts'],
       coverage: {
         include: [
           'src/entities/**/*',

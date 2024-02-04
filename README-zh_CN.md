@@ -88,8 +88,8 @@ VITE_MOCK_SERVER=http://localhost:<your port>
 
 使用这个模板时，请按照以下清单确保你的信息更新正确：
 
-- [ ] 在 `LICENSE` 文件中更改作者名字。
-- [ ] 在 `index.html` 文件中更改网站标题。
-- [ ] 更换 `public` 目录下的 `logo.svg` 文件。
+- [ ] 在 `LICENSE` 文件中更改作者名字
+- [ ] 在 `index.html` 文件中更改网站标题
+- [ ] 更换 `public` 目录下的 `logo.svg` 文件
 - [ ] 修改 `.env` 文件中的 `VITE_API_BASE_URL` 为开发环境接口域名
 - [ ] 创建 `.env.production` 文件， 修改 `VITE_API_BASE_URL` 为生产环境接口域名

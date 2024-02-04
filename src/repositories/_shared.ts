@@ -13,7 +13,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   if (import.meta.env.DEV && import.meta.env.VITE_MOCK_ENABLE === 'true' && import.meta.env.VITE_MOCK_GLOBAL === 'true')
-    config.headers['x-mock'] = true
+    config.headers['x-mock'] = import.meta.env.VITE_MOCK_GLOBAL
 
   return config
 })

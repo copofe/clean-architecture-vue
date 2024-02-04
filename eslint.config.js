@@ -1,9 +1,9 @@
-import antfu from '@antfu/eslint-config'
+import lint from '@antfu/eslint-config'
 import { FlatCompat } from '@eslint/eslintrc'
 
 const compat = new FlatCompat()
 
-export default antfu(
+export default lint(
   {
     ignores: [
       'public/**',
