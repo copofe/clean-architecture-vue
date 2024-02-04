@@ -88,7 +88,7 @@ VITE_MOCK_SERVER=http://localhost:<your port>
 - Independent service
 - Complete server capabilities, supports middleware/plugins/storage, perfectly simulate server data changes
 - Use TypeScript, reuse business type definitions
-- Support hot updates
+- Support HMR
 
 ## Checklist
 
