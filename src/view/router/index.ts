@@ -24,8 +24,8 @@ router.afterEach((to) => {
     document.title = i18n.global.t(to.meta.title)
 })
 
-router.onError((error) => {
-  throw new Error(error)
-})
+// router.onError((error) => {
+//   throw new Error(error)
+// })
 
 export default router

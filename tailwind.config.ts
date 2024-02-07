@@ -5,8 +5,7 @@ module.exports = {
   darkMode: ['class'],
 
   content: [
-    './src/view/**/*.vue',
-    './src/view/components/**/*.{ts,tsx}',
+    './src/view/**/*.{vue,ts,tsx}',
     './src/view/styles/*.css',
   ],
 
