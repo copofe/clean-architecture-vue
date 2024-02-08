@@ -14,7 +14,6 @@
     "build": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint:fix": "eslint . --fix",
-    "lint-staged": "lint-staged",
     "test": "vitest",
     "coverage": "nitro build & vitest run --coverage",
     "prepare": "husky"
