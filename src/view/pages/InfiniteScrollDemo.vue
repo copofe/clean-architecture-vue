@@ -39,7 +39,7 @@ async function getList({ limit }: { limit: number }) {
     </div>
     <InfiniteScroll
       item-key="v"
-      :on-end-reached="getList"
+      :data-source="getList"
       :num-columns="numColumns"
       :item-gap="gap"
       :limit="limit"

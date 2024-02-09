@@ -1,41 +1,54 @@
 <script setup lang="ts" generic="T extends Record<string, any>">
-import { Loader2 } from 'lucide-vue-next'
-
-const props = defineProps<{
+interface InfiniteScrollProps {
   /**
-   * The key of the item
-   * @default index
+   * The Element or Document whose bounds are used as the bounding box when testing for intersection.
+   * If no root value was passed or its value is null, the top-level document's viewport is used
    */
-  itemKey?: string
+  root?: HTMLElement | null
   /**
-   * The callback function when the end of the list is reached
+   * Function to fetch data for the infinite scroll
    */
-  onEndReached: (...args: any) => (T[] | Promise<T[]>)
+  dataSource: (...args: any) => (T[] | Promise<T[]>)
   /**
-   * The params
-   * @default {}
+   * Additional parameters for the data source function
    */
   params?: Record<string, any>
   /**
-   * The limit of items to fetch at once
-   * @default 10
+   * Maximum number of items to fetch at a time
    */
   limit?: number
   /**
-   * The number of columns to display
-   * @default 1
+   * Number of columns to display in the grid layout
    */
   numColumns?: number
   /**
-   * The gap between items in pixels
-   * @default 0
+   * Gap between items in the grid layout
    */
   itemGap?: number
   /**
-   * The class of the container
+   * Key to identify each item in the list
+   */
+  itemKey?: string
+  /**
+   * Additional CSS class for the list container
    */
   containerClass?: string
-}>()
+  /**
+   * Call dataSource function when the distance between the scrollbar and the bottom is less than offset
+   * @default 0
+   */
+  offset?: number
+}
+
+const props = withDefaults(defineProps<InfiniteScrollProps>(), {
+  root: null,
+  params: () => ({}),
+  limit: 10,
+  numColumns: 1,
+  itemGap: 0,
+  containerClass: '',
+  offset: 0,
+})
 
 const targetRef = ref<HTMLDivElement>()
 const intersectionObserver = ref<IntersectionObserver>()
@@ -44,7 +57,7 @@ function init() {
     if (entry && entry.isIntersecting)
       fetchData()
   }, {
-    root: null,
+    root: props.root,
   })
 }
 function observer() {
@@ -80,9 +93,9 @@ function fetchData() {
   loading.value = true
   unObserver()
 
-  const { onEndReached, params = {}, limit = 10 } = props
+  const { dataSource, params, limit } = props
 
-  const res = onEndReached({ ...params, page: _page, limit })
+  const res = dataSource({ ...params, page: _page, limit })
   if (res instanceof Promise) {
     res.then((result) => {
       onSuccess(result, _page, limit)
@@ -116,7 +129,13 @@ onUnmounted(() => {
 <template>
   <div>
     <slot name="header" />
-    <div :class="`${props.containerClass || ''} grid overflow-x-hidden`" :style="{ gridTemplateColumns: `repeat(${props.numColumns || 1}, minmax(0, 1fr))`, gap: `${props.itemGap || 0}px` }">
+    <div
+      :class="`${props.containerClass} grid overflow-x-hidden`"
+      :style="{
+        gridTemplateColumns: `repeat(${props.numColumns}, minmax(0, 1fr))`,
+        gap: `${props.itemGap}px`,
+      }"
+    >
       <div v-for="(item, index) in data" :key="props.itemKey ? item[props.itemKey] : index">
         <slot
           name="renderItem"
@@ -125,10 +144,17 @@ onUnmounted(() => {
         />
       </div>
     </div>
+    <div v-if="data.length === 0 && finished" class="py-2 flex justify-center text-muted-foreground">
+      No Data
+    </div>
     <slot name="footer" />
     <div class="py-2 flex justify-center">
-      <Loader2 v-if="loading" class="h-full animate-spin w-4 text-muted-foreground" />
+      <Loading v-if="loading" class="h-full w-4 text-muted-foreground" />
     </div>
-    <div ref="targetRef" class="w-full h-px pointer-events-none" />
+    <div
+      ref="targetRef"
+      class="w-full pointer-events-none"
+      :style="{ height: `${props.offset}px` }"
+    />
   </div>
 </template>
