@@ -18,22 +18,6 @@ A front-end template designed for building web applications with Vue.js.
 - I18n ready.
 - Mock ready.
 
-## Principles
-
-[Separation Of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) is most important. By separating business objects, business workflows, and views, the development and maintenance of the program is simplified. Clean Architecture was proposed by Robert C. Martin in 2012. It is divided into four levels in total (Entities, Use Cases, Interface Adapters, Frameworks and Drivers). There is a dependency principle between layers:
-
-The dependency relationships in the source code can only point to the inner layer of the same concentric circle, that is, low-level mechanisms point to high-level policies:
-
-- High-level modules should not depend on low-level modules, both should depend on their abstractions.
-- Abstractions should not depend on details, details should depend on abstractions.
-
-Based on these principles, we decided to split into four layers:
-
-- Entity: Business objects that encapsulate core business data and logic that are essential to the business domain.
-- Repository: Abstracts data access and storage responsibilities away from business objects, handles CRUD operations and queries against persistence storage.
-- Use Case: Contains application-specific business rules and workflows, coordinates work across entities and repositories to perform specific application goals.
-- View: Renders UI components and handles presentation responsibilities, communicates with use cases to display information and collect user input.
-
 ## Tech Stack
 
 - [Vue 3](https://github.com/vuejs/core), [Vue Router](https://router.vuejs.org/), [Vite](https://vitejs.dev/)
@@ -53,12 +37,11 @@ Based on these principles, we decided to split into four layers:
 - `build` : Build production files
 - `type-check` : Check types
 - `lint:fix` : Lint check and fix
-- `lint-staged` : Lint staged files
 - `test` : Run tests
 - `coverage` : Run tests and generate coverage report
 - `prepare` : Configure husky hooks
 
-### Mocking
+## Mocking
 
 We use nitro as mock service, supporting global and local mocking. The mock server port is hardcoded as 8080 in the project. If there is a conflict, you can modify the following:
 
@@ -76,19 +59,35 @@ We use nitro as mock service, supporting global and local mocking. The mock serv
 VITE_MOCK_SERVER=http://localhost:<your port>
 ```
 
-#### Usage
+### Usage
 
 - Enable/disable mock: .env file `VITE_MOCK_ENABLE=true/false`
 - Enable/disable global mock: .env file `VITE_MOCK_GLOBAL=true/false`
 - Local mock: Add `x-mock: true` in request header
 
-#### Benefits
+### Benefits
 
 - Non-invasive
 - Independent service
 - Complete server capabilities, supports middleware/plugins/storage, perfectly simulate server data changes
 - Use TypeScript, reuse business type definitions
 - Support HMR
+
+## Principles
+
+[Separation Of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) is most important. By separating business objects, business workflows, and views, the development and maintenance of the program is simplified. Clean Architecture was proposed by Robert C. Martin in 2012. It is divided into four levels in total (Entities, Use Cases, Interface Adapters, Frameworks and Drivers). There is a dependency principle between layers:
+
+The dependency relationships in the source code can only point to the inner layer of the same concentric circle, that is, low-level mechanisms point to high-level policies:
+
+- High-level modules should not depend on low-level modules, both should depend on their abstractions.
+- Abstractions should not depend on details, details should depend on abstractions.
+
+Based on these principles, we decided to split into four layers:
+
+- Entity: Business objects that encapsulate core business data and logic that are essential to the business domain.
+- Repository: Abstracts data access and storage responsibilities away from business objects, handles CRUD operations and queries against persistence storage.
+- Use Case: Contains application-specific business rules and workflows, coordinates work across entities and repositories to perform specific application goals.
+- View: Renders UI components and handles presentation responsibilities, communicates with use cases to display information and collect user input.
 
 ## Checklist
 
