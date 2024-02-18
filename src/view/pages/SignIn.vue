@@ -26,16 +26,24 @@ const { isLoading, run: login } = useAsyncFunc(
   <Page class="flex flex-col px-6 py-12 lg:px-8">
     <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col gap-4">
       <div>
-        <Label for="username" class="mb-1">{{ t('user.username') }}</Label>
+        <Label for="username" class="mb-1 capitalize">{{ t('user.username') }}</Label>
         <Input id="username" v-model="formData.username" />
       </div>
 
       <div>
-        <Label for="password" class="mb-1">{{ t('user.password') }}</Label>
-        <Input id="password" v-model="formData.password" />
+        <Label for="password" class="mb-1 capitalize">{{ t('user.password') }}</Label>
+        <Input
+          id="password"
+          v-model="formData.password"
+          type="password"
+        />
       </div>
 
-      <Button :loading="isLoading" @click.stop="login">
+      <Button
+        class="capitalize"
+        :loading="isLoading"
+        @click.stop="login"
+      >
         {{ t('user.sign-in') }}
       </Button>
     </div>
