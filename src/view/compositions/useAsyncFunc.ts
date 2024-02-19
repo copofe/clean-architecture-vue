@@ -1,21 +1,22 @@
 interface Options<T> {
   /**
-   * Retry when status is failed
+   * Retry on failure.
    * @default false
    */
   retry?: boolean
   /**
-   * Maximum number of attempts
+   * Max number of retry attempts.
    * @default 10
    */
   attempt?: number
   /**
-   * Callback when error is caught.
+   * Callback for handling errors.
+   * @param e The caught error object.
    */
   onError?: (e: unknown) => void
   /**
-   * Callback when success is caught.
-   * @param {T} data
+   * Callback for successful operation.
+   * @param data The data returned from the operation.
    */
   onSuccess?: (data: T) => void
 }
@@ -32,14 +33,15 @@ export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>,
   const data: Ref<T | null> = ref(null)
 
   async function run(...args: P) {
+    if (isLoading.value)
+      return
     isLoading.value = true
 
     try {
       const res = await fn(...args)
       data.value = res
       isLoading.value = false
-      if (onSuccess)
-        onSuccess(res)
+      onSuccess?.(res)
       attemptCount = 0
     }
     catch (err) {
@@ -51,8 +53,7 @@ export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>,
       else {
         isLoading.value = false
         attemptCount = 0
-        if (onError)
-          onError(err)
+        onError?.(err)
         throw err
       }
     }

@@ -1,6 +1,6 @@
 import type { AxiosError } from 'axios'
 import axios from 'axios'
-import { RequestError } from '::/entities/app.model'
+import { ApiResponseCode, RequestError } from '::/entities/app.model'
 import type { Request } from '::/entities/app.model'
 
 const instance = axios.create({
@@ -16,7 +16,7 @@ instance.interceptors.request.use((config) => {
 
 instance.interceptors.response.use(
   (response) => {
-    if (response.status >= 200 && response.status < 300)
+    if (response.status >= 200 && response.status < 300 && response.data.code === ApiResponseCode.Succeeded)
       return response
 
     return Promise.reject(new RequestError(response.data.msg, response.data.code))
