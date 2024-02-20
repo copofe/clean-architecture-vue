@@ -33,8 +33,6 @@ export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>,
   const data: Ref<T | null> = ref(null)
 
   async function run(...args: P) {
-    if (isLoading.value)
-      return
     isLoading.value = true
 
     try {
@@ -45,10 +43,10 @@ export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>,
       attemptCount = 0
     }
     catch (err) {
+      attemptCount++
       if (retry && attemptCount < attempt) {
-        attemptCount++
         await new Promise(resolve => setTimeout(resolve, interval()))
-        run(...args)
+        await run(...args)
       }
       else {
         isLoading.value = false

@@ -16,10 +16,11 @@ describe('useAsyncFunc', () => {
   })
 
   it('should retry on failure', async () => {
-    const mockFn = vi.fn().mockRejectedValueOnce(new Error('failure')).mockResolvedValue('bar')
-    const { run } = useAsyncFunc(mockFn, { retry: true })
-    await run()
-    expect(mockFn).toHaveBeenCalledTimes(2)
+    const mockFn = vi.fn().mockRejectedValue(new Error('failure'))
+    const retryAttempts = 2
+    const { run } = useAsyncFunc(mockFn, { retry: true, attempt: retryAttempts })
+    await expect(run()).rejects.toThrowError('failure')
+    expect(mockFn).toHaveBeenCalledTimes(retryAttempts)
   })
 
   it('should call onSuccess callback', async () => {
