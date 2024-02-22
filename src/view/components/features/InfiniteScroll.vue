@@ -121,7 +121,7 @@ onActivated(() => {
 onDeactivated(() => {
   unObserver()
 })
-onUnmounted(() => {
+onBeforeUnmount(() => {
   unObserver()
 })
 </script>
