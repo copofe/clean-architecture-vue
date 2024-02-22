@@ -63,10 +63,9 @@ export default defineConfig(({ mode }) => {
     test: {
       environment: 'jsdom',
       coverage: {
+        reporter: 'html',
         include: [
           'src/entities/**/*',
-          'src/repositories/**/*',
-          'src/usecases/**/*',
           'src/view/components/**/*.vue',
           'src/view/compositions/**/*.ts',
           'src/view/store/**/*.ts',

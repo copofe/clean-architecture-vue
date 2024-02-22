@@ -16,7 +16,7 @@
     "type-check": "vue-tsc --build --force",
     "lint:fix": "eslint . --fix",
     "test": "vitest",
-    "coverage": "nitro build & vitest run --coverage",
+    "coverage": "vitest run --coverage",
     "prepare": "husky"
   },
   "dependencies": {

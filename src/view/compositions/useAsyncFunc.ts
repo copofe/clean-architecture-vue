@@ -5,7 +5,7 @@ interface Options<T> {
    */
   retry?: boolean
   /**
-   * Max number of retry attempts.
+   * Maximum number of retry attempts.
    * @default 10
    */
   attempt?: number
@@ -47,6 +47,7 @@ export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>,
       if (retry && attemptCount < attempt) {
         await new Promise(resolve => setTimeout(resolve, interval()))
         await run(...args)
+        /* v8 ignore next */
       }
       else {
         isLoading.value = false
@@ -59,7 +60,7 @@ export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>,
 
   return {
     isLoading,
-    run,
     data,
+    run,
   }
 }
