@@ -43,7 +43,7 @@ A front-end template designed for building web applications with Vue.js.
 
 ## Mocking
 
-We use nitro as mock service, supporting global and local mocking. The mock server port is hardcoded as 8080 in the project. If there is a conflict, you can modify the following:
+We use nitro as mock service, supporting global and partial mocking. The mock server port is hardcoded as 8080 in the project. If there is a conflict, you can modify the following:
 
 - `package.json`
 ```json
@@ -63,7 +63,7 @@ VITE_MOCK_SERVER=http://localhost:<your port>
 
 - Enable/disable mock: .env file `VITE_MOCK_ENABLE=true/false`
 - Enable/disable global mock: .env file `VITE_MOCK_GLOBAL=true/false`
-- Local mock: Add `x-mock: true` in request header
+- Partial mock: Add `x-mock: true` in request header
 
 ### Benefits
 
