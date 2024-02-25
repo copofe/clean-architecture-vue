@@ -7,7 +7,7 @@ describe('composeToken', () => {
     expect(AppEntity.composeToken(invalidToken)).toBe('')
   })
 
-  it('should throw if token is not a string', () => {
+  it('should throw if token is not a string or null', () => {
     const invalidToken = 123
     // @ts-expect-error invalid type
     expect(() => AppEntity.composeToken(invalidToken)).toThrowError()

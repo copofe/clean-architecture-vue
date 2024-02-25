@@ -18,6 +18,22 @@ A front-end template designed for building web applications with Vue.js.
 - I18n ready.
 - Mock ready.
 
+## Architecture
+
+[Separation Of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) is most important. By separating business objects, business workflows, and views, the development and maintenance of the program is simplified. Clean Architecture was proposed by Robert C. Martin in 2012. It is divided into four levels in total (Entities, Use Cases, Interface Adapters, Frameworks and Drivers). There is a dependency principle between layers:
+
+The dependency relationships in the source code can only point to the inner layer of the same concentric circle, that is, low-level mechanisms point to high-level policies:
+
+- High-level modules should not depend on low-level modules, both should depend on their abstractions.
+- Abstractions should not depend on details, details should depend on abstractions.
+
+Therefore, we decided to split the application into four layers:
+
+- Entity: Business objects that encapsulate core business data and logic that are essential to the business domain. it should not have any external dependencies.
+- Repository: Abstracts data access and storage responsibilities away from business objects, handles CRUD operations and queries against persistence storage.
+- Use Case: Contains application-specific business rules and workflows, coordinates work across entities and repositories to perform specific application goals.
+- View: Renders UI components and handles presentation responsibilities, communicates with use cases to display information and collect user input.
+
 ## Tech Stack
 
 - [Vue 3](https://github.com/vuejs/core), [Vue Router](https://router.vuejs.org/), [Vite](https://vitejs.dev/)
@@ -73,22 +89,6 @@ VITE_MOCK_SERVER=http://localhost:<your port>
 - Use TypeScript, reuse business type definitions
 - Support HMR
 
-## Principles
-
-[Separation Of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) is most important. By separating business objects, business workflows, and views, the development and maintenance of the program is simplified. Clean Architecture was proposed by Robert C. Martin in 2012. It is divided into four levels in total (Entities, Use Cases, Interface Adapters, Frameworks and Drivers). There is a dependency principle between layers:
-
-The dependency relationships in the source code can only point to the inner layer of the same concentric circle, that is, low-level mechanisms point to high-level policies:
-
-- High-level modules should not depend on low-level modules, both should depend on their abstractions.
-- Abstractions should not depend on details, details should depend on abstractions.
-
-Based on these principles, we decided to split into four layers:
-
-- Entity: Business objects that encapsulate core business data and logic that are essential to the business domain.
-- Repository: Abstracts data access and storage responsibilities away from business objects, handles CRUD operations and queries against persistence storage.
-- Use Case: Contains application-specific business rules and workflows, coordinates work across entities and repositories to perform specific application goals.
-- View: Renders UI components and handles presentation responsibilities, communicates with use cases to display information and collect user input.
-
 ## Checklist
 
 When you use this template, try follow the checklist to update your info properly
@@ -96,5 +96,5 @@ When you use this template, try follow the checklist to update your info properl
 - [ ] Change the author name in `LICENSE`
 - [ ] Change the title in `index.html`
 - [ ] Change the `logo.svg` in `public`
-- [ ] Change the `VITE_API_BASE_URL` in `.env` file to the dev environment API domain
+- [ ] Change the `VITE_API_BASE_URL` in `.env.development` file to the dev environment API domain
 - [ ] Create `.env.production` file and modify `VITE_API_BASE_URL` to the production API domain

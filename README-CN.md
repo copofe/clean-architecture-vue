@@ -16,6 +16,20 @@
 - 已准备好国际化功能。
 - 已准备好模拟数据功能。
 
+## 架构
+
+[关注点分离](https://en.wikipedia.org/wiki/Separation_of_concerns)是最重要的原则。通过将业务对象、业务流程和视图分开来，简化了程序的开发和维护。Clean Architecture 由 Robert C. Martin 在 2012 年提出，包含四个层级：实体、用例、接口适配器、框架和驱动。这些层次之间遵循着严格的依赖原则：
+
+- 源代码中的依赖关系只能从外层指向内层，它们都应依赖于抽象概念。
+- 抽象不应依赖于具体实现，具体实现应依赖于抽象。
+
+所以，我们决定将应用分为四层：
+
+- 实体（Entity）：包含核心业务数据和逻辑的对象，这些是业务领域的基础。实体不能有任何外部依赖。
+- 仓库（Repository）：负责从业务对象中分离数据访问和存储职责，处理数据的增删改查操作和持久化存储的查询。
+- 用例（Use Case）：包含应用程序特定的业务规则和流程，协调实体和仓库的工作，实现应用程序的特定目标。
+- 视图（View）：负责渲染用户界面组件和展示职责，与用例交互以展示信息和收集用户输入。
+
 ## 技术栈
 
 - [Vue 3](https://github.com/vuejs/core)、[Vue Router](https://router.vuejs.org/)、[Vite](https://vitejs.dev/)
@@ -70,20 +84,6 @@ VITE_MOCK_SERVER=http://localhost:<your port>
 - 可用 typescript，复用业务类型定义
 - 支持热更新
 
-## 原则
-
-[关注点分离](https://en.wikipedia.org/wiki/Separation_of_concerns)是最关键的原则。它通过将业务对象、业务流程和视图分开来，简化了程序的开发和维护。Clean Architecture 由 Robert C. Martin 在 2012 年提出，包含四个层次：实体、用例、接口适配器、框架和驱动。这些层次之间遵循着严格的依赖原则：
-
-- 源代码中的依赖关系只能从外层指向内层，它们都应依赖于抽象概念。
-- 抽象不应依赖于具体实现，具体实现应依赖于抽象。
-
-基于这些原则，模板分为四个层次：
-
-- 实体（Entity）：包含核心业务数据和逻辑的对象，这些是业务领域的基础。
-- 仓库（Repository）：负责从业务对象中分离数据访问和存储职责，处理数据的增删改查操作和持久化存储的查询。
-- 用例（Use Case）：包含应用程序特定的业务规则和流程，协调实体和仓库的工作，实现应用程序的特定目标。
-- 视图（View）：负责渲染用户界面组件和展示职责，与用例交互以展示信息和收集用户输入。
-
 ## 检查清单
 
 使用这个模板时，请按照以下清单确保你的信息更新正确：
@@ -91,5 +91,5 @@ VITE_MOCK_SERVER=http://localhost:<your port>
 - [ ] 在 `LICENSE` 文件中更改作者名字
 - [ ] 在 `index.html` 文件中更改网站标题
 - [ ] 更换 `public` 目录下的 `logo.svg` 文件
-- [ ] 修改 `.env` 文件中的 `VITE_API_BASE_URL` 为开发环境接口域名
+- [ ] 修改 `.env.development` 文件中的 `VITE_API_BASE_URL` 为开发环境接口域名
 - [ ] 创建 `.env.production` 文件， 修改 `VITE_API_BASE_URL` 为生产环境接口域名

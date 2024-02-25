@@ -27,10 +27,10 @@ instance.interceptors.response.use(
 )
 
 export const request: Request = {
-  get: (url: string, data, config) => instance.get(url, { ...config, params: data }),
-  post: (url: string, data, config) => instance.post(url, data, config),
-  put: (url: string, data, config) => instance.put(url, data, config),
-  delete: (url: string, data, config) => instance.delete(url, { ...config, params: data }),
-  patch: (url: string, data, config) => instance.patch(url, data, config),
+  get: (url, params, config) => instance.get(url, { ...config, params }),
+  delete: (url, params, config) => instance.delete(url, { ...config, params }),
+  post: (url, data, config) => instance.post(url, data, config),
+  put: (url, data, config) => instance.put(url, data, config),
+  patch: (url, data, config) => instance.patch(url, data, config),
   headers: instance.defaults.headers.common as Request['headers'],
 }

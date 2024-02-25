@@ -11,15 +11,20 @@ class UserRepo extends Repository {
     username: string
     password: string
   }) {
-    return this.request.post<Token>('/user/login', data).then(extractData)
+    const token = await this.request.post<Token>('/user/login', data).then(extractData)
+    this.setToken(token)
+    this.updateAuthorization(token)
+    return token
   }
 
-  invalidateToken() {
-    return this.request.get<void>('/user/logout')
+  async invalidateToken() {
+    await this.request.post('/user/logout')
+    this.setToken(null)
+    this.updateAuthorization(null)
   }
 
   async getCurrentUser() {
-    return this.request.get<User>('/user').then(extractData)
+    return this.request.get<User>('/user/info').then(extractData)
   }
 }
 

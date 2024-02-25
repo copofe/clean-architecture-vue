@@ -16,7 +16,7 @@ export interface AppSetting {
   enabled: boolean
 }
 
-/*****************************************************************************/
+/******************************************************************************/
 
 export interface RequestConfig {
   method?: string
@@ -50,11 +50,12 @@ export type ApiResponse<T> = RequestResponse<{
   data: T
 }>
 
+type RequestParams = Record<string, any>
 type RequestData = Record<string, any> | FormData
 
 export interface Request {
-  get: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
-  delete: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
+  get: <T>(url: string, params?: RequestParams, config?: RequestConfig) => Promise<ApiResponse<T>>
+  delete: <T>(url: string, params?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
   post: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
   put: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
   patch: <T>(url: string, data?: RequestData, config?: RequestConfig) => Promise<ApiResponse<T>>
@@ -77,7 +78,7 @@ export interface Session<KV extends Record<string, any>> {
   clear: () => Promise<void>
 }
 
-export interface Eventer<Events> {
+export interface Eventer<Events extends Record<string, any>> {
   on: <K extends keyof Events>(e: K, fn: (data: Events[K]) => void) => void
   off: (e: keyof Events) => void
   emit: {
@@ -86,7 +87,7 @@ export interface Eventer<Events> {
   }
 }
 
-/*****************************************************************************/
+/******************************************************************************/
 
 export abstract class ImplRepository {
   protected abstract request: Request

@@ -10,7 +10,7 @@ export interface Events {
 
 const eventer: Eventer<Events> = mitt()
 
-/*****************************************************************************/
+/******************************************************************************/
 
 export class Usecase implements ImplUsecase {
   eventer = eventer

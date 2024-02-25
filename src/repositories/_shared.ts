@@ -5,6 +5,8 @@ import { request } from '::/adapter/request'
 import { storage } from '::/adapter/storage'
 import { session } from '::/adapter/session'
 
+const tokenKey = 'token'
+
 export class Repository extends ImplRepository {
   protected request = request
   protected storage = storage
@@ -13,12 +15,12 @@ export class Repository extends ImplRepository {
     super()
   }
 
-  setToken(token: Token) {
-    return this.storage.setItem('token', token)
+  protected setToken(token: Token) {
+    return this.storage.setItem(tokenKey, token)
   }
 
   getToken() {
-    return this.storage.getItem('token')
+    return this.storage.getItem(tokenKey)
   }
 
   updateAuthorization(token: Token) {
@@ -30,7 +32,7 @@ export class Repository extends ImplRepository {
   }
 }
 
-/*****************************************************************************/
+/******************************************************************************/
 
 export function extractData<T>(res: ApiResponse<T>): ApiResponse<T>['data']['data'] {
   return res.data.data

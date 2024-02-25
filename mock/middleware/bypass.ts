@@ -3,7 +3,7 @@ export default defineEventHandler(async (event) => {
   if (mock === 'false') {
     const res = await fetchWithEvent(event, import.meta.env.VITE_API_BASE_URL)
     if (res.status === 200) {
-      return await res.text()
+      return await res.json()
     }
     else {
       throw createError({
