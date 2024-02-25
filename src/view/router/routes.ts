@@ -5,8 +5,9 @@ const routes: RouteRecordRaw[] = [
   {
     path: '',
     name: 'Private',
-    beforeEnter: async (to) => {
-      return await auth(to)
+    beforeEnter: async (_to) => {
+      // disable auth for demo
+      // return await auth(to)
     },
     children: [
       {
