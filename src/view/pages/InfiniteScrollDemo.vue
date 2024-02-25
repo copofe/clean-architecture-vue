@@ -14,28 +14,30 @@ async function getList({ limit }: { limit: number }) {
 </script>
 
 <template>
-  <Page class="px-4">
-    <div>
-      <Label>limit</Label><Input
-        v-model="limit"
-        type="number"
-        :min="10"
-        :step="10"
-      />
-    </div>
-    <div>
-      <Label>numColumns</Label><Input
-        v-model="numColumns"
-        type="number"
-        :min="1"
-      />
-    </div>
-    <div>
-      <Label>gap</Label><Input
-        v-model="gap"
-        type="number"
-        :min="0"
-      />
+  <Page class="px-2">
+    <div class="flex gap-1">
+      <div>
+        <Label>limit</Label><Input
+          v-model="limit"
+          type="number"
+          :min="10"
+          :step="10"
+        />
+      </div>
+      <div>
+        <Label>numColumns</Label><Input
+          v-model="numColumns"
+          type="number"
+          :min="1"
+        />
+      </div>
+      <div>
+        <Label>gap</Label><Input
+          v-model="gap"
+          type="number"
+          :min="0"
+        />
+      </div>
     </div>
     <InfiniteScroll
       item-key="v"

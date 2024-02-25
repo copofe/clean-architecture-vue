@@ -11,11 +11,34 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: 'Home',
-        component: () => import('::/view/pages/Home.vue'),
-        meta: {
-          title: 'home',
-        },
+        name: 'Entry',
+        component: () => import('::/view/pages/Entry.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Home',
+            component: () => import('::/view/pages/Home.vue'),
+            meta: {
+              title: 'home',
+            },
+          },
+          {
+            path: 'components',
+            name: 'Components',
+            component: () => import('::/view/pages/Components.vue'),
+            meta: {
+              title: 'components',
+            },
+          },
+          {
+            path: 'pages',
+            name: 'Pages',
+            component: () => import('::/view/pages/Pages.vue'),
+            meta: {
+              title: 'pages',
+            },
+          },
+        ],
       },
       {
         path: 'infinite-scroll',

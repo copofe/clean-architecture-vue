@@ -8,6 +8,12 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('./../src/view/components/ui/button/Button.vue')['default']
+    Card: typeof import('./../src/view/components/ui/card/Card.vue')['default']
+    CardContent: typeof import('./../src/view/components/ui/card/CardContent.vue')['default']
+    CardDescription: typeof import('./../src/view/components/ui/card/CardDescription.vue')['default']
+    CardFooter: typeof import('./../src/view/components/ui/card/CardFooter.vue')['default']
+    CardHeader: typeof import('./../src/view/components/ui/card/CardHeader.vue')['default']
+    CardTitle: typeof import('./../src/view/components/ui/card/CardTitle.vue')['default']
     InfiniteScroll: typeof import('./../src/view/components/features/InfiniteScroll.vue')['default']
     Input: typeof import('./../src/view/components/ui/input/Input.vue')['default']
     Label: typeof import('./../src/view/components/ui/label/Label.vue')['default']
@@ -15,5 +21,9 @@ declare module 'vue' {
     Page: typeof import('./../src/view/components/features/Page.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Tabs: typeof import('./../src/view/components/ui/tabs/Tabs.vue')['default']
+    TabsContent: typeof import('./../src/view/components/ui/tabs/TabsContent.vue')['default']
+    TabsList: typeof import('./../src/view/components/ui/tabs/TabsList.vue')['default']
+    TabsTrigger: typeof import('./../src/view/components/ui/tabs/TabsTrigger.vue')['default']
   }
 }
