@@ -10,7 +10,7 @@ export const useStore = defineStore('root', () => {
 
   const user = ref<User>()
 
-  // persist state by this way, you could use pinia-plugin-persistedstate
+  // persist state in this way, alternatively, you can use pinia-plugin-persistedstate
   const language: Ref<string> = useLocalStorage('language', navigator.language)
 
   return {
