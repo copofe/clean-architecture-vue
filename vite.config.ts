@@ -61,12 +61,13 @@ export default defineConfig(({ mode }) => {
           name: 'frontend-clean-architecture',
           short_name: 'FCA',
           description: 'A front-end template designed for building web applications with Vue.js',
+          start_url: '/',
           theme_color: '#ffffff',
           icons: [
             {
-              src: 'logo.png',
+              src: 'logo.svg',
               sizes: '512x512',
-              type: 'svg',
+              type: 'image/svg+xml',
             },
           ],
         },
