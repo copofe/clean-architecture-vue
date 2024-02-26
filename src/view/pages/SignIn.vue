@@ -24,6 +24,7 @@ const { isLoading, run: login } = useAsyncFunc(
 
 <template>
   <Page class="flex flex-col px-6 py-12 lg:px-8">
+    <img src="/logo.svg" class="w-1/4 sm:w-32 self-center">
     <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col gap-4">
       <div>
         <Label for="username" class="mb-1 capitalize">{{ t('user.username') }}</Label>

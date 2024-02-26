@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { ArrowRightIcon, LogInIcon } from 'lucide-vue-next'
+import { ArrowRightIcon, LogInIcon, SignpostIcon } from 'lucide-vue-next'
 
 const router = useRouter()
 const components = [
+  {
+    label: '404',
+    route: 'NotFound',
+    icon: SignpostIcon,
+  },
   {
     label: 'sign in',
     route: 'SignIn',

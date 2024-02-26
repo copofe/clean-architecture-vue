@@ -17,7 +17,8 @@ async function getList({ limit }: { limit: number }) {
   <Page class="px-2">
     <div class="flex gap-1">
       <div>
-        <Label>limit</Label><Input
+        <Label>limit</Label>
+        <Input
           v-model="limit"
           type="number"
           :min="10"
@@ -25,14 +26,16 @@ async function getList({ limit }: { limit: number }) {
         />
       </div>
       <div>
-        <Label>numColumns</Label><Input
+        <Label>numColumns</Label>
+        <Input
           v-model="numColumns"
           type="number"
           :min="1"
         />
       </div>
       <div>
-        <Label>gap</Label><Input
+        <Label>gap</Label>
+        <Input
           v-model="gap"
           type="number"
           :min="0"

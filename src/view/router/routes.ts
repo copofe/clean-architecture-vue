@@ -61,7 +61,7 @@ const routes: RouteRecordRaw[] = [
     name: 'NotFound',
     component: () => import('::/view/pages/404.vue'),
     meta: {
-      title: 'not-found',
+      title: 'page-not-found',
     },
   },
 ]

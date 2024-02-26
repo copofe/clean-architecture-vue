@@ -6,6 +6,7 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
+import { VitePWA } from 'vite-plugin-pwa'
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
@@ -53,6 +54,22 @@ export default defineConfig(({ mode }) => {
         compositionOnly: true,
         fullInstall: true,
         include: [path.resolve(__dirname, 'locales/**')],
+      }),
+      VitePWA({
+        registerType: 'autoUpdate',
+        manifest: {
+          name: 'frontend-clean-architecture',
+          short_name: 'FCA',
+          description: 'A front-end template designed for building web applications with Vue.js',
+          theme_color: '#ffffff',
+          icons: [
+            {
+              src: 'logo.png',
+              sizes: '512x512',
+              type: 'svg',
+            },
+          ],
+        },
       }),
     ],
     server: {
