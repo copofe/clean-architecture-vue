@@ -35,7 +35,7 @@ const tabs = [
         class="flex-1 flex flex-col items-center py-1 justify-center data-[state=active]:shadow-none"
         @click="router.push({ name: tab.value })"
       >
-        <component :is="tab.icon" class="h-6 w-6" />
+        <component :is="tab.icon" class="h-5 w-5" />
         <span class="text-xs">{{ t(tab.value.toLowerCase()).toUpperCase() }}</span>
       </TabsTrigger>
     </TabsList>
