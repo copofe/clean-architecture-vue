@@ -2,11 +2,11 @@
 
 A front-end template designed for building web applications with Vue.js.
 
+[中文介绍](./README-zh_CN.md)
+
 [Live Demo](https://frontend-clean-architecture.vercel.app/)
 
 [Create a repo from this template on GitHub.](https://github.com/copofe/frontend-clean-architecture/generate)
-
-[中文介绍](./README-zh_CN.md)
 
 ## Features
 
@@ -55,7 +55,7 @@ Therefore, we decided to split the application into four layers:
 - `lint:fix` : Lint check and fix
 - `test` : Run tests
 - `coverage` : Run tests and generate coverage report
-- `prepare` : Configure husky hooks
+- `prepare` : Configure git hooks
 
 ## Mocking
 
