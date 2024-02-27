@@ -56,17 +56,21 @@ export default defineConfig(({ mode }) => {
         include: [path.resolve(__dirname, 'locales/**')],
       }),
       VitePWA({
-        registerType: 'autoUpdate',
+        devOptions: {
+          enabled: true,
+        },
         manifest: {
           name: 'frontend-clean-architecture',
           short_name: 'FCA',
           description: 'A front-end template designed for building web applications with Vue.js',
           start_url: '/',
           theme_color: '#ffffff',
+          display: 'standalone',
+          display_override: ['window-controls-overlay', 'fullscreen', 'minimal-ui'],
           icons: [
             {
               src: 'logo.svg',
-              sizes: '512x512',
+              sizes: '150x150',
               type: 'image/svg+xml',
             },
           ],
