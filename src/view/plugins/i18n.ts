@@ -24,6 +24,7 @@ function setI18nLanguage(lang: Locale) {
   i18n.global.locale.value = lang as any
   if (typeof document !== 'undefined')
     document.querySelector('html')?.setAttribute('lang', lang)
+  appRepo.updateAcceptLanguage(lang)
   return lang
 }
 
@@ -37,8 +38,6 @@ export async function loadLanguageAsync(lang: string): Promise<Locale> {
   const messages = await localesMap[lang]()
   i18n.global.setLocaleMessage(lang, messages.default)
   loadedLanguages.push(lang)
-
-  appRepo.updateAcceptLanguage(lang)
 
   return setI18nLanguage(lang)
 }

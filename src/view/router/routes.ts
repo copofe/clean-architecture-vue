@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
-import { auth } from './guards'
+
+// import { auth } from './guards'
 
 const routes: RouteRecordRaw[] = [
   {
