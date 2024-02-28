@@ -25,7 +25,7 @@ const { isLoading, run: login } = useAsyncFunc(
 </script>
 
 <template>
-  <Page class="flex flex-col px-6 py-12 lg:px-8">
+  <div class="flex flex-col px-6 py-12 lg:px-8">
     <img src="/logo.svg" class="w-1/4 sm:w-32 self-center">
     <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col gap-4">
       <div>
@@ -50,5 +50,5 @@ const { isLoading, run: login } = useAsyncFunc(
         {{ t('user.sign-in') }}
       </Button>
     </div>
-  </Page>
+  </div>
 </template>

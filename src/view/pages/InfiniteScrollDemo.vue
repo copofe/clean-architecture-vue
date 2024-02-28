@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const limit = ref(10)
 const numColumns = ref(1)
-const gap = ref(0)
+const gap = ref(4)
 
 async function getList({ limit }: { limit: number }) {
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  await new Promise(resolve => setTimeout(resolve, 200))
   return [...Array(limit)].map(() => {
     return {
       v: Math.random().toPrecision(4),
@@ -14,8 +14,8 @@ async function getList({ limit }: { limit: number }) {
 </script>
 
 <template>
-  <Page class="px-2">
-    <div class="flex gap-1">
+  <div class="px-2">
+    <div class="flex gap-1 mb-2">
       <div>
         <Label>limit</Label>
         <Input
@@ -48,10 +48,14 @@ async function getList({ limit }: { limit: number }) {
       :num-columns="numColumns"
       :item-gap="gap"
       :limit="limit"
+      :offset="164"
     >
-      <template #renderItem="{ item }">
-        <span>{{ item.v }}</span>
+      <template #renderItem="{ item, index }">
+        <div class="bg-card p-4 border">
+          <p>index: {{ index }}</p>
+          <p>value: {{ item.v }}</p>
+        </div>
       </template>
     </InfiniteScroll>
-  </Page>
+  </div>
 </template>

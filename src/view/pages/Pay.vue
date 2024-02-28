@@ -52,7 +52,7 @@ function handleInput(e: MouseEvent) {
 </script>
 
 <template>
-  <Page class="select-none">
+  <div class="select-none">
     <div class="p-2">
       <Input
         class="text-5xl h-20 leading-none text-right bg-background pointer-events-none rounded-none"
@@ -79,5 +79,5 @@ function handleInput(e: MouseEvent) {
       <span style="grid-column: span 2 / span 2">0</span>
       <span>.</span>
     </div>
-  </Page>
+  </div>
 </template>

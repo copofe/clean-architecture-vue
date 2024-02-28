@@ -1,7 +1,7 @@
-import type { RouteLocationNormalized, RouteLocationRaw } from 'vue-router'
+import type { NavigationGuard } from 'vue-router'
 import { userRepo } from '::/repositories/user'
 
-export async function auth(to: RouteLocationNormalized): Promise<void | RouteLocationRaw> {
+export const auth: NavigationGuard = async (to) => {
   const isLogged = await userRepo.getToken()
   if (!isLogged) {
     return {

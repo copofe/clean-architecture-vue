@@ -12,7 +12,7 @@ const components = [
 </script>
 
 <template>
-  <Page>
+  <div>
     <div
       v-for="component in components"
       :key="component.route"
@@ -25,5 +25,5 @@ const components = [
       </div>
       <ArrowRightIcon class="w-5 h-5" />
     </div>
-  </Page>
+  </div>
 </template>

@@ -34,7 +34,7 @@ interface InfiniteScrollProps {
    */
   containerClass?: string
   /**
-   * Call dataSource function when the distance between the scrollbar and the bottom is less than offset
+   * Call dataSource function when the distance between the scrollbar and the bottom is less than offset in pixels
    * @default 0
    */
   offset?: number
@@ -130,13 +130,17 @@ onBeforeUnmount(() => {
   <div>
     <slot name="header" />
     <div
-      :class="`${props.containerClass} grid overflow-x-hidden`"
+      :class="`${props.containerClass} grid overflow-x-hidden scroll-smooth scrollbar-none relative`"
       :style="{
         gridTemplateColumns: `repeat(${props.numColumns}, minmax(0, 1fr))`,
         gap: `${props.itemGap}px`,
       }"
     >
-      <div v-for="(item, index) in data" :key="props.itemKey ? item[props.itemKey] : index">
+      <div
+        v-for="(item, index) in data"
+        :key="props.itemKey ? item[props.itemKey] : index"
+        :style="{ transitionDelay: `${index % limit * 0.03}s` }"
+      >
         <slot
           name="renderItem"
           :item="item"
@@ -148,13 +152,13 @@ onBeforeUnmount(() => {
       No Data
     </div>
     <slot name="footer" />
-    <div class="py-2 flex justify-center">
-      <Loading v-if="loading" class="h-full w-4 text-muted-foreground" />
-    </div>
     <div
       ref="targetRef"
       class="w-full pointer-events-none"
-      :style="{ height: `${props.offset}px` }"
+      :style="{ height: `${props.offset}px`, marginTop: `-${props.offset}px` }"
     />
+    <div class="py-2 flex justify-center">
+      <Loading v-if="loading" class="h-full w-4 text-muted-foreground" />
+    </div>
   </div>
 </template>

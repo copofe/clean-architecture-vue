@@ -25,7 +25,7 @@ function toggleLanguage() {
 </script>
 
 <template>
-  <Page class="flex flex-col items-center px-6 py-12 lg:px-8 gap-8">
+  <div class="flex flex-col items-center px-6 py-12 lg:px-8 gap-8">
     <img src="/logo.svg" class="w-1/4 sm:w-32 self-center">
     <h1 class="text-lg">
       {{ t('name') }}
@@ -70,5 +70,5 @@ function toggleLanguage() {
         </Button>
       </a>
     </div>
-  </Page>
+  </div>
 </template>

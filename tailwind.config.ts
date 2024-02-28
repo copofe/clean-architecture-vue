@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 import animate from 'tailwindcss-animate'
 
 module.exports = {
@@ -86,5 +87,18 @@ module.exports = {
       },
     },
   },
-  plugins: [animate],
+  plugins: [
+    animate,
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        '.scrollbar-none': {
+          'scrollbar-width': 'none',
+          '-ms-overflow-style': 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
+      })
+    }),
+  ],
 } satisfies Config

@@ -25,7 +25,7 @@ const tabs = [
   <Tabs
     :model-value="(route.name as string)"
     activation-mode="manual"
-    class="w-screen h-full pb-12"
+    class="w-screen pb-12"
   >
     <TabsList class="flex h-12 p-0 bg-background fixed left-0 right-0 bottom-0 border-t rounded-none">
       <TabsTrigger
