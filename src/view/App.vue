@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { useColorMode, useDark } from '@vueuse/core'
 
-useDark()
+useDark({
+  onChanged() {
+    const background = getComputedStyle(document.body).getPropertyValue('background-color')
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', background)
+  },
+})
 const mode = useColorMode()
 const theme = computed(() => mode.value === 'auto' ? 'system' : mode.value)
 </script>
