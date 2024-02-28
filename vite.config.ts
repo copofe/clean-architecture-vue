@@ -33,7 +33,18 @@ export default defineConfig(({ mode }) => {
     plugins: [
       AutoImport({
         dts: 'types/auto-imports.d.ts',
-        imports: ['vue', 'vue-router', 'vue-i18n'],
+        imports: [
+          'vue',
+          'vue-router',
+          'vue-i18n',
+          {
+            'vue-sonner': ['toast'],
+          },
+        ],
+        dirs: [
+          'src/view/composables',
+          'src/view/store',
+        ],
         eslintrc: {
           enabled: true,
         },

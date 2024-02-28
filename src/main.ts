@@ -9,6 +9,8 @@ import App from '::/view/App.vue'
 import '::/view/styles/index.css'
 
 RequestError.errorHandler = (err) => {
+  if (err.message)
+    toast.error(err.message)
   // if you use RESTful API, you only need to check if the error code returned equals 401.
   if (err.code === ApiResponseCode.UnAuthorized || err.code === 401)
     userRepo.clearToken().then(() => router.push({ name: 'SignIn' }))

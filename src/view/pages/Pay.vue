@@ -36,18 +36,18 @@ const moneyKeyboard = {
 }
 
 const amount = ref<string>('')
-function handleClick(e: MouseEvent) {
+function handleInput(e: MouseEvent) {
   const target = e.target as HTMLSpanElement
   if (target.tagName !== 'SPAN')
     return
 
   if (target.textContent?.toLowerCase() === 'del')
     amount.value = moneyKeyboard.backspace(amount.value)
+
   else if (target.textContent?.toLowerCase() === 'pay')
-    // eslint-disable-next-line no-alert
-    alert(`paying ${Number(amount.value)}, you should validate it first`)
-  else
-    amount.value = moneyKeyboard.input(target.textContent ?? '', amount.value)
+    toast.info(`paying...${amount.value}`)
+
+  else amount.value = moneyKeyboard.input(target.textContent ?? '', amount.value)
 }
 </script>
 
@@ -62,8 +62,8 @@ function handleClick(e: MouseEvent) {
       />
     </div>
     <div
-      class="fixed bottom-0 right-0 left-0 text-xl grid grid-rows-3 grid-cols-4 gap-px cursor-pointer [&>span]:flex [&>span]:items-center [&>span]:justify-center [&>span]:bg-muted active:[&>span]:bg-background [&>span]:p-6"
-      @click="handleClick"
+      class="fixed bottom-0 right-0 left-0 text-xl grid grid-rows-3 grid-cols-4 gap-px cursor-pointer [&>span]:flex [&>span]:items-center [&>span]:justify-center [&>span]:bg-secondary active:[&>span]:bg-background [&>span]:p-6"
+      @click="handleInput"
     >
       <span>1</span>
       <span>2</span>

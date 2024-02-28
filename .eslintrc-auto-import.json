@@ -55,6 +55,7 @@
     "toRef": true,
     "toRefs": true,
     "toValue": true,
+    "toast": true,
     "triggerRef": true,
     "unref": true,
     "useAttrs": true,
@@ -68,6 +69,8 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "useStore": true,
+    "useAsyncFunc": true
   }
 }

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useAsyncFunc } from '../compositions/useAsyncFunc'
-import { useStore } from '../store'
 import { userAuthUsecase } from '::/usecases/user'
 
 const { t } = useI18n()
@@ -20,6 +18,7 @@ const { isLoading, run: login } = useAsyncFunc(
       store.user = data.user
       const { redirect } = route.query
       router.replace(redirect ? decodeURIComponent(redirect as string) : { name: 'Home' })
+      toast.success('login successfully')
     },
   },
 )

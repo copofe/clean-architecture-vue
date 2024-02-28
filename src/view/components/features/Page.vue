@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="page h-full bg-muted bg-opacity-20">
+  <div class="page h-full bg-background">
     <slot />
   </div>
 </template>

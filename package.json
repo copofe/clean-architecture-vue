@@ -36,7 +36,8 @@
     "unstorage": "^1.10.1",
     "vue": "^3.4.20",
     "vue-i18n": "^9.9.1",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue-sonner": "^1.0.3"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.6.4",
