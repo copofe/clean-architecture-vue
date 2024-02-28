@@ -47,6 +47,11 @@ const routes: RouteRecordRaw[] = [
         name: 'InfiniteScroll',
         component: () => import('::/view/pages/InfiniteScrollDemo.vue'),
       },
+      {
+        path: 'pay',
+        name: 'Pay',
+        component: () => import('::/view/pages/Pay.vue'),
+      },
     ],
   },
   {

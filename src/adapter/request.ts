@@ -16,13 +16,13 @@ instance.interceptors.request.use((config) => {
 
 instance.interceptors.response.use(
   (response) => {
-    if (response.status >= 200 && response.status < 300 && response.data.code === ApiResponseCode.Succeeded)
+    if (response.data.code === ApiResponseCode.Succeeded)
       return response
 
     return Promise.reject(new RequestError(response.data.msg, response.data.code))
   },
   (error: AxiosError) => {
-    return Promise.reject(new RequestError(error.message))
+    return Promise.reject(new RequestError(error.message, error.response?.status))
   },
 )
 

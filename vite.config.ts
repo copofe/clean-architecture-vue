@@ -65,8 +65,6 @@ export default defineConfig(({ mode }) => {
           description: 'A front-end template designed for building web applications with Vue.js',
           start_url: '/',
           theme_color: '#ffffff',
-          display: 'standalone',
-          display_override: ['window-controls-overlay', 'fullscreen', 'minimal-ui'],
           icons: [
             {
               src: 'logo.svg',

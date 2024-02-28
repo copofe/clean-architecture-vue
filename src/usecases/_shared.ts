@@ -2,7 +2,7 @@ import mitt from 'mitt'
 import type { Eventer, ImplUsecase } from '::/entities/app.model'
 import type { User } from '::/entities/user.model'
 
-export interface Events {
+interface Events {
   // user
   'user.login': User
   'user.logout': void

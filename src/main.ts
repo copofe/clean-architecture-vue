@@ -1,21 +1,17 @@
 // import { appUsecase } from '::/usecases/app'
-import { RequestError } from '::/entities/app.model'
+import { ApiResponseCode, RequestError } from '::/entities/app.model'
+import { userRepo } from '::/repositories/user'
 import { useStore } from '::/view/store'
 import router from '::/view/router'
 import i18n, { loadLanguageAsync } from '::/view/plugins/i18n'
 import store from '::/view/plugins/pinia'
-import { registerEventHub } from '::/view/eventHub'
 import App from '::/view/App.vue'
 import '::/view/styles/index.css'
 
-function errorHandler(err: unknown) {
-  // Global error handler
-  if (err instanceof RequestError)
-  // TODO: show error by notification or toast
-    console.error(err)
-
-  else
-    console.error(err)
+RequestError.errorHandler = (err) => {
+  // if you use RESTful API, you only need to check if the error code returned equals 401.
+  if (err.code === ApiResponseCode.UnAuthorized || err.code === 401)
+    userRepo.clearToken().then(() => router.push({ name: 'SignIn' }))
 }
 
 async function setup() {
@@ -24,8 +20,6 @@ async function setup() {
     .use(store)
     .use(i18n)
     .use(router)
-
-  app.config.errorHandler = errorHandler
 
   return app
 }
@@ -37,8 +31,6 @@ async function initialize() {
 
   // store.appInfo = appInfo
   // store.setting = appSetting
-
-  registerEventHub()
 }
 
 async function bootstrap() {

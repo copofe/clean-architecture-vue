@@ -5,7 +5,7 @@ import { request } from '::/adapter/request'
 import { storage } from '::/adapter/storage'
 import { session } from '::/adapter/session'
 
-const tokenKey = 'token'
+export const TOKENKEY = 'token'
 
 export class Repository extends ImplRepository {
   protected request = request
@@ -16,11 +16,11 @@ export class Repository extends ImplRepository {
   }
 
   protected setToken(token: Token) {
-    return this.storage.setItem(tokenKey, token)
+    return this.storage.setItem(TOKENKEY, token)
   }
 
   getToken() {
-    return this.storage.getItem(tokenKey)
+    return this.storage.getItem(TOKENKEY)
   }
 
   updateAuthorization(token: Token) {

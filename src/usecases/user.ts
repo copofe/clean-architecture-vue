@@ -12,8 +12,6 @@ class UserAuthUsecase extends Usecase {
     const token = await userRepo.generateToken(...args)
     const user = await userRepo.getCurrentUser()
 
-    this.eventer.emit('user.login', user)
-
     return {
       token,
       user,
@@ -22,8 +20,6 @@ class UserAuthUsecase extends Usecase {
 
   logout = async () => {
     await userRepo.invalidateToken()
-
-    this.eventer.emit('user.logout')
   }
 }
 

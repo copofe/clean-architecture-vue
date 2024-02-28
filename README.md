@@ -30,7 +30,7 @@ The dependency relationships in the source code can only point to the inner laye
 Therefore, we decided to split the application into four layers:
 
 - Entity: Business objects that encapsulate core business data and logic that are essential to the business domain. it should not have any external dependencies.
-- Repository: Abstracts data access and storage responsibilities away from business objects, handles CRUD operations and queries against persistence storage.
+- Repository: Abstracts data access and storage responsibilities away from business objects, handles CRUD operations and persistence storage.
 - Use Case: Contains application-specific business rules and workflows, coordinates work across entities and repositories to perform specific application goals.
 - View: Renders UI components and handles presentation responsibilities, communicates with use cases to display information and collect user input.
 

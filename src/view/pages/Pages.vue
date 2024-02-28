@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowRightIcon, LogInIcon, SignpostIcon } from 'lucide-vue-next'
+import { ArrowRightIcon, CreditCardIcon, LogInIcon, SignpostIcon } from 'lucide-vue-next'
 
 const router = useRouter()
 const components = [
@@ -12,6 +12,11 @@ const components = [
     label: 'sign in',
     route: 'SignIn',
     icon: LogInIcon,
+  },
+  {
+    label: 'pay',
+    route: 'Pay',
+    icon: CreditCardIcon,
   },
 ]
 </script>

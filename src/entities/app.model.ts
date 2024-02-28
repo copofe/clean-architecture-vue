@@ -27,8 +27,8 @@ export interface RequestConfig {
 }
 
 export enum ApiResponseCode {
-  Succeeded = 0,
-  Failed = 1,
+  Succeeded = 10000,
+  UnAuthorized = 10401,
 }
 
 export interface RequestResponse<T> {
@@ -39,14 +39,16 @@ export interface RequestResponse<T> {
 }
 
 export class RequestError extends StandardError {
-  constructor(public message: string, public code?: ApiResponseCode) {
+  static errorHandler: (err: RequestError) => void
+  constructor(public message: string, public code?: number) {
     super('RequestError', message)
+    RequestError.errorHandler(this)
   }
 }
 
 export type ApiResponse<T> = RequestResponse<{
   code: ApiResponseCode
-  msg: string
+  msg?: string
   data: T
 }>
 

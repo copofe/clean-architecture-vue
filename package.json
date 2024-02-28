@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "packageManager": "pnpm@8.15.1",
   "description": "A front-end template designed for building web applications with Vue.js",
+  "author": "copofe <me@shinji.me>",
+  "license": "MIT",
+  "repository": "copofe/frontend-clean-architecture",
   "engines": {
     "node": "^18.0.0 || >= 20.0.0"
   },

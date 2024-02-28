@@ -1,3 +1,5 @@
 export default defineEventHandler(() => {
-  return '123abc'
+  return {
+    data: '123abc',
+  }
 })

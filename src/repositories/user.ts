@@ -12,15 +12,19 @@ class UserRepo extends Repository {
     password: string
   }) {
     const token = await this.request.post<Token>('/user/login', data).then(extractData)
-    this.setToken(token)
+    await this.setToken(token)
     this.updateAuthorization(token)
     return token
   }
 
+  async clearToken() {
+    await this.setToken(null)
+    this.updateAuthorization(null)
+  }
+
   async invalidateToken() {
     await this.request.post('/user/logout')
-    this.setToken(null)
-    this.updateAuthorization(null)
+    this.clearToken()
   }
 
   async getCurrentUser() {
