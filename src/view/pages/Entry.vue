@@ -25,9 +25,9 @@ const tabs = [
   <Tabs
     :model-value="(route.name as string)"
     activation-mode="manual"
-    class="w-screen pb-12"
+    class="w-screen pb-14"
   >
-    <TabsList class="flex h-12 p-0 bg-background fixed left-0 right-0 bottom-0 border-t rounded-none">
+    <TabsList class="flex h-14 p-0 bg-background fixed left-0 right-0 bottom-0 border-t rounded-none z-50">
       <TabsTrigger
         v-for="tab in tabs"
         :key="tab.value"
@@ -35,8 +35,8 @@ const tabs = [
         class="flex-1 flex flex-col gap-1 justify-center items-center py-1 data-[state=active]:shadow-none"
         @click="router.push({ name: tab.value })"
       >
-        <component :is="tab.icon" class="h-5 w-5" />
-        <span class="text-[10px] leading-none">{{ t(tab.value.toLowerCase()).toUpperCase() }}</span>
+        <component :is="tab.icon" class="h-6 w-6" />
+        <span class="text-[11px] leading-none">{{ t(tab.value.toLowerCase()).toUpperCase() }}</span>
       </TabsTrigger>
     </TabsList>
     <router-view v-slot="{ Component }">

@@ -4,11 +4,15 @@ interface InfiniteScrollProps {
    * The Element or Document whose bounds are used as the bounding box when testing for intersection.
    * If no root value was passed or its value is null, the top-level document's viewport is used
    */
-  root?: HTMLElement | null
+  root?: HTMLElement
   /**
    * Function to fetch data for the infinite scroll
    */
-  dataSource: (...args: any) => (T[] | Promise<T[]>)
+  dataSource: (params: {
+    page: number
+    limit: number
+    [key: string]: any
+  }) => (T[] | Promise<T[]>)
   /**
    * Additional parameters for the data source function
    */
@@ -34,20 +38,20 @@ interface InfiniteScrollProps {
    */
   containerClass?: string
   /**
-   * Call dataSource function when the distance between the scrollbar and the bottom is less than offset in pixels
+   * Call dataSource function when the distance between the scrollbar and the bottom is less than distance in pixels
    * @default 0
    */
-  offset?: number
+  distance?: number
 }
 
 const props = withDefaults(defineProps<InfiniteScrollProps>(), {
-  root: null,
+  root: undefined,
   params: () => ({}),
   limit: 10,
   numColumns: 1,
   itemGap: 0,
   containerClass: '',
-  offset: 0,
+  distance: 0,
 })
 
 const targetRef = ref<HTMLDivElement>()
@@ -58,6 +62,8 @@ function init() {
       fetchData()
   }, {
     root: props.root,
+    threshold: 0,
+    rootMargin: `0px 0px ${props.distance}px 0px`,
   })
 }
 function observer() {
@@ -78,14 +84,14 @@ function onSuccess(res: T[], currentPage: number, limit: number) {
   loading.value = false
   page.value = currentPage
   finished.value = res.length !== limit
-  observer()
+  nextTick(observer)
 }
 function onError() {
   loading.value = false
   error.value = true
 }
 function fetchData() {
-  if (loading.value || finished.value || error.value)
+  if (loading.value || finished.value)
     return
 
   const _page = page.value + 1
@@ -115,15 +121,9 @@ onMounted(() => {
   init()
   observer()
 })
-onActivated(() => {
-  observer()
-})
-onDeactivated(() => {
-  unObserver()
-})
-onBeforeUnmount(() => {
-  unObserver()
-})
+onActivated(observer)
+onDeactivated(unObserver)
+onBeforeUnmount(unObserver)
 </script>
 
 <template>
@@ -147,18 +147,17 @@ onBeforeUnmount(() => {
           :index="index"
         />
       </div>
+      <div
+        ref="targetRef"
+        class="w-full pointer-events-none"
+      />
     </div>
     <div v-if="data.length === 0 && finished" class="py-2 flex justify-center text-muted-foreground">
       No Data
     </div>
     <slot name="footer" />
-    <div
-      ref="targetRef"
-      class="w-full pointer-events-none"
-      :style="{ height: `${props.offset}px`, marginTop: `-${props.offset}px` }"
-    />
-    <div class="py-2 flex justify-center">
-      <Loading v-if="loading" class="h-full w-4 text-muted-foreground" />
+    <div v-if="loading" class="py-2 flex justify-center">
+      <Loading class="h-full w-4 text-muted-foreground" />
     </div>
   </div>
 </template>

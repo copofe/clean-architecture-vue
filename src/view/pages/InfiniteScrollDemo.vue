@@ -14,8 +14,8 @@ async function getList({ limit }: { limit: number }) {
 </script>
 
 <template>
-  <div class="px-2">
-    <div class="flex gap-1 mb-2">
+  <div>
+    <div class="flex gap-1 p-2 sticky top-0 z-10 bg-card shadow-md">
       <div>
         <Label>limit</Label>
         <Input
@@ -48,7 +48,8 @@ async function getList({ limit }: { limit: number }) {
       :num-columns="numColumns"
       :item-gap="gap"
       :limit="limit"
-      :offset="164"
+      :distance="160"
+      container-class="px-2 pt-2"
     >
       <template #renderItem="{ item, index }">
         <div class="bg-card p-4 border">

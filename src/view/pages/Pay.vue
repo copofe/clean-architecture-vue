@@ -45,7 +45,7 @@ function handleInput(e: MouseEvent) {
     amount.value = moneyKeyboard.backspace(amount.value)
 
   else if (target.textContent?.toLowerCase() === 'pay')
-    toast.info(`paying...${amount.value}`)
+    toast.info(`paying...${Number(amount.value).toFixed(2)}`)
 
   else amount.value = moneyKeyboard.input(target.textContent ?? '', amount.value)
 }
