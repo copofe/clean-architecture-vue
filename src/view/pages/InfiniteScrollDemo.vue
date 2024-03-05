@@ -4,7 +4,7 @@ const numColumns = ref(1)
 const gap = ref(4)
 
 async function getList({ limit }: { limit: number }) {
-  await new Promise(resolve => setTimeout(resolve, 200))
+  await new Promise(resolve => setTimeout(resolve, 1000))
   return [...Array(limit)].map(() => {
     return {
       v: Math.random().toPrecision(4),

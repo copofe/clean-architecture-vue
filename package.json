@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.9.0",
+    "@vueuse/gesture": "^2.0.0",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",

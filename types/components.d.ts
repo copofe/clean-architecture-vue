@@ -13,6 +13,7 @@ declare module 'vue' {
     Label: typeof import('./../src/view/components/ui/label/Label.vue')['default']
     Loading: typeof import('./../src/view/components/ui/loading/Loading.vue')['default']
     Page: typeof import('./../src/view/components/features/Page.vue')['default']
+    RefreshControl: typeof import('./../src/view/components/features/RefreshControl.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Sonner: typeof import('./../src/view/components/ui/sonner/Sonner.vue')['default']

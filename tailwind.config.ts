@@ -10,6 +10,8 @@ module.exports = {
     './src/view/styles/*.css',
   ],
 
+  safelist: ['animate-spin'],
+
   theme: {
     colors: {},
     borderRadius: {},
@@ -57,6 +59,7 @@ module.exports = {
         },
       },
       borderRadius: {
+        full: '50%',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',

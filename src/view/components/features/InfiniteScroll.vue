@@ -80,7 +80,7 @@ const finished = ref(false)
 const error = ref(false)
 
 function onSuccess(res: T[], currentPage: number, limit: number) {
-  data.value = data.value.concat(res)
+  data.value = currentPage === 1 ? res : data.value.concat(res)
   loading.value = false
   page.value = currentPage
   finished.value = res.length !== limit
@@ -90,7 +90,7 @@ function onError() {
   loading.value = false
   error.value = true
 }
-function fetchData() {
+async function fetchData() {
   if (loading.value || finished.value)
     return
 
@@ -101,20 +101,20 @@ function fetchData() {
 
   const { dataSource, params, limit } = props
 
-  const res = dataSource({ ...params, page: _page, limit })
-  if (res instanceof Promise) {
-    res.then((result) => {
-      onSuccess(result, _page, limit)
-    }).catch(onError)
+  try {
+    const res = await dataSource({ ...params, page: _page, limit })
+    onSuccess(res, _page, limit)
   }
-  else {
-    try {
-      onSuccess(res, _page, limit)
-    }
-    catch (error) {
-      onError()
-    }
+  catch (error) {
+    onError()
   }
+}
+
+async function refresh() {
+  page.value = 0
+  finished.value = false
+  error.value = false
+  await fetchData()
 }
 
 onMounted(() => {
@@ -127,7 +127,7 @@ onBeforeUnmount(unObserver)
 </script>
 
 <template>
-  <div>
+  <RefreshControl :refresh="refresh">
     <slot name="header" />
     <div
       :class="`${props.containerClass} grid overflow-x-hidden scroll-smooth scrollbar-none relative`"
@@ -159,5 +159,5 @@ onBeforeUnmount(unObserver)
     <div v-if="loading" class="py-2 flex justify-center">
       <Loading class="h-full w-4 text-muted-foreground" />
     </div>
-  </div>
+  </RefreshControl>
 </template>

@@ -1,4 +1,5 @@
 // import { appUsecase } from '::/usecases/app'
+import { GesturePlugin } from '@vueuse/gesture'
 import { ApiResponseCode, RequestError } from '::/entities/app.model'
 import { userRepo } from '::/repositories/user'
 import { useStore } from '::/view/store'
@@ -22,6 +23,7 @@ async function setup() {
     .use(store)
     .use(i18n)
     .use(router)
+    .use(GesturePlugin)
 
   return app
 }

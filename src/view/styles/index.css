@@ -84,7 +84,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border scrollbar-none;
   }
 
   body {

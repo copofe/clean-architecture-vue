@@ -1,9 +1,8 @@
 {
   "recommendations": [
-    "vue.volar",
-    "Vue.vscode-typescript-vue-plugin",
     "bradlc.vscode-tailwindcss",
     "lokalise.i18n-ally",
-    "vitest.explorer"
+    "vitest.explorer",
+    "vue.volar"
   ]
 }
