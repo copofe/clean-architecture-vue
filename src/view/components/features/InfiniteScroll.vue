@@ -139,7 +139,6 @@ onBeforeUnmount(unObserver)
       <div
         v-for="(item, index) in data"
         :key="props.itemKey ? item[props.itemKey] : index"
-        :style="{ transitionDelay: `${index % limit * 0.03}s` }"
       >
         <slot
           name="renderItem"

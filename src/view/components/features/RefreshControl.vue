@@ -7,18 +7,17 @@ const props = defineProps<{
   refresh: () => Promise<any>
 }>()
 
-onMounted(() => {
+function addOverscrollBehavior() {
   document.body.style.overscrollBehavior = 'contain'
-})
-onActivated(() => {
-  document.body.style.overscrollBehavior = 'contain'
-})
-onDeactivated(() => {
+}
+function removeOverscrollBehavior() {
   document.body.style.overscrollBehavior = 'auto'
-})
-onBeforeUnmount(() => {
-  document.body.style.overscrollBehavior = 'auto'
-})
+}
+
+onMounted(addOverscrollBehavior)
+onActivated(addOverscrollBehavior)
+onDeactivated(removeOverscrollBehavior)
+onBeforeUnmount(removeOverscrollBehavior)
 
 const container = ref<HTMLElement>()
 const target = ref<HTMLElement>()
@@ -92,9 +91,10 @@ useGesture(
       }
     },
     onDragEnd: () => {
-      if (distance === MaxDistance) {
+      if (distance >= MaxDistance / 2) {
         refreshing = true
         icon.value!.style.transform = ''
+        icon.value!.style.opacity = '1'
         icon.value!.classList.add('animate-spin')
         control.value!.style.transitionDuration = `${duration / 1000}s`
         control.value!.style.transform = `translate3d(${X}px, 20px, 0px) scale(1)`
