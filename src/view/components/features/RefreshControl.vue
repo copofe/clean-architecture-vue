@@ -34,6 +34,7 @@ const X = window.screen.availWidth / 2 - 16
 const Y = 0
 const defaultTransform = `translate3d(${X}px, ${Y}px, 0px) scale(0)`
 const MaxDistance = 100
+const triggerDistance = 30
 const duration = 500
 
 let shouldPull = false
@@ -91,7 +92,7 @@ useGesture(
       }
     },
     onDragEnd: () => {
-      if (distance >= MaxDistance / 2) {
+      if (distance >= triggerDistance) {
         refreshing = true
         icon.value!.style.transform = ''
         icon.value!.style.opacity = '1'
