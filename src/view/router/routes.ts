@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
             name: 'Home',
             component: () => import('::/view/pages/Home.vue'),
             meta: {
-              title: 'home',
+              title: 'View.home',
             },
           },
           {
@@ -29,7 +29,7 @@ const routes: RouteRecordRaw[] = [
             name: 'Components',
             component: () => import('::/view/pages/Components.vue'),
             meta: {
-              title: 'components',
+              title: 'View.components',
             },
           },
           {
@@ -37,7 +37,7 @@ const routes: RouteRecordRaw[] = [
             name: 'Pages',
             component: () => import('::/view/pages/Pages.vue'),
             meta: {
-              title: 'pages',
+              title: 'View.pages',
             },
           },
         ],
@@ -59,7 +59,7 @@ const routes: RouteRecordRaw[] = [
     name: 'SignIn',
     component: () => import('::/view/pages/SignIn.vue'),
     meta: {
-      title: 'user.sign-in',
+      title: 'User.sign-in',
     },
   },
   {
@@ -67,7 +67,7 @@ const routes: RouteRecordRaw[] = [
     name: 'NotFound',
     component: () => import('::/view/pages/404.vue'),
     meta: {
-      title: 'page-not-found',
+      title: 'Error.page-not-found',
     },
   },
 ]

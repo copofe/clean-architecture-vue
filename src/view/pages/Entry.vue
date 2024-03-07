@@ -36,7 +36,7 @@ const tabs = [
         @click="router.push({ name: tab.value })"
       >
         <component :is="tab.icon" class="h-6 w-6" />
-        <span class="text-[11px] leading-none">{{ t(tab.value.toLowerCase()).toUpperCase() }}</span>
+        <span class="text-[11px] leading-none">{{ t(`View.${tab.value.toLowerCase()}`).toUpperCase() }}</span>
       </TabsTrigger>
     </TabsList>
     <router-view v-slot="{ Component }">

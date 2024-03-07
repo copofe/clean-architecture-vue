@@ -1,17 +1,18 @@
-name: Frontend Clean Architecture
-slogan: A front-end template designed for building web applications with Vue.js.
-permission-denied: permission denied
-page-not-found: page not found
-
-back: back
-
-home: home
-components: components
-pages: pages
-
-user:
+Base:
+  back: back
+Error:
+  page-not-found: page not found
+  permission-denied: permission denied
+Project:
+  name: Frontend Clean Architecture
+  slogan: A front-end template designed for building web applications with Vue.js.
+User:
+  password: password
   sign-in: sign in
   sign-out: sign out
   sign-up: sign up
   username: username
-  password: password
+View:
+  components: components
+  home: home
+  pages: pages

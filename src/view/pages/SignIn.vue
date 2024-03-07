@@ -29,12 +29,12 @@ const { isLoading, run: login } = useAsyncFunc(
     <img src="/logo.svg" class="w-1/4 sm:w-32 self-center">
     <div class="my-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col gap-4">
       <div>
-        <Label for="username" class="mb-1 capitalize">{{ t('user.username') }}</Label>
+        <Label for="username" class="mb-1 capitalize">{{ t('User.username') }}</Label>
         <Input id="username" v-model="formData.username" />
       </div>
 
       <div>
-        <Label for="password" class="mb-1 capitalize">{{ t('user.password') }}</Label>
+        <Label for="password" class="mb-1 capitalize">{{ t('User.password') }}</Label>
         <Input
           id="password"
           v-model="formData.password"
@@ -47,7 +47,7 @@ const { isLoading, run: login } = useAsyncFunc(
         :loading="isLoading"
         @click.stop="login"
       >
-        {{ t('user.sign-in') }}
+        {{ t('User.sign-in') }}
       </Button>
     </div>
   </div>

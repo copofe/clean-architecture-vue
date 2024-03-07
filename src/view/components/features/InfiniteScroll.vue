@@ -112,6 +112,7 @@ async function fetchData() {
 
 async function refresh() {
   page.value = 0
+  loading.value = false
   finished.value = false
   error.value = false
   await fetchData()
@@ -127,7 +128,7 @@ onBeforeUnmount(unObserver)
 </script>
 
 <template>
-  <RefreshControl :refresh="refresh">
+  <RefreshControl :refresh="refresh" :disabled="loading">
     <slot name="header" />
     <div
       :class="`${props.containerClass} grid overflow-x-hidden scroll-smooth scrollbar-none relative`"

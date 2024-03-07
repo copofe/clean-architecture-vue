@@ -5,19 +5,8 @@ import { RotateCwIcon } from 'lucide-vue-next'
 
 const props = defineProps<{
   refresh: () => Promise<any>
+  disabled?: boolean
 }>()
-
-function addOverscrollBehavior() {
-  document.body.style.overscrollBehavior = 'contain'
-}
-function removeOverscrollBehavior() {
-  document.body.style.overscrollBehavior = 'auto'
-}
-
-onMounted(addOverscrollBehavior)
-onActivated(addOverscrollBehavior)
-onDeactivated(removeOverscrollBehavior)
-onBeforeUnmount(removeOverscrollBehavior)
 
 const container = ref<HTMLElement>()
 const target = ref<HTMLElement>()
@@ -31,7 +20,7 @@ useIntersectionObserver(target, ([{ isIntersecting }]) => {
 })
 
 const X = window.screen.availWidth / 2 - 16
-const Y = 0
+const Y = 20
 const defaultTransform = `translate3d(${X}px, ${Y}px, 0px) scale(0)`
 const MaxDistance = 100
 const triggerDistance = 30
@@ -46,12 +35,10 @@ function reset() {
   control.value!.style.transform = defaultTransform
   setTimeout(() => {
     control.value!.style.transitionDuration = ''
-    icon.value!.classList.remove('animate-spin-reverse')
     icon.value!.style.transform = ''
     refreshing = false
-  }, duration)
+  }, duration / 2)
   icon.value!.classList.remove('animate-spin')
-  icon.value!.classList.add('animate-spin-reverse')
   shouldPull = false
   direction = ''
   distance = 0
@@ -60,7 +47,7 @@ function reset() {
 useGesture(
   {
     onDrag: ({ movement: [_x, y], values, initial, previous, first, event }) => {
-      if (refreshing)
+      if (refreshing || props.disabled)
         return
       if (isIntersected.value && first) {
         shouldPull = true
@@ -94,13 +81,13 @@ useGesture(
     onDragEnd: () => {
       if (distance >= triggerDistance) {
         refreshing = true
-        icon.value!.style.transform = ''
+        icon.value!.style.transform = ``
         icon.value!.style.opacity = '1'
         icon.value!.classList.add('animate-spin')
         control.value!.style.transitionDuration = `${duration / 1000}s`
-        control.value!.style.transform = `translate3d(${X}px, 20px, 0px) scale(1)`
+        control.value!.style.transform = `translate3d(${X}px, ${Y}px, 0px) scale(1)`
         props.refresh().then(() => {
-          nextTick(reset)
+          reset()
         })
       }
       else {
@@ -119,6 +106,18 @@ useGesture(
     },
   },
 )
+
+function addOverscrollBehavior() {
+  document.body.style.overscrollBehavior = 'contain'
+}
+function removeOverscrollBehavior() {
+  document.body.style.overscrollBehavior = 'auto'
+}
+
+onMounted(addOverscrollBehavior)
+onActivated(addOverscrollBehavior)
+onDeactivated(removeOverscrollBehavior)
+onBeforeUnmount(removeOverscrollBehavior)
 </script>
 
 <template>

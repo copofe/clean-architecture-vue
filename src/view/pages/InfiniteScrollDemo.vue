@@ -48,7 +48,6 @@ async function getList({ limit }: { limit: number }) {
       :num-columns="numColumns"
       :item-gap="gap"
       :limit="limit"
-      :distance="160"
       container-class="px-2 pt-2"
     >
       <template #renderItem="{ item, index }">
