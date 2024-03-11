@@ -1,5 +1,11 @@
+import { z } from 'zod'
 import { Usecase } from './_shared'
 import { userRepo } from '::/repositories/user'
+
+export const loginSchema = z.object({
+  username: z.string().min(2),
+  password: z.string().min(6),
+})
 
 class UserAuthUsecase extends Usecase {
   constructor() {
@@ -7,7 +13,7 @@ class UserAuthUsecase extends Usecase {
   }
 
   login = async (...args: Parameters<typeof userRepo['generateToken']>) => {
-    // TODO: validate params
+    loginSchema.parse(...args)
 
     const token = await userRepo.generateToken(...args)
     const user = await userRepo.getCurrentUser()

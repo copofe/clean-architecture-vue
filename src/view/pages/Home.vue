@@ -29,7 +29,7 @@ function toggleLanguage() {
     <h1 class="text-lg font-semibold">
       {{ t('Project.name') }}
     </h1>
-    <p class="italic text-sm text-muted-foreground">
+    <p class="italic text-sm text-center text-muted-foreground">
       {{ t('Project.slogan') }}
     </p>
     <div class="flex">

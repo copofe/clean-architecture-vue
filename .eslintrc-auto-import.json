@@ -58,6 +58,7 @@
     "toast": true,
     "triggerRef": true,
     "unref": true,
+    "useAsyncFunc": true,
     "useAttrs": true,
     "useCssModule": true,
     "useCssVars": true,
@@ -66,11 +67,10 @@
     "useRoute": true,
     "useRouter": true,
     "useSlots": true,
+    "useStore": true,
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true,
-    "useStore": true,
-    "useAsyncFunc": true
+    "watchSyncEffect": true
   }
 }

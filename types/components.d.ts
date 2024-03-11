@@ -8,6 +8,12 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('./../src/view/components/ui/button/Button.vue')['default']
+    FormControl: typeof import('./../src/view/components/ui/form/FormControl.vue')['default']
+    FormDescription: typeof import('./../src/view/components/ui/form/FormDescription.vue')['default']
+    FormField: typeof import('vee-validate')['Field']
+    FormItem: typeof import('./../src/view/components/ui/form/FormItem.vue')['default']
+    FormLabel: typeof import('./../src/view/components/ui/form/FormLabel.vue')['default']
+    FormMessage: typeof import('./../src/view/components/ui/form/FormMessage.vue')['default']
     InfiniteScroll: typeof import('./../src/view/components/features/InfiniteScroll.vue')['default']
     Input: typeof import('./../src/view/components/ui/input/Input.vue')['default']
     Label: typeof import('./../src/view/components/ui/label/Label.vue')['default']

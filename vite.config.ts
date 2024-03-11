@@ -53,6 +53,12 @@ export default defineConfig(({ mode }) => {
       Components({
         dts: 'types/components.d.ts',
         dirs: ['src/view/components'],
+        resolvers: [
+          (componentName) => {
+            if (componentName === 'FormField')
+              return { name: componentName.slice(4), from: 'vee-validate' }
+          },
+        ],
         types: [
           {
             from: 'vue-router',
