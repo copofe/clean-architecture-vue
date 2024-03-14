@@ -8,28 +8,26 @@ const route = useRoute()
 const router = useRouter()
 const store = useStore()
 
-const { handleSubmit } = useForm({
+const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(loginSchema),
 })
 
 const onSubmit = handleSubmit(async (values) => {
-  const data = await userAuthUsecase.login(values)
-  store.user = data.user
+  const { user } = await userAuthUsecase.login(values)
+  store.user = user
   const { redirect } = route.query
   router.replace(redirect ? decodeURIComponent(redirect as string) : { name: 'Home' })
-  toast.success('login successfully')
+  toast.success(t('Success.signed-in'))
 })
-
-const { isLoading, run: login } = useAsyncFunc(onSubmit)
 </script>
 
 <template>
   <div class="flex flex-col px-6 py-12 lg:px-8">
     <img src="/logo.svg" class="w-1/4 sm:w-32 self-center">
-    <form class="my-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col gap-4" @submit="login">
+    <form class="my-10 sm:mx-auto sm:w-full sm:max-w-sm flex flex-col gap-4" @submit="onSubmit">
       <FormField v-slot="{ componentField }" name="username">
         <FormItem>
-          <FormLabel class="mb-1 capitalize">
+          <FormLabel class="capitalize">
             {{ t('User.username') }}
           </FormLabel>
           <FormControl>
@@ -40,7 +38,7 @@ const { isLoading, run: login } = useAsyncFunc(onSubmit)
       </FormField>
       <FormField v-slot="{ componentField }" name="password">
         <FormItem>
-          <FormLabel class="mb-1 capitalize">
+          <FormLabel class="capitalize">
             {{ t('User.password') }}
           </FormLabel>
           <FormControl>
@@ -52,8 +50,9 @@ const { isLoading, run: login } = useAsyncFunc(onSubmit)
 
       <Button
         type="submit"
-        class="capitalize"
-        :loading="isLoading"
+        size="lg"
+        class="capitalize mt-4"
+        :loading="isSubmitting"
       >
         {{ t('User.sign-in') }}
       </Button>

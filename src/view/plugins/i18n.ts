@@ -34,9 +34,7 @@ interface i18nOptions {
 }
 
 const customErrorMap: z.ZodErrorMap = (issue) => {
-  const t = i18n.global.t
-  const te = i18n.global.te
-  const d = i18n.global.d
+  const { t, te, d } = i18n.global
 
   let message: string = ''
   let options: i18nOptions = {}

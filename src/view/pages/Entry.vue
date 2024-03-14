@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ComponentIcon, HomeIcon, LayersIcon } from 'lucide-vue-next'
+import { userRepo } from '::/repositories/user'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -36,7 +37,7 @@ const tabs = [
         @click="router.push({ name: tab.value })"
       >
         <component :is="tab.icon" class="h-6 w-6" />
-        <span class="text-[11px] leading-none">{{ t(`View.${tab.value.toLowerCase()}`).toUpperCase() }}</span>
+        <span class="text-[11px] leading-none capitalize">{{ t(`View.${tab.value.toLowerCase()}`) }}</span>
       </TabsTrigger>
     </TabsList>
     <router-view v-slot="{ Component }">

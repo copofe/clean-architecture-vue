@@ -1,14 +1,15 @@
 import type { RouteRecordRaw } from 'vue-router'
+import { proceedIfAuthenticated } from './guards'
 
-// import { auth } from './guards'
+// import { authenticate } from './guards'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '',
     name: 'Private',
     beforeEnter: async (_to) => {
-      // disable auth for demo
-      // return await auth(to)
+      // disable authenticate for demo
+      // return await authenticate(to)
     },
     children: [
       {
@@ -58,6 +59,7 @@ const routes: RouteRecordRaw[] = [
     path: '/sign-in',
     name: 'SignIn',
     component: () => import('::/view/pages/SignIn.vue'),
+    beforeEnter: proceedIfAuthenticated,
     meta: {
       title: 'User.sign-in',
     },

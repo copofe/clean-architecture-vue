@@ -110,7 +110,8 @@ Error:
     never: never
     map: map
     set: set
-
+Success:
+  signed-in: signed in successfully
 Project:
   name: Frontend Clean Architecture
   slogan: A front-end template designed for building web applications with Vue.js.

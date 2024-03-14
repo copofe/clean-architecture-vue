@@ -1,5 +1,6 @@
-// import { appUsecase } from '::/usecases/app'
 import { GesturePlugin } from '@vueuse/gesture'
+
+// import { appUsecase } from '::/usecases/app'
 import { ApiResponseCode, RequestError } from '::/entities/app.model'
 import { userRepo } from '::/repositories/user'
 import { useStore } from '::/view/store'
@@ -9,12 +10,14 @@ import store from '::/view/plugins/pinia'
 import App from '::/view/App.vue'
 import '::/view/styles/index.css'
 
-RequestError.errorHandler = (err) => {
-  if (err.message)
-    toast.error(err.message)
-  // if you use RESTful API, you only need to check if the error code returned equals 401.
-  if (err.code === ApiResponseCode.UnAuthorized || err.code === 401)
-    userRepo.clearToken().then(() => router.push({ name: 'SignIn' }))
+function prepare() {
+  RequestError.errorHandler = (err) => {
+    if (err.message)
+      toast.error(err.message)
+    // if you use RESTful API, you only need to check if the error code returned equals 401.
+    if (err.code === ApiResponseCode.UnAuthorized || err.code === 401)
+      userRepo.clearToken().then(() => router.push({ name: 'SignIn' }))
+  }
 }
 
 async function setup() {
@@ -38,6 +41,7 @@ async function initialize() {
 }
 
 async function bootstrap() {
+  prepare()
   const app = await setup()
   await initialize()
   app.mount('#app')
