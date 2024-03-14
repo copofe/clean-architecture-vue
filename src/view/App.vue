@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useColorMode, useDark } from '@vueuse/core'
+import { useDark } from '@vueuse/core'
 
 useDark({
   onChanged() {

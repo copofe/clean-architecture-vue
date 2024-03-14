@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Button: typeof import('./../src/view/components/ui/button/Button.vue')['default']
+    ErrorBoundary: typeof import('./../src/view/components/features/ErrorBoundary.vue')['default']
     FormControl: typeof import('./../src/view/components/ui/form/FormControl.vue')['default']
     FormDescription: typeof import('./../src/view/components/ui/form/FormDescription.vue')['default']
     FormField: typeof import('vee-validate')['Field']
