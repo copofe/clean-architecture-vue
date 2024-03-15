@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { useDark } from '@vueuse/core'
 
+function themeEffect() {
+  const background = getComputedStyle(document.body).getPropertyValue('background-color')
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', background)
+}
+
+themeEffect()
+
 useDark({
-  onChanged() {
-    const background = getComputedStyle(document.body).getPropertyValue('background-color')
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', background)
-  },
+  onChanged: themeEffect,
 })
 </script>
 
