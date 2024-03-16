@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import { useDark } from '@vueuse/core'
 
-function themeEffect() {
-  const background = getComputedStyle(document.body).getPropertyValue('background-color')
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', background)
+function themeEffect(isDark: boolean) {
+  const background = isDark ? '240 10% 3.9%' : '0 0% 100%'
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', `hsl(${background})`)
 }
-
-themeEffect()
 
 useDark({
   onChanged: themeEffect,
