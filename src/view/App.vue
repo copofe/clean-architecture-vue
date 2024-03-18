@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { useDark } from '@vueuse/core'
+import { useCssVar, useDark } from '@vueuse/core'
 
-function themeEffect(isDark: boolean) {
-  const background = isDark ? '240 10% 3.9%' : '0 0% 100%'
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', `hsl(${background})`)
-}
+const el = ref(null)
+const background = useCssVar('--background', el)
 
-useDark({
-  onChanged: themeEffect,
+watchEffect(() => {
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', `hsl(${background.value})`)
 })
+
+useDark()
 </script>
 
 <template>

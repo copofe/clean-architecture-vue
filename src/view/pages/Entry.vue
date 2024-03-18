@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ComponentIcon, HomeIcon, LayersIcon } from 'lucide-vue-next'
-import { userRepo } from '::/repositories/user'
 
 const { t } = useI18n()
 const router = useRouter()
