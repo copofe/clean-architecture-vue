@@ -1,6 +1,7 @@
 export class StandardError extends Error {
-  constructor(public name: string, public message: string) {
+  constructor(public message: string, public name: string = 'Error') {
     super(message)
+    this.name = name
   }
 }
 
@@ -41,7 +42,7 @@ export interface RequestResponse<T> {
 export class RequestError extends StandardError {
   static errorHandler: (err: RequestError) => void
   constructor(public message: string, public code?: number) {
-    super('RequestError', message)
+    super(message, 'RequestError')
     RequestError.errorHandler(this)
   }
 }

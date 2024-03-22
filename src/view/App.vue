@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import { useCssVar, useDark } from '@vueuse/core'
+import { useDark, useMutationObserver } from '@vueuse/core'
 
-const el = ref(null)
-const background = useCssVar('--background', el)
-
-watchEffect(() => {
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', `hsl(${background.value})`)
+useMutationObserver(document.documentElement, (mutations) => {
+  if (mutations[0]) {
+    if (mutations[0].attributeName === 'class')
+      changeThemeColor()
+  }
+}, {
+  attributes: true,
 })
+
+function changeThemeColor() {
+  const background = getComputedStyle(document.body).getPropertyValue('--background')
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', `hsl(${background})`)
+}
 
 useDark()
 </script>

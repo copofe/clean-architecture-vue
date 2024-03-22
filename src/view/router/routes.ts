@@ -49,6 +49,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('::/view/pages/InfiniteScrollDemo.vue'),
       },
       {
+        path: 'error-boundary',
+        name: 'ErrorBoundary',
+        component: () => import('::/view/pages/ErrorDemo.vue'),
+      },
+      {
         path: 'pay',
         name: 'Pay',
         component: () => import('::/view/pages/Pay.vue'),

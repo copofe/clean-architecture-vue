@@ -8,6 +8,11 @@ const components = [
     route: 'InfiniteScroll',
     icon: GalleryHorizontalIcon,
   },
+  {
+    label: 'error boundary',
+    route: 'ErrorBoundary',
+    icon: GalleryHorizontalIcon,
+  },
 ]
 </script>
 
