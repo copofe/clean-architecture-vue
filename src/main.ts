@@ -1,14 +1,12 @@
-import { GesturePlugin } from '@vueuse/gesture'
-
 // import { appUsecase } from '::/usecases/app'
 import { ApiResponseCode, RequestError } from '::/entities/app.model'
 import { userRepo } from '::/repositories/user'
 import { useStore } from '::/view/store'
 import router from '::/view/router'
-import i18n, { loadLanguageAsync } from '::/view/plugins/i18n'
-import store from '::/view/plugins/pinia'
+import { loadLanguageAsync } from '::/view/plugins/i18n'
+import { setupPlugins } from '::/view/plugins'
 import App from '::/view/App.vue'
-import '::/view/styles/index.css'
+import '::/view/App.css'
 
 function prepare() {
   RequestError.errorHandler = (err) => {
@@ -22,11 +20,8 @@ function prepare() {
 
 async function setup() {
   const app = createApp(App)
-  app
-    .use(store)
-    .use(i18n)
-    .use(router)
-    .use(GesturePlugin)
+  setupPlugins(app)
+  app.use(router)
 
   return app
 }

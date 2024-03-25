@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
-import { loginSchema, userAuthUsecase } from '::/usecases/user'
+import { userAuthUsecase } from '::/usecases/user'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -9,7 +9,7 @@ const router = useRouter()
 const store = useStore()
 
 const { handleSubmit, isSubmitting } = useForm({
-  validationSchema: toTypedSchema(loginSchema),
+  validationSchema: toTypedSchema(userAuthUsecase.schema),
 })
 
 const onSubmit = handleSubmit(async (values) => {

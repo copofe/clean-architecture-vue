@@ -9,9 +9,7 @@ export interface ErrorBoundaryProps {
 const props = withDefaults(defineProps<ErrorBoundaryProps>(), {
   onError: () => {},
 })
-const emit = defineEmits(['restore'])
-
-const hasError = ref(false)
+const captured = ref(false)
 const err = ref<Error | null>(null)
 
 const slots = useSlots()
@@ -20,7 +18,7 @@ if (!slots.default)
   console.warn('ErrorBoundary component must have child components.')
 
 onErrorCaptured((error: Error, vm, info: string) => {
-  hasError.value = true
+  captured.value = true
   err.value = error
 
   props?.onError(error, vm, info)
@@ -29,14 +27,13 @@ onErrorCaptured((error: Error, vm, info: string) => {
 })
 
 function retry() {
-  hasError.value = false
+  captured.value = false
   err.value = null
-  emit('restore')
 }
 </script>
 
 <template>
-  <slot v-if="!hasError" />
+  <slot v-if="!captured" />
   <template v-else>
     <div v-if="!props.fallBack" class="h-full flex-1 flex flex-col items-center justify-center">
       <h3 class="mb-2">

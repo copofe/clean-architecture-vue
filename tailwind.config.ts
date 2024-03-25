@@ -7,7 +7,7 @@ module.exports = {
 
   content: [
     './src/view/**/*.{vue,ts,tsx}',
-    './src/view/styles/*.css',
+    './src/view/**/*.css',
   ],
 
   safelist: ['animate-spin'],

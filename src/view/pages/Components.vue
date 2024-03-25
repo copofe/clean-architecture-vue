@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowRightIcon, GalleryHorizontalIcon } from 'lucide-vue-next'
+import { ArrowRightIcon, GalleryHorizontalIcon, TriangleAlertIcon } from 'lucide-vue-next'
 
 const router = useRouter()
 const components = [
@@ -11,7 +11,7 @@ const components = [
   {
     label: 'error boundary',
     route: 'ErrorBoundary',
-    icon: GalleryHorizontalIcon,
+    icon: TriangleAlertIcon,
   },
 ]
 </script>

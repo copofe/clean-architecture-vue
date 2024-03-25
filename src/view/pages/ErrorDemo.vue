@@ -7,9 +7,7 @@ function triggerError() {
 </script>
 
 <template>
-  <ErrorBoundary @restore="() => console.log('restore')">
-    <Button @click="triggerError">
-      triggerError
-    </Button>
-  </ErrorBoundary>
+  <Button @click="triggerError">
+    triggerError
+  </Button>
 </template>

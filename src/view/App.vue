@@ -8,7 +8,9 @@ useThemeColor()
 <template>
   <router-view v-slot="{ Component }">
     <keep-alive :include="['Entry']">
-      <component :is="Component" />
+      <ErrorBoundary>
+        <component :is="Component" />
+      </ErrorBoundary>
     </keep-alive>
   </router-view>
   <Sonner
