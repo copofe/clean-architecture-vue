@@ -30,6 +30,12 @@ function retry() {
   captured.value = false
   err.value = null
 }
+
+const route = useRoute()
+watch(route, () => {
+  if (captured.value)
+    retry()
+})
 </script>
 
 <template>
