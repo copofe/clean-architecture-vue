@@ -1,5 +1,5 @@
 import { Usecase } from './_shared'
-import { loginSchema, userRepo } from '::/repositories/user'
+import { type LoginParams, loginSchema, userRepo } from '::/repositories/user'
 
 class UserAuthUsecase extends Usecase {
   public readonly schema = loginSchema
@@ -7,10 +7,10 @@ class UserAuthUsecase extends Usecase {
     super()
   }
 
-  login = async (...args: Parameters<typeof userRepo['login']>) => {
-    loginSchema.parse(args[0])
+  login = async (params: LoginParams) => {
+    loginSchema.parse(params)
 
-    const token = await userRepo.login(...args)
+    const token = await userRepo.login(params)
     const user = await userRepo.getCurrentUser()
 
     return {

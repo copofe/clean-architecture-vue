@@ -13,7 +13,7 @@ export const loginSchema = z.object({
   password: Schema.password,
 })
 
-type LoginParams = z.infer<typeof loginSchema>
+export type LoginParams = z.infer<typeof loginSchema>
 
 class UserRepo extends Repository {
   constructor() {

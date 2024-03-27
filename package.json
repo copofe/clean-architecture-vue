@@ -19,9 +19,11 @@
     "lint:fix": "eslint . --fix",
     "test": "vitest",
     "coverage": "vitest run --coverage",
+    "commit": "commit",
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
+    "@commitlint/prompt-cli": "^19.2.0",
     "@vee-validate/zod": "^4.12.6",
     "@vueuse/core": "^10.9.0",
     "@vueuse/gesture": "^2.0.0",
