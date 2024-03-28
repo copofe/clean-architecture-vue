@@ -1,4 +1,4 @@
-// import { appUsecase } from '::/usecases/app'
+import { appUsecase } from '::/usecases/app'
 import { ApiResponseCode, RequestError } from '::/entities/app.model'
 import { userRepo } from '::/repositories/user'
 import { useStore } from '::/view/store'
@@ -28,11 +28,7 @@ async function setup() {
 
 async function initialize() {
   const store = useStore()
-  // const [{ appInfo, appSetting }] = await Promise.all([appUsecase.initialize(), loadLanguageAsync(store.language)])
-  await Promise.all([loadLanguageAsync(store.language)])
-
-  // store.appInfo = appInfo
-  // store.setting = appSetting
+  await Promise.all([appUsecase.initialize(), loadLanguageAsync(store.language)])
 }
 
 async function bootstrap() {
@@ -40,6 +36,8 @@ async function bootstrap() {
   const app = await setup()
   await initialize()
   app.mount('#app')
+  if (await userRepo.getToken())
+    userRepo.getCurrentUser()
 }
 
 bootstrap()

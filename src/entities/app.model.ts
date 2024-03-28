@@ -5,6 +5,8 @@ export class StandardError extends Error {
   }
 }
 
+export type Language = NavigatorLanguage['language']
+
 export type Token = string | null
 
 export type Permission = string
@@ -99,5 +101,4 @@ export abstract class ImplRepository {
 }
 
 export abstract class ImplUsecase {
-  abstract eventer: Eventer<any>
 }

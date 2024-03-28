@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { type RouteRecordNormalized, createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
-import i18n from '../plugins/i18n'
 import routes from './routes'
+import { eventer } from '::/internal/eventer'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,14 +14,22 @@ const router = createRouter({
   },
 })
 
+export function setRouteDocumentTitle(title: RouteRecordNormalized['meta']['title']) {
+  if (title)
+    document.title = typeof (title) === 'string' ? title : title()
+}
+
 router.beforeEach((to, from) => {
   if (to.path !== from.path)
     NProgress.start()
 })
 router.afterEach((to) => {
   NProgress.done()
-  if (to.meta.title)
-    document.title = i18n.global.t(to.meta.title)
+  setRouteDocumentTitle(to.meta.title)
+})
+
+eventer.on('update.language', () => {
+  setRouteDocumentTitle(router.currentRoute.value.meta.title)
 })
 
 // router.onError((error) => {

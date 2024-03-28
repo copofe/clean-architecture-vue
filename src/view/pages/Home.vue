@@ -1,25 +1,17 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 import { Languages, Moon, Sun } from 'lucide-vue-next'
-import NProgress from 'nprogress'
 import { loadLanguageAsync } from '../plugins/i18n'
 
 const { t } = useI18n()
 const store = useStore()
-const route = useRoute()
 
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
 
 function toggleLanguage() {
   const language = store.language === 'en-US' ? 'zh-CN' : 'en-US'
-  NProgress.start()
-  loadLanguageAsync(language).then(() => {
-    store.language = language
-    if (route.meta.title)
-      document.title = t(route.meta.title)
-    NProgress.done()
-  })
+  loadLanguageAsync(language)
 }
 </script>
 

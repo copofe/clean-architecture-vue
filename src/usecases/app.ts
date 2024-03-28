@@ -10,15 +10,15 @@ class AppUsecase extends Usecase {
     const token = await appRepo.getToken()
     appRepo.updateAuthorization(token)
 
-    const [appSetting, appInfo] = await Promise.all([
-      appRepo.getAppSetting(),
-      appRepo.getAppInfo(),
-    ])
+    // const [appSetting, appInfo] = await Promise.all([
+    //   appRepo.getAppSetting(),
+    //   appRepo.getAppInfo(),
+    // ])
 
     return {
       token,
-      appInfo,
-      appSetting,
+      // appInfo,
+      // appSetting,
     }
   }
 }

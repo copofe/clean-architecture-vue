@@ -81,6 +81,14 @@ export default defineConfig(({ mode }) => {
           short_name: 'FCA',
           description: 'A front-end template designed for building web applications with Vue.js',
           start_url: '/',
+          scope: '/',
+          dir: 'ltr',
+          lang: 'en-US',
+          display: 'standalone',
+          orientation: 'natural',
+          display_override: [
+            'window-controls-overlay',
+          ],
           theme_color: '#ffffff',
           icons: [
             {
@@ -89,6 +97,16 @@ export default defineConfig(({ mode }) => {
               type: 'image/svg+xml',
             },
           ],
+          screenshots: [
+            {
+              src: 'screenshot.png',
+              sizes: '1170x2532',
+              type: 'image/png',
+            },
+          ],
+          edge_side_panel: {
+            preferred_width: 480,
+          },
         },
       }),
     ],

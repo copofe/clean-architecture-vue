@@ -1,7 +1,10 @@
 import type { RouteRecordRaw } from 'vue-router'
+import i18n from '../plugins/i18n'
 import { proceedIfAuthenticated } from './guards'
 
 // import { authenticate } from './guards'
+
+const { t } = i18n.global
 
 const routes: RouteRecordRaw[] = [
   {
@@ -22,7 +25,7 @@ const routes: RouteRecordRaw[] = [
             name: 'Home',
             component: () => import('::/view/pages/Home.vue'),
             meta: {
-              title: 'View.home',
+              title: () => t('View.home'),
             },
           },
           {
@@ -30,7 +33,7 @@ const routes: RouteRecordRaw[] = [
             name: 'Components',
             component: () => import('::/view/pages/Components.vue'),
             meta: {
-              title: 'View.components',
+              title: () => t('View.components'),
             },
           },
           {
@@ -38,7 +41,7 @@ const routes: RouteRecordRaw[] = [
             name: 'Pages',
             component: () => import('::/view/pages/Pages.vue'),
             meta: {
-              title: 'View.pages',
+              title: () => t('View.pages'),
             },
           },
         ],
@@ -66,7 +69,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('::/view/pages/SignIn.vue'),
     beforeEnter: proceedIfAuthenticated,
     meta: {
-      title: 'User.sign-in',
+      title: () => t('User.sign-in'),
     },
   },
   {
@@ -74,7 +77,7 @@ const routes: RouteRecordRaw[] = [
     name: 'NotFound',
     component: () => import('::/view/pages/404.vue'),
     meta: {
-      title: 'Error.page-not-found',
+      title: () => t('Error.page-not-found'),
     },
   },
 ]

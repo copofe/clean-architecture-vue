@@ -72,6 +72,8 @@
     "watchEffect": true,
     "watchPostEffect": true,
     "watchSyncEffect": true,
-    "useThemeColor": true
+    "useThemeColor": true,
+    "useStoreRefs": true,
+    "useForm": true
   }
 }

@@ -2,7 +2,9 @@ import type { Locale } from 'vue-i18n'
 import { createI18n } from 'vue-i18n'
 import messages from '@intlify/unplugin-vue-i18n/messages'
 import { ZodIssueCode, ZodParsedType, z } from 'zod'
+import nProgress from 'nprogress'
 import { appRepo } from '::/repositories/app'
+import type { Language } from '::/entities/app.model'
 
 // Import i18n resources
 // https://vitejs.dev/guide/features.html#glob-import
@@ -214,10 +216,12 @@ function setI18nLanguage(lang: Locale) {
   if (typeof document !== 'undefined')
     document.querySelector('html')?.setAttribute('lang', lang)
   appRepo.updateAcceptLanguage(lang)
+  nProgress.done()
   return lang
 }
 
-export async function loadLanguageAsync(lang: string): Promise<Locale> {
+export async function loadLanguageAsync(lang: Language): Promise<Locale> {
+  nProgress.start()
   if (i18n.global.locale.value === lang)
     return setI18nLanguage(lang)
 

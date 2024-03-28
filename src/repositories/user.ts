@@ -2,15 +2,14 @@ import { z } from 'zod'
 import { Repository, extractData } from './_shared'
 import type { Token } from '::/entities/app.model'
 import type { User } from '::/entities/user.model'
+import { eventer } from '::/internal/eventer'
 
-export const Schema = {
-  username: z.string().min(2),
-  password: z.string().min(6),
-}
+const schemaUsername = z.string().min(2)
+const schemaPassword = z.string().min(6)
 
 export const loginSchema = z.object({
-  username: Schema.username,
-  password: Schema.password,
+  username: schemaUsername,
+  password: schemaPassword,
 })
 
 export type LoginParams = z.infer<typeof loginSchema>
@@ -21,7 +20,7 @@ class UserRepo extends Repository {
   }
 
   async login(data: LoginParams) {
-    const token = await this.request.post<Token>('/auth/login', data).then(extractData)
+    const token = await this.request.post<Exclude<Token, null>>('/auth/login', data).then(extractData)
     await this.setToken(token)
     this.updateAuthorization(token)
     return token
@@ -38,7 +37,9 @@ class UserRepo extends Repository {
   }
 
   async getCurrentUser() {
-    return this.request.get<User>('/user/info').then(extractData)
+    const user = await this.request.get<User>('/user/info').then(extractData)
+    eventer.emit('update.user', user)
+    return user
   }
 }
 
