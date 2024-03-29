@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
+import { RequestError } from '::/entities/app.model'
 
 export interface ErrorBoundaryProps {
   fallBack?: Component
@@ -18,10 +19,12 @@ if (!slots.default)
   console.warn('ErrorBoundary component must have child components.')
 
 onErrorCaptured((error: Error, vm, info: string) => {
-  captured.value = true
-  err.value = error
+  if (!(error instanceof RequestError)) {
+    captured.value = true
+    err.value = error
 
-  props?.onError(error, vm, info)
+    props?.onError(error, vm, info)
+  }
 
   return false
 })

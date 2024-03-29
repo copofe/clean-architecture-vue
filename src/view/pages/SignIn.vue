@@ -5,9 +5,7 @@ const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
 
-const { handleSubmit, isSubmitting } = useForm({
-  validationSchema: userAuthUsecase.schema,
-})
+const { handleSubmit, isSubmitting } = useForm(userAuthUsecase.schema)
 
 const onSubmit = handleSubmit(async (values) => {
   await userAuthUsecase.login(values)

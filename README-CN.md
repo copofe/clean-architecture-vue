@@ -51,6 +51,7 @@
 - `lint:fix` 代码检查修复
 - `test` 执行测试
 - `coverage` 执行测试并生成覆盖率报告
+- `commit` : 交互式 git 提交
 - `prepare` 配置 git hooks
 
 ## Mock
