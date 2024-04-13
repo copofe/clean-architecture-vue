@@ -6,8 +6,6 @@ import { storage } from '::/adapter/storage'
 import { session } from '::/adapter/session'
 import { eventer } from '::/internal/eventer'
 
-export const TOKENKEY = 'token'
-
 export class Repository extends ImplRepository {
   protected request = request
   protected storage = storage
@@ -16,15 +14,21 @@ export class Repository extends ImplRepository {
     super()
   }
 
-  protected async setToken(token: Token) {
-    await this.storage.setItem(TOKENKEY, token)
+  async setToken(token: Token) {
+    this.updateAuthorization(token)
+    await this.storage.setItem('token', token)
   }
 
   getToken() {
-    return this.storage.getItem(TOKENKEY)
+    return this.storage.getItem('token')
   }
 
-  updateAuthorization(token: Token) {
+  async clearToken() {
+    await this.setToken(null)
+    this.updateAuthorization(null)
+  }
+
+  protected updateAuthorization(token: Token) {
     this.request.headers.Authorization = AppEntity.composeToken(token)
   }
 

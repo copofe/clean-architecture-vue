@@ -10,6 +10,8 @@ interface Events {
 
   'user.login': User
   'user.logout': void
+
+  'error.unauthorized': void
 }
 
 export const eventer: Eventer<Events> = mitt()

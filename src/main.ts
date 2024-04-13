@@ -1,24 +1,13 @@
-import { appUsecase } from '::/usecases/app'
 import { ApiResponseCode, RequestError } from '::/entities/app.model'
-import { userRepo } from '::/repositories/user'
-import { useStore } from '::/view/store'
-import router from '::/view/router'
-import { loadLanguageAsync } from '::/view/plugins/i18n'
+import { appRepo } from '::/repositories/app'
+import { appUsecase } from '::/usecases/app'
+import { eventer } from '::/internal/eventer'
 import { setupPlugins } from '::/view/plugins'
+import router, { setRouteDocumentTitle } from '::/view/routes'
 import App from '::/view/App.vue'
 import '::/view/App.css'
 
-function prepare() {
-  RequestError.errorHandler = (err) => {
-    if (err.message)
-      toast.error(err.message)
-    // if you use RESTful API, you only need to check if the error code returned equals 401.
-    if (err.code === ApiResponseCode.UnAuthorized || err.code === 401)
-      userRepo.clearToken().then(() => router.push({ name: 'SignIn' }))
-  }
-}
-
-async function setup() {
+function setup() {
   const app = createApp(App)
   setupPlugins(app)
   app.use(router)
@@ -26,18 +15,37 @@ async function setup() {
   return app
 }
 
-async function initialize() {
-  const store = useStore()
-  await Promise.all([appUsecase.initialize(), loadLanguageAsync(store.language)])
+function bootstrap() {
+  RequestError.handler = function (err: RequestError) {
+    if (err.message)
+      toast.error(err.message)
+    if (err.code === ApiResponseCode.Unauthorized) {
+      appRepo.clearToken().then(() => {
+        eventer.emit('error.unauthorized')
+      })
+    }
+  }
+
+  const { appInfo, setting, user, language } = useStoreRefs()
+
+  eventer.on('update.appInfo', data => appInfo.value = data)
+  eventer.on('update.setting', data => setting.value = data)
+  eventer.on('update.user', data => user.value = data)
+  eventer.on('update.language', data => language.value = data)
+  eventer.on('update.language', () => {
+    setRouteDocumentTitle(router.currentRoute.value.meta.title)
+  })
+  eventer.on('error.unauthorized', () => {
+    router.replace({ name: 'SignIn', query: { redirect: encodeURIComponent(router.currentRoute.value.fullPath) } })
+  })
 }
 
-async function bootstrap() {
-  prepare()
-  const app = await setup()
-  await initialize()
+async function main() {
+  const app = setup()
+  bootstrap()
+  await appUsecase.initialize()
+
   app.mount('#app')
-  if (await userRepo.getToken())
-    userRepo.getCurrentUser()
 }
 
-bootstrap()
+main()

@@ -31,7 +31,7 @@ export interface RequestConfig {
 
 export enum ApiResponseCode {
   Succeeded = 10000,
-  UnAuthorized = 10401,
+  Unauthorized = 10401,
 }
 
 export interface RequestResponse<T> {
@@ -42,10 +42,10 @@ export interface RequestResponse<T> {
 }
 
 export class RequestError extends StandardError {
-  static errorHandler: (err: RequestError) => void
+  static handler: (err: RequestError) => void
   constructor(public message: string, public code?: number) {
     super(message, 'RequestError')
-    RequestError.errorHandler(this)
+    RequestError.handler(this)
   }
 }
 
