@@ -1,6 +1,6 @@
 import { Usecase } from './_shared'
 import { appRepo } from '::/repositories/app'
-import { userRepo } from '::/repositories/user'
+// import { userRepo } from '::/repositories/user'
 
 class AppUsecase extends Usecase {
   constructor() {
@@ -12,15 +12,15 @@ class AppUsecase extends Usecase {
     if (token)
       appRepo.setToken(token)
 
-    const initialTasks: Promise<any>[] = [
-      appRepo.getAppSetting(),
-      appRepo.getAppInfo(),
-    ]
+    // const initialTasks: Promise<any>[] = [
+    //   appRepo.getAppSetting(),
+    //   appRepo.getAppInfo(),
+    // ]
 
-    if (token)
-      initialTasks.push(userRepo.getCurrentUser())
+    // if (token)
+    //   initialTasks.push(userRepo.getCurrentUser())
 
-    await Promise.all(initialTasks)
+    // await Promise.all(initialTasks)
   }
 }
 
