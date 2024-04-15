@@ -3,6 +3,7 @@ import { Repository, extractData } from './_shared'
 import type { Token } from '::/entities/app.model'
 import type { User } from '::/entities/user.model'
 import { eventer } from '::/internal/eventer'
+import { validate } from '::/internal/decorator'
 
 const schemaUsername = z.string().min(2)
 const schemaPassword = z.string().min(6)
@@ -19,6 +20,7 @@ class UserRepo extends Repository {
     super()
   }
 
+  @validate(loginSchema)
   async login(data: LoginParams) {
     const token = await this.request.post<Exclude<Token, null>>('/auth/login', data).then(extractData)
     await this.setToken(token)

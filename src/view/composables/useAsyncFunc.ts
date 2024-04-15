@@ -19,10 +19,24 @@ interface Options<T> {
    * @param data The data returned from the operation.
    */
   onSuccess?: (data: T) => void
+  /**
+   * caching based on this key
+   */
+  key?: string
+  /**
+   * Call the function immediately
+   */
+  immediate?: boolean
+  /**
+   * Initial data
+   */
+  initialData?: T
 }
 
-export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>, options: Options<T> = {}) {
-  const { retry = false, attempt = 10, onError, onSuccess } = options
+const cache = new Map()
+
+export function useAsyncFunc<T, P>(fn: (...args: P[]) => Promise<T>, options: Options<T> = {}) {
+  const { retry = false, attempt = 10, onError, onSuccess, immediate, key, initialData } = options
 
   let attemptCount = 0
 
@@ -32,13 +46,19 @@ export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>,
 
   const data: Ref<T | null> = ref(null)
 
-  async function run(...args: P) {
+  async function run(...args: P[]) {
     isLoading.value = true
 
     try {
+      if (key) {
+        const res: T = cache.get(key)
+        data.value = res
+        isLoading.value = false
+      }
       const res = await fn(...args)
       data.value = res
       isLoading.value = false
+      cache.set(key, res)
       onSuccess?.(res)
       attemptCount = 0
     }
@@ -57,6 +77,12 @@ export function useAsyncFunc<T, P extends any[]>(fn: (...args: P) => Promise<T>,
       }
     }
   }
+
+  if (immediate)
+    run()
+
+  if (initialData)
+    data.value = initialData
 
   return {
     isLoading,

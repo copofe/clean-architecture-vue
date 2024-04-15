@@ -9,8 +9,6 @@ class UserAuthUsecase extends Usecase {
   }
 
   login = async (params: LoginParams) => {
-    loginSchema.parse(params)
-
     const token = await userRepo.login(params)
     const user = await userRepo.getCurrentUser()
 

@@ -8,14 +8,17 @@ const route = useRoute()
 const tabs = [
   {
     value: 'Home',
+    label: () => t('View.home'),
     icon: HomeIcon,
   },
   {
     value: 'Components',
+    label: () => t('View.components'),
     icon: ComponentIcon,
   },
   {
     value: 'Pages',
+    label: () => t('View.pages'),
     icon: LayersIcon,
   },
 ]
@@ -36,7 +39,7 @@ const tabs = [
         @click="router.push({ name: tab.value })"
       >
         <component :is="tab.icon" class="h-6 w-6" />
-        <span class="text-[11px] leading-none capitalize">{{ t(`View.${tab.value.toLowerCase()}`) }}</span>
+        <span class="text-[11px] leading-none capitalize">{{ tab.label() }}</span>
       </TabsTrigger>
     </TabsList>
     <router-view v-slot="{ Component }">

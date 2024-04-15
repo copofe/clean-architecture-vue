@@ -73,9 +73,6 @@ export default defineConfig(({ mode }) => {
         include: [path.resolve(__dirname, 'locales/**')],
       }),
       VitePWA({
-        devOptions: {
-          enabled: true,
-        },
         manifest: {
           name: 'frontend-clean-architecture',
           short_name: 'FCA',
