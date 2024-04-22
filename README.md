@@ -27,10 +27,9 @@ The dependency relationships in the source code can only point to the inner laye
 - High-level modules should not depend on low-level modules, both should depend on their abstractions.
 - Abstractions should not depend on details, details should depend on abstractions.
 
-Therefore, we decided to split the application into four layers:
+Therefore, we decided to split the application into three layers:
 
-- Entity: Business objects that encapsulate core business data and logic that are essential to the business domain. it should not have any external dependencies.
-- Repository: Abstracts data access and storage responsibilities away from business objects, handles CRUD operations and persistence storage.
+- Entity: Business objects that encapsulate core business data and logic that are essential to the business domain. it should avoid using any external dependencies as much as possible.
 - Use Case: Contains application-specific business rules and workflows, coordinates work across entities and repositories to perform specific application goals.
 - View: Renders UI components and handles presentation responsibilities, communicates with use cases to display information and collect user input.
 

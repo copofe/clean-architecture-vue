@@ -1,6 +1,6 @@
 import { createStorage } from 'unstorage'
 import sessionStorageDriver from 'unstorage/drivers/session-storage'
-import type { Session } from '::/entities/app.model'
+import type { Session } from '::/impl'
 
 export interface SessionKeyValue {}
 

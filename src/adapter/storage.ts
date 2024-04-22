@@ -1,6 +1,7 @@
 import { createStorage } from 'unstorage'
 import localStorageDriver from 'unstorage/drivers/localstorage'
-import type { Storage, Token } from '::/entities/app.model'
+import type { Token } from '::/entities/app.model'
+import type { Storage } from '::/impl'
 
 export interface StorageKeyValue {
   token: Token

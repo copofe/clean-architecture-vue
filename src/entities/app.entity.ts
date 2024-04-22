@@ -1,13 +1,24 @@
-import type { Token } from './app.model'
+import { Entity, extractData } from './_shared'
+import type { AppInfo, AppSetting } from './app.model'
+import type { RequestConfig } from '::/impl'
+import { eventer } from '::/internal/eventer'
 
-export class AppEntity {
-  static composeToken(token: Token): string {
-    if (typeof token !== 'string' && token !== null)
-      throw new TypeError('Token must be a string or null')
+class AppEntity extends Entity {
+  constructor() {
+    super()
+  }
 
-    if (token === null || token.trim().length === 0)
-      return ''
+  async getAppInfo(config?: RequestConfig) {
+    const data = await this.request.get<AppInfo>('/app/info', config).then(extractData)
+    eventer.emit('update.appInfo', data)
+    return data
+  }
 
-    return `Bearer ${token.trim()}`
+  async getAppSetting() {
+    const data = await this.request.get<AppSetting>('/app/setting').then(extractData)
+    eventer.emit('update.setting', data)
+    return data
   }
 }
+
+export const appEntity = new AppEntity()

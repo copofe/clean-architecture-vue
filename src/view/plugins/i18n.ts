@@ -3,7 +3,7 @@ import { createI18n } from 'vue-i18n'
 import messages from '@intlify/unplugin-vue-i18n/messages'
 import { ZodIssueCode, ZodParsedType, z } from 'zod'
 import nProgress from 'nprogress'
-import { appRepo } from '::/repositories/app'
+import { appEntity } from '::/entities/app.entity'
 import type { Language } from '::/entities/app.model'
 
 // Import i18n resources
@@ -215,7 +215,7 @@ function setI18nLanguage(lang: Locale) {
   i18n.global.locale.value = lang as any
   if (typeof document !== 'undefined')
     document.querySelector('html')?.setAttribute('lang', lang)
-  appRepo.updateAcceptLanguage(lang)
+  appEntity.updateAcceptLanguage(lang)
   nProgress.done()
   return lang
 }

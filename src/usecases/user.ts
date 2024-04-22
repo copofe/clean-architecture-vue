@@ -1,6 +1,6 @@
 import { Usecase } from './_shared'
 import { eventer } from '::/internal/eventer'
-import { type LoginParams, loginSchema, userRepo } from '::/repositories/user'
+import { type LoginParams, loginSchema, userEntity } from '::/entities/user.entity'
 
 class UserAuthUsecase extends Usecase {
   public readonly schema = loginSchema
@@ -9,8 +9,8 @@ class UserAuthUsecase extends Usecase {
   }
 
   login = async (params: LoginParams) => {
-    const token = await userRepo.login(params)
-    const user = await userRepo.getCurrentUser()
+    const token = await userEntity.login(params)
+    const user = await userEntity.getCurrentUser()
 
     eventer.emit('user.login', user)
 
@@ -21,7 +21,7 @@ class UserAuthUsecase extends Usecase {
   }
 
   logout = async () => {
-    await userRepo.logout()
+    await userEntity.logout()
     eventer.emit('user.logout')
   }
 }

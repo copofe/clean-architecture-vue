@@ -1,4 +1,4 @@
-import type { ImplUsecase } from '::/entities/app.model'
+import type { ImplUsecase } from '::/impl'
 
 export class Usecase implements ImplUsecase {
 }

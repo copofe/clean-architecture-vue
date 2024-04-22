@@ -1,4 +1,4 @@
-import { ApiResponseCode } from '../../src/entities/app.model'
+import { ApiResponseCode } from '../../src/impl'
 
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('beforeResponse', (_event, response) => {

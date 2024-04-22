@@ -1,11 +1,11 @@
 import { type NavigationGuard, type RouteRecordNormalized, type RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
 import i18n from '../plugins/i18n'
-import { userRepo } from '::/repositories/user'
+import { userEntity } from '::/entities/user.entity'
 
 // eslint-disable-next-line unused-imports/no-unused-vars
 const authenticate: NavigationGuard = async (to) => {
-  const token = await userRepo.getToken()
+  const token = await userEntity.getToken()
   if (!token) {
     return {
       name: 'SignIn',
@@ -15,7 +15,7 @@ const authenticate: NavigationGuard = async (to) => {
 }
 
 async function proceedIfAuthenticated() {
-  const token = await userRepo.getToken()
+  const token = await userEntity.getToken()
   if (token) {
     toast.info('you already signed in.')
     return {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { RequestError, StandardError } from './app.model'
+import { RequestError, StandardError } from '::/impl'
 
 describe('standardError', () => {
   it('should initialize with name and message', () => {

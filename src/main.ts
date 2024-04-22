@@ -1,5 +1,5 @@
-import { ApiResponseCode, RequestError } from '::/entities/app.model'
-import { appRepo } from '::/repositories/app'
+import { ApiResponseCode, RequestError } from '::/impl'
+import { appEntity } from '::/entities/app.entity'
 import { appUsecase } from '::/usecases/app'
 import { eventer } from '::/internal/eventer'
 import { setupPlugins } from '::/view/plugins'
@@ -20,7 +20,7 @@ function bootstrap() {
     if (err.message)
       toast.error(err.message)
     if (err.code === ApiResponseCode.Unauthorized) {
-      appRepo.clearToken().then(() => {
+      appEntity.clearToken().then(() => {
         eventer.emit('error.unauthorized')
       })
     }

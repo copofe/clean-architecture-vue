@@ -5,3 +5,7 @@ export interface User {
   username: string
   permission: Permission[]
 }
+
+export function havePermission(permissions: Permission[], requiredPermission: Permission): boolean {
+  return !!requiredPermission && permissions.includes(requiredPermission)
+}
