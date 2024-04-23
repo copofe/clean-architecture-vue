@@ -6,16 +6,6 @@ import { storage } from '::/adapter/storage'
 import { session } from '::/adapter/session'
 import { eventer } from '::/internal/eventer'
 
-export function composeToken(token: Token): string {
-  if (typeof token !== 'string' && token !== null)
-    throw new TypeError('Token must be a string or null')
-
-  if (token === null || token.trim().length === 0)
-    return ''
-
-  return `Bearer ${token.trim()}`
-}
-
 export class Entity extends ImplEntity {
   protected request = request
   protected storage = storage
@@ -42,9 +32,7 @@ export class Entity extends ImplEntity {
     if (typeof token !== 'string' && token !== null)
       throw new TypeError('Token must be a string or null')
 
-    if (token === null || token.trim().length === 0)
-      return ''
-    this.request.headers.Authorization = composeToken(token)
+    this.request.headers.Authorization = token === null ? '' : `Bearer ${token.trim()}`
   }
 
   updateAcceptLanguage(lang: string) {

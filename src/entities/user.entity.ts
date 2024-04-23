@@ -4,12 +4,12 @@ import type { Token } from './app.model'
 import type { User } from './user.model'
 import { eventer } from '::/internal/eventer'
 
-const schemaUsername = z.string().min(2)
-const schemaPassword = z.string().min(6)
+const username = z.string().min(2)
+const password = z.string().min(6)
 
 export const loginSchema = z.object({
-  username: schemaUsername,
-  password: schemaPassword,
+  username,
+  password,
 })
 
 export type LoginParams = z.infer<typeof loginSchema>
