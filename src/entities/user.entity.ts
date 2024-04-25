@@ -20,7 +20,7 @@ class UserEntity extends Entity {
   }
 
   @validate(loginSchema)
-  async login(data: LoginParams) {
+  async login(data: LoginParams): Promise<Token> {
     const token = await this.request.post<Exclude<Token, null>>('/auth/login', data).then(extractData)
     await this.setToken(token)
     return token
@@ -31,7 +31,7 @@ class UserEntity extends Entity {
     this.clearToken()
   }
 
-  async getCurrentUser() {
+  async getCurrentUser(): Promise<User> {
     const user = await this.request.get<User>('/user/info').then(extractData)
     eventer.emit('update.user', user)
     return user

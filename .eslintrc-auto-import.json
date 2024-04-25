@@ -73,7 +73,6 @@
     "watchPostEffect": true,
     "watchSyncEffect": true,
     "useThemeColor": true,
-    "useStoreRefs": true,
-    "useForm": true
+    "useStoreRefs": true
   }
 }
