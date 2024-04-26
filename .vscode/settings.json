@@ -33,5 +33,7 @@
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
-  "vitest.enable": true
+  "cSpell.words": [
+    "sonner"
+  ]
 }
