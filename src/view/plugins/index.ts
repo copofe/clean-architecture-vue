@@ -1,10 +1,9 @@
-import type { App } from 'vue'
-import { GesturePlugin } from '@vueuse/gesture'
-import i18n from '::/view/plugins/i18n'
-import store from '::/view/plugins/pinia'
+import type { App, Plugin } from 'vue'
+
+const plugins = import.meta.glob(['./*.ts'], { eager: true, import: 'default' })
 
 export function setupPlugins(app: App) {
-  app.use(store)
-    .use(i18n)
-    .use(GesturePlugin)
+  Object.entries(plugins).forEach(([_path, plugin]) => {
+    app.use(plugin as Plugin)
+  })
 }

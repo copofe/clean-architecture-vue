@@ -39,6 +39,7 @@ export default defineConfig(({ mode }) => {
           'vue-i18n',
           {
             'vue-sonner': ['toast'],
+            '@tanstack/vue-query': ['useQuery', 'useMutation'],
           },
         ],
         dirs: [

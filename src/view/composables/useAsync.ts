@@ -35,29 +35,29 @@ interface Options<T> {
 
 const cache = new Map()
 
-export function useAsyncFunc<T, P>(fn: (...args: P[]) => Promise<T>, options: Options<T> = {}) {
+export function useAsync<T, P>(fn: (...args: P[]) => Promise<T>, options: Options<T> = {}) {
   const { retry = false, attempt = 10, onError, onSuccess, immediate, key, initialData } = options
 
   let attemptCount = 0
 
   const interval = () => 1000 * (attemptCount + 1)
 
-  const isLoading = ref(false)
+  const isPending = ref(false)
 
   const data: Ref<T | null> = ref(null)
 
   async function run(...args: P[]) {
-    isLoading.value = true
+    isPending.value = true
 
     try {
       if (key) {
         const res: T = cache.get(key)
         data.value = res
-        isLoading.value = false
+        isPending.value = false
       }
       const res = await fn(...args)
       data.value = res
-      isLoading.value = false
+      isPending.value = false
       cache.set(key, res)
       onSuccess?.(res)
       attemptCount = 0
@@ -70,7 +70,7 @@ export function useAsyncFunc<T, P>(fn: (...args: P[]) => Promise<T>, options: Op
         /* v8 ignore next */
       }
       else {
-        isLoading.value = false
+        isPending.value = false
         attemptCount = 0
         onError?.(err)
         throw err
@@ -85,7 +85,7 @@ export function useAsyncFunc<T, P>(fn: (...args: P[]) => Promise<T>, options: Op
     data.value = initialData
 
   return {
-    isLoading,
+    isPending,
     data,
     run,
   }

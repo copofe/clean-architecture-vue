@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": "copofe/frontend-clean-architecture",
   "engines": {
-    "node": "^18.0.0 || >= 20.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "dev": "vite",
@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@commitlint/prompt-cli": "^19.3.0",
+    "@tanstack/vue-query": "^5.32.0",
     "@vee-validate/zod": "^4.12.6",
     "@vueuse/core": "^10.9.0",
     "@vueuse/gesture": "^2.0.0",

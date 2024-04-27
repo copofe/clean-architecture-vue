@@ -58,7 +58,6 @@
     "toast": true,
     "triggerRef": true,
     "unref": true,
-    "useAsyncFunc": true,
     "useAttrs": true,
     "useCssModule": true,
     "useCssVars": true,
@@ -73,6 +72,9 @@
     "watchPostEffect": true,
     "watchSyncEffect": true,
     "useThemeColor": true,
-    "useStoreRefs": true
+    "useStoreRefs": true,
+    "useMutation": true,
+    "useQuery": true,
+    "useAsync": true
   }
 }
