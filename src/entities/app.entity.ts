@@ -1,6 +1,6 @@
 import { Entity, extractData } from './_shared'
 import type { AppInfo, AppSetting } from './app.model'
-import type { RequestConfig } from '::/impl'
+import type { RequestConfig } from '::/implement'
 import { eventer } from '::/internal/eventer'
 
 class AppEntity extends Entity {

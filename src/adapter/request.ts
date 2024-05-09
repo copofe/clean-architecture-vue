@@ -1,7 +1,7 @@
 import type { AxiosError } from 'axios'
 import axios from 'axios'
-import type { Request } from '::/impl'
-import { ApiResponseCode, RequestError } from '::/impl'
+import type { Request } from '::/implement'
+import { ApiResponseCode, RequestError } from '::/implement'
 
 const instance = axios.create({
   baseURL: `${import.meta.env.DEV ? '' : import.meta.env.VITE_API_BASE_URL}/api`,

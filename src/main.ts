@@ -1,4 +1,4 @@
-import { ApiResponseCode, RequestError } from '::/impl'
+import { ApiResponseCode, RequestError } from '::/implement'
 import { appEntity } from '::/entities/app.entity'
 import { appUsecase } from '::/usecases/app'
 import { eventer } from '::/internal/eventer'

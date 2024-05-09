@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Component } from 'vue'
-import { RequestError } from '::/impl'
+import { RequestError } from '::/implement'
 
 export interface ErrorBoundaryProps {
   fallBack?: Component

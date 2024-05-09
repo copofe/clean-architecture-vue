@@ -1,6 +1,6 @@
 import type { ZodObject } from 'zod'
 import type { Token } from './app.model'
-import { type ApiResponse, ImplEntity } from '::/impl'
+import { type ApiResponse, ImplEntity } from '::/implement'
 import { request } from '::/adapter/request'
 import { storage } from '::/adapter/storage'
 import { session } from '::/adapter/session'
