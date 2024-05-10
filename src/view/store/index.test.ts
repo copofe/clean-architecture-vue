@@ -14,7 +14,7 @@ describe('root store', () => {
 
   it('should initialize setting to undefined', () => {
     const store = useStore()
-    expect(store.setting).toBeUndefined()
+    expect(store.appSetting).toBeUndefined()
   })
 
   it('should initialize user to undefined', () => {
@@ -40,10 +40,10 @@ describe('root store', () => {
 
   it('should update setting when set setting', () => {
     const store = useStore()
-    store.setting = {
+    store.appSetting = {
       enabled: true,
     }
-    expect(store.setting).toEqual({
+    expect(store.appSetting).toEqual({
       enabled: true,
     })
   })

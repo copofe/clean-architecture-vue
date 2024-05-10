@@ -6,6 +6,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const QueryClient: typeof import('@tanstack/vue-query')['QueryClient']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
@@ -52,6 +53,7 @@ declare global {
   const toast: typeof import('vue-sonner')['toast']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
+  const useAppInfo: typeof import('../src/view/composables/useAppInfo')['useAppInfo']
   const useAsync: typeof import('../src/view/composables/useAsync')['useAsync']
   const useAttrs: typeof import('vue')['useAttrs']
   const useCssModule: typeof import('vue')['useCssModule']
@@ -59,7 +61,9 @@ declare global {
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useLink: typeof import('vue-router')['useLink']
   const useMutation: typeof import('@tanstack/vue-query')['useMutation']
+  const useQueries: typeof import('@tanstack/vue-query')['useQueries']
   const useQuery: typeof import('@tanstack/vue-query')['useQuery']
+  const useQueryClient: typeof import('@tanstack/vue-query')['useQueryClient']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
   const useSlots: typeof import('vue')['useSlots']

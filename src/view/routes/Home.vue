@@ -11,7 +11,7 @@ const toggleDark = useToggle(isDark)
 
 function toggleLanguage() {
   const language = store.language === 'en-US' ? 'zh-CN' : 'en-US'
-  loadLanguageAsync(language)
+  loadLanguageAsync(language).then(store.setLanguage)
 }
 </script>
 

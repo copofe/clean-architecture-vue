@@ -2,7 +2,6 @@ import { z } from 'zod'
 import { Entity, extractData, validate } from './_shared'
 import type { Token } from './app.model'
 import type { User } from './user.model'
-import { eventer } from '::/internal/eventer'
 
 const username = z.string().min(2)
 const password = z.string().min(6)
@@ -33,7 +32,6 @@ class UserEntity extends Entity {
 
   async getCurrentUser(): Promise<User> {
     const user = await this.request.get<User>('/user/info').then(extractData)
-    eventer.emit('update.user', user)
     return user
   }
 }

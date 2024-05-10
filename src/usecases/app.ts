@@ -1,6 +1,6 @@
 import { Usecase } from './_shared'
 import { appEntity } from '::/entities/app.entity'
-// import { userEntity } from '::/entities/user.entity'
+import { userEntity } from '::/entities/user.entity'
 
 class AppUsecase extends Usecase {
   constructor() {
@@ -12,15 +12,17 @@ class AppUsecase extends Usecase {
     if (token)
       appEntity.setToken(token)
 
-    // const initialTasks: Promise<any>[] = [
-    //   appEntity.getAppSetting(),
-    //   appEntity.getAppInfo(),
-    // ]
+    const { setAppInfo, setAppSetting, setUser } = useStore()
 
-    // if (token)
-    //   initialTasks.push(userEntity.getCurrentUser())
+    const initialTasks: Promise<any>[] = [
+      appEntity.getAppSetting().then(setAppSetting),
+      appEntity.getAppInfo().then(setAppInfo),
+    ]
 
-    // await Promise.all(initialTasks)
+    if (token)
+      initialTasks.push(userEntity.getCurrentUser().then(setUser))
+
+    await Promise.all(initialTasks)
   }
 }
 

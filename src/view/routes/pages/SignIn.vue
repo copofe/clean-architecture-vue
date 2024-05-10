@@ -1,18 +1,22 @@
 <script setup lang="ts">
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
-import { userAuthUsecase } from '::/usecases/user'
+import { UserAuthUsecase } from '::/usecases/user'
 
 const { t } = useI18n()
 const route = useRoute()
 const router = useRouter()
+const { setUser } = useStore()
+
+const userAuthUsecase = new UserAuthUsecase()
 
 const { handleSubmit, isSubmitting } = useForm({
   validationSchema: toTypedSchema(userAuthUsecase.schema),
 })
 
 const onSubmit = handleSubmit(async (values) => {
-  await userAuthUsecase.login(values)
+  const { user } = await userAuthUsecase.login(values)
+  setUser(user)
   const { redirect } = route.query
   router.replace(redirect ? decodeURIComponent(redirect as string) : { name: 'Home' })
   toast.success(t('Success.signed-in'))

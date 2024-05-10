@@ -4,7 +4,6 @@ import { type ApiResponse, ImplEntity } from '::/implement'
 import { request } from '::/adapter/request'
 import { storage } from '::/adapter/storage'
 import { session } from '::/adapter/session'
-import { eventer } from '::/internal/eventer'
 
 export class Entity extends ImplEntity {
   protected request = request
@@ -37,7 +36,6 @@ export class Entity extends ImplEntity {
 
   updateAcceptLanguage(lang: string) {
     this.request.headers['Accept-Language'] = lang
-    eventer.emit('update.language', lang)
   }
 }
 

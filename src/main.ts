@@ -1,9 +1,8 @@
 import { ApiResponseCode, RequestError } from '::/implement'
 import { appEntity } from '::/entities/app.entity'
 import { appUsecase } from '::/usecases/app'
-import { eventer } from '::/internal/eventer'
 import { setupPlugins } from '::/view/plugins'
-import router, { setRouteDocumentTitle } from '::/view/routes'
+import router from '::/view/routes'
 import App from '::/view/App.vue'
 import '::/view/App.css'
 
@@ -21,23 +20,10 @@ function bootstrap() {
       toast.error(err.message)
     if (err.code === ApiResponseCode.Unauthorized) {
       appEntity.clearToken().then(() => {
-        eventer.emit('error.unauthorized')
+        router.replace({ name: 'SignIn', query: { redirect: encodeURIComponent(router.currentRoute.value.fullPath) } })
       })
     }
   }
-
-  const { appInfo, setting, user, language } = useStoreRefs()
-
-  eventer.on('update.appInfo', data => appInfo.value = data)
-  eventer.on('update.setting', data => setting.value = data)
-  eventer.on('update.user', data => user.value = data)
-  eventer.on('update.language', data => language.value = data)
-  eventer.on('update.language', () => {
-    setRouteDocumentTitle(router.currentRoute.value.meta.title)
-  })
-  eventer.on('error.unauthorized', () => {
-    router.replace({ name: 'SignIn', query: { redirect: encodeURIComponent(router.currentRoute.value.fullPath) } })
-  })
 }
 
 async function main() {

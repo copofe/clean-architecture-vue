@@ -75,6 +75,9 @@
     "useStoreRefs": true,
     "useMutation": true,
     "useQuery": true,
-    "useAsync": true
+    "useAsync": true,
+    "QueryClient": true,
+    "useQueries": true,
+    "useQueryClient": true
   }
 }
