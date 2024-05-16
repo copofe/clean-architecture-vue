@@ -1,9 +1,13 @@
-import type { App, Plugin } from 'vue'
+import type { App } from 'vue'
 
-const plugins = import.meta.glob(['./*.ts'], { eager: true, import: 'default' })
+import gesture from './gesture'
+import i18n from './i18n'
+import pinia from './pinia'
+import query, { queryConfig } from './query'
 
 export function setupPlugins(app: App) {
-  Object.entries(plugins).forEach(([_path, plugin]) => {
-    app.use(plugin as Plugin)
-  })
+  app.use(gesture)
+    .use(i18n)
+    .use(pinia)
+    .use(query, queryConfig)
 }

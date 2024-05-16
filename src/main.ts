@@ -29,7 +29,12 @@ function bootstrap() {
 async function main() {
   const app = setup()
   bootstrap()
-  await appUsecase.initialize()
+  const { setAppInfo, setAppSetting, setUser } = useStore()
+  appUsecase.initialize({
+    setAppInfo,
+    setAppSetting,
+    setUser,
+  })
 
   app.mount('#app')
 }
