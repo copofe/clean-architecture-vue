@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { Entity, extractData, validate } from './_shared'
+import { Entity, extractData } from './_shared'
 import type { Token } from './app.model'
 import type { User } from './user.model'
 
@@ -18,9 +18,10 @@ class UserEntity extends Entity {
     super()
   }
 
-  @validate(loginSchema)
-  async login(data: LoginParams): Promise<Token> {
-    const token = await this.request.post<Exclude<Token, null>>('/auth/login', data).then(extractData)
+  async login(data: LoginParams): Promise<string> {
+    loginSchema.parse(data)
+
+    const token = await this.request.post<string>('/auth/login', data).then(extractData)
     await this.setToken(token)
     return token
   }

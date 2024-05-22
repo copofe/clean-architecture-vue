@@ -15,11 +15,16 @@ const { handleSubmit, isSubmitting } = useForm({
 })
 
 const onSubmit = handleSubmit(async (values) => {
-  const { user } = await userAuthUsecase.login(values)
-  setUser(user)
-  const { redirect } = route.query
-  router.replace(redirect ? decodeURIComponent(redirect as string) : { name: 'Home' })
-  toast.success(t('Success.signed-in'))
+  try {
+    const { user } = await userAuthUsecase.login(values)
+    setUser(user)
+    const { redirect } = route.query
+    router.replace(redirect ? decodeURIComponent(redirect as string) : { name: 'Home' })
+    toast.success(t('Success.signed-in'))
+  }
+  catch (error) {
+
+  }
 })
 </script>
 

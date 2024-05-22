@@ -44,18 +44,3 @@ export class Entity extends ImplEntity {
 export function extractData<T>(res: ApiResponse<T>): ApiResponse<T>['data']['data'] {
   return res.data.data
 }
-
-/******************************************************************************/
-
-export function validate(schema: ZodObject<any>) {
-  return function (target: object, key: string, descriptor: PropertyDescriptor) {
-    const oldValue = descriptor?.value
-    return {
-      ...descriptor,
-      value(...args: any[]) {
-        schema.parse(args[0])
-        return oldValue.apply(this, args)
-      },
-    }
-  }
-}

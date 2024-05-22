@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDark } from '@vueuse/core'
 
-useDark()
+useDark({ storageKey: 'color-scheme' })
 useThemeColor()
 </script>
 
